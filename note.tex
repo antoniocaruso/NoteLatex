@@ -8,10 +8,23 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{hyperref}
-\usepackage{microtype} 
+\usepackage[babel=true,final]{microtype} 
 \usepackage{boiboites} 
-\usepackage[a4paper,vmargin=30mm, 
-            right=1.9in, marginparsep=3.5mm, footskip=15mm]{geometry}
+\usepackage[showframe=false,paper=a4paper,margin=1in]{geometry}
+
+\makeatletter 
+\renewcommand\maketitle{
+\begin{titlepage} \vspace*{\stretch{1}}
+ \begin{center} {\Huge \@title \par}% 
+	 \vspace{5em}% 
+	 {\LARGE \@author \par}%
+	 \vspace{1.5em} {
+	 \large \emph{\@date} \par}% 
+	 \vspace{3em} \end{center}%
+ \vspace*{\stretch{1}} 
+\end{titlepage}} 
+\makeatother
+
 \usepackage{epigraph} 
 \setlength{\epigraphwidth}{0.8\textwidth}
 \renewcommand{\epigraphsize}{\small}
@@ -53,23 +66,36 @@
 \hyphenation{rap-pre-sen-ta-zio-ne}
 
 \newboxedtheorem[
+	boxcolor = red!50!black, 
+	background=blue!5, 
+	titlebackground=blue!20,
+	titleboxcolor=black]{thm}{Teorema}{thmCounter} 
+
+
+\newboxedtheorem[
 	boxcolor = orange, 
 	background=blue!5, 
 	titlebackground=blue!20,
-	titleboxcolor=black]{defn}{Definizione}{thCounter} 
+	titleboxcolor=black]{defn}{Definizione}{defCounter} 
 
 \newboxedtheorem[
 	boxcolor = black, 
 	background=blue!5, 
-	titlebackground=blue!20,
+	titlebackground=blue!5,
 	titleboxcolor=black]{observe}{Osservazione}{obsCounter} 
 
+%\newboxedtheorem[
+%	boxcolor = black, 
+%	background=blue!2, 
+%	titlebackground=blue!20,
+%	titleboxcolor=black,
+%	size=0.94\textwidth]{ex}{Esempio}{exCounter} 
 
 \theoremstyle{definition}
 \newtheorem{ex}{Esempio}
 
 %\usepackage{setspace} 
-%\setstretch{1.08} 
+%\setstretch{1.03} 
 %\setlength{\parskip}{0.2em}
 
 % ---- Front matter ---- 
@@ -81,32 +107,23 @@
 
 \clubpenalty=10000 \widowpenalty=10000 \overfullrule=1mm
 
-\makeatletter 
-\renewcommand\maketitle{
-\begin{titlepage} \vspace*{\stretch{1}}
- \begin{center} {\Huge \@title \par}% 
-	 \vspace{5em}% 
-	 {\LARGE \@author \par}%
-	 \vspace{1.5em} {
-	 \large \emph{\@date} \par}% 
-	 \vspace{3em} \end{center}%
- \vspace*{\stretch{1}} 
-\end{titlepage}} 
-\makeatother
-
 \newcommand{\nota}[1]{\marginpar[{\raggedleft\small\sffamily #1\\}]{%
  								 {\raggedright\small\sffamily #1\\}}}
 \newcommand{\Mod}[1]{\ \text{mod}\ #1}
 
 
 \begin{document}
-
+\hypersetup{pageanchor=false}
 \pagenumbering{arabic} 
 \frontmatter 
-\maketitle 
+\maketitle
+\hypersetup{pageanchor=true} 
 \tableofcontents
 \pagenumbering{roman} 
 \mainmatter
+
+\newgeometry{vmargin=30mm, right=1.9in, marginparsep=3.5mm, footskip=15mm}
+
 
 \chapter{Rappresentazione dei Numeri}
 
@@ -125,29 +142,29 @@ rimuovere tali ostacoli.} { - \textsc{JOHN NEPAIR [Napier] (1916)}}
 
 \section[Numeri Interi]{Numeri Interi}
 
-Il \emph{contare} è la prima attività Matematica svolta da ognuno di noi. Lo
-studio dei numeri interi fin dalle elementari avviene attraverso l'uso di una
-notazione posizionale decimale che come vedremo è stata introdotta in Europa
-intorno al A.D. $1202$\footnote{Quindi per migliaia di anni il modo con cui si 
-pensava ad i numeri, li si scriveva e sopratutto si faceva Aritmetica è stato molto diverso da come noi siamo abituati a fare sin da piccoli.} da parte di
-Leonardo Pisano (detto il Fibonacci). Gli Interi ed in particolare le
-operazioni elementari: somma, sottrazione, moltiplicazione e divisione tra
-essi, sono studiati in quella parte della matematica chiamata specificatamente
-\emph{Aritmetica}; Nonostante il lettore possa trovare strano dover rivedere
-concetti cosi semplici, queste note lo solleciteranno a comprendere le
-differenze tra \emph{valore} numerico, e \emph{rappresentazione};
+Il primo approccio con la Matematica è \emph{contare}. Il contare porta alla
+definizione dei numeri interi, attualmente scritti attraverso l'uso di una
+\emph{notazione posizionale decimale} che come vedremo è stata introdotta in
+Europa intorno al A.D. $1202$\footnote{Quindi per migliaia di anni il modo con
+cui si pensava ad i numeri, li si scriveva e sopratutto si faceva Aritmetica è
+stato molto diverso da come noi siamo abituati a fare sin da piccoli.} da parte
+di Leonardo Pisano (detto il Fibonacci). Gli Interi e le operazioni elementari
+tra essi, come somma, sottrazione, moltiplicazione e divisione sono studiati in
+quella parte della matematica chiamata \emph{Aritmetica}; Nonostante il lettore
+possa trovare strano dover rivedere concetti che ritiene assodati, queste note
+mostreranno come alcuni concetti dell'Aritmetica meritino un ulteriore approfondimento.
 
-Questa diversa prospettiva sarà utilissima per comprendere perchè scriviamo i
-numeri in decimale, ed il legame stretto tra la scelta di una rappresentazione
-numerica e gli \emph{algoritmi} necessari allo svolgimento delle operazioni
-elementari. Oltre che per le necessità specifiche del corso di Programmazione,
-questo Capitolo è sicuramente di interesse a chi dovrà svolgere attività
-didattica nelle scuole elementari; evidenziando la natura essenzialmente
-\emph{algoritmica} dell'Aritmetica.
+Queste note introdurranno una diversa prospettiva sul perché scriviamo i numeri in decimale. Vedremo come la scelta di una rappresentazione numerica è strettamente legata al modo con cui svolgiamo abitualmente le operazioni aritmetiche, cioè
+gli \emph{algoritmi} usati per il calcolo di somma, sottrazione, etc. 
+Questi aspetti sono di interesse sia per comprendere all'interno del corso di Programmazione come viene rappresentata l'informazione dentro il computer, sia per chi dovrà svolgere attività didattica nelle scuole
+elementari; evidenziando la natura essenzialmente \emph{algoritmica}
+dell'Aritmetica.
 
-Cominciamo quindi, \nota{rappresentazione vs.\\ valore} con il distingure
-chiaramente un valore numerico, ad esempio l'intero $1234$, da una delle tante
-possibili sue \emph{rappresentazioni}, termine che vuol indicare \emph{il modo
+Siamo interessati in particolare allo studio della \emph{rappresentazione} dei numeri. In questa prospettiva dobbiamo chiaramente sottolineare la differenza tra due entità: un numero, inteso astrattamente come \emph{valore} e la sua
+\emph{rappresentazione} (o \emph{numerale}) intesa come sequenza di segni che
+servono appunto a scrivere o comunicare un certo valore.
+Cominciamo quindi, \nota{rappresentazione vs.\\ valore} con il distinguere
+chiaramente un valore numerico, ad esempio l'intero $1234$, da una delle sue tante possibili \emph{rappresentazioni}, termine che vuol indicare \emph{il modo
 in cui scriviamo} quel valore. Noi scriviamo (e pensiamo) i numeri allo stesso
 modo, usando un sistema posizionale \emph{decimale} pertanto il modo più comune
 di scrivere $1234$ è ovviamente: \textsf{'1234'}\footnote{le due scritture sono
@@ -159,51 +176,18 @@ che descrivono come si \emph{scrivono} i numeri, cioè una serie di regole
 \emph{'sintattiche'} che possono variare nel tempo e nello spazio.
 
 La rappresentazione posizionale, ci consente di scrivere qualunque numero
-(intero) come una \emph{stringa}\footnote{sequenza di caratteri giustapposti}
-di \emph{cifre} (\emph{digit} in inglese). Il numero di cifre usate è detto
-\emph{base o radice} della rappresentazione, una definizione formale è fornita
-di seguito:
-
+(naturale) come una \emph{stringa}\footnote{sequenza di caratteri giustapposti}
+di \emph{cifre} (\emph{digit} in inglese). Vale il seguente Teorema:
 %%%% Definizione Rappresentazione Posizionale 
 
-\begin{defn}[Rappresentazione dei numeri Naturali in base $B$] Sia $B>1$ un intero che chiameremo \emph{base (o radice)} della rap\-presentazione, e $\mathcal{C}$ un insieme di $B$ simboli distinti.
+\begin{thm}[Rappresentazione dei numeri Naturali in base $B$] Sia $B>1$ un intero che chiameremo \emph{base (o radice)} della rap\-presentazione, e $\mathcal{C} = \{ c_0, c_1, \ldots c_{B-1} \}$ un insieme di simboli distinti dette \emph{cifre della rappresentazione} (in inglese \emph{digit}). Ogni cifra è associata ad un valore intero tra $0$ e $B-1$.\bigskip
 
-Gli elementi di $\mathcal{C}$ sono dette \emph{cifre della rappresentazione}
-(in inglese \emph{digit}). Ogni cifra è associata ad un valore intero tra $0$ e
-$B-1$. Un numero naturale in base $B$ è scritto come una sequenza di cifre:
-$(c_{k-1}c_{k-2} \ldots c_1c_0)_B$ ed il suo valore è dato dalla relazione:
-
+Allora $\forall n \in \mathbb{N}$, esiste ed è unica la sequenza di cifre: 
+$(c_{k-1}c_{k-2} \ldots c_1c_0)_B$ ed il suo valore è:
 \begin{equation}\label{eq:pos} 
-	c_{k-1}B^{k-1}+c_{k-2}B^{k-2}+\ldots+c_1B+c_0 = \sum_{i=0}^{k-1} c_iB^i 
+	n = c_{k-1}B^{k-1}+c_{k-2}B^{k-2}+\ldots+c_1B+c_0 = \sum_{i=0}^{k-1} c_iB^i 
 \end{equation}
-\end{defn} %%%%
-
-\noindent nel seguito se la base $B$ è chiara dal contesto non useremo le
-parentesi e la base come pedice, pertanto $ (1001001)_2$ sarà scritto
-semplicemente come $1001001$ se è chiaro che stiamo trattando numeri in base
-$2$. Noi usiamo abitualmene la base $10$, poichè abbiamo $10$ dita, e questo
-facilità il processo di apprendimento, sia della rappresentazione sia del
-\emph{contare} in tale base. Abitualmente in base $10$ scriveremo \textsf{1298}
-e non $\mbox{\textsf{(1298)}}_{10}$, ed il valore ad esso associato è l'intero
-1298. Quest'ultima osservazione che può sembrare banale, è invece opportuna in
-quanto è chiaro che data una sequenza di cifre, il valore ad essa associato
-dipende dal sistema di numerazione in cui ci troviamo, cioè dalla base usata,
-la stessa sequenza infatti avrà valori diversi a seconda della base.
-
-\begin{ex} $(\textsf{1234})_{10} = 1\cdot 10^3+2\cdot 10^2 + 3 \cdot 10 + 4 =
-1234$, $(\textsf{1234})_8 = 1\cdot 8^3+2\cdot 8^2+3\cdot 8^1+4\cdot 8^0 =
-(668)_{10}$, $(\textsf{11010010})_2 = 1\cdot 2^8 + 1\cdot 2^7 + 1\cdot 2^5 +
-1\cdot 2^1 = 1234$.\\ Ed $(\textsf{1234})_3$ ? Non ha senso valutare la
-sequenza poichè se $B = 3$ si ha $\mathcal{C} = \{ 0, 1, 2 \}$ ed i simboli
-\textsf{3,4} non hanno alcun significato in tale sistema.\end{ex}
-
-Poichè in \eqref{eq:pos} le operazioni sono svolte in base $10$ essa fornisce
-un modo per convertire un naturale dalla base $B \neq 10$ alla base $B = 10$,
-negli esempi si vede come calcolare il valore (in base 10) di numeri binari o
-ottali. La stessa formula ci mostra come i numeri siano strettamente collegati
-al concetto di polinomio: la \eqref{eq:pos} può essere vista come un polinomio
-di grado $k-1$, i cui coefficienti sono le cifre dell'intero, valutato nel
-punto $x = B$.
+\end{thm} %%%%
 
 Il sistema \emph{decimale} ha $B = 10$ e $\mathcal{C} = $\{\textsf{ 0, 1, 2, 3,
 4, 5, 6, 7, 8, 9}\,\} ed il lettore lo usa quotidianamente fin dalle
@@ -216,18 +200,81 @@ simboli delle cifre esadecimali, e si usa normalmente $\mathcal{C} = \{
 \textsf{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F} \}$ con la convenzione che $\textsf{A}
 = 10, \textsf{B} = 11, \ldots, \textsf{F} = 15$.
 
-\begin{ex} $(\textsf{1ABF})_{16} = 1\cdot 16^3 + 10\cdot 16^2 + 11 \cdot 16 +
-15 = 6848$. $(\textsf{4D2})_{16} = 4\cdot 16^2 + 13\cdot 16 + 2 = 1234$.
-\end{ex}
+\begin{ex} 
+$(\textsf{1234})_{10} = 1\cdot 10^3+2\cdot 10^2 + 3 \cdot 10 + 4 =
+1234$. $(\textsf{1234})_8 = 1\cdot 8^3+2\cdot 8^2+3\cdot 8^1+4\cdot 8^0 =
+(668)_{10}$. $(\textsf{11010010})_2 = 1\cdot 2^8 + 1\cdot 2^7 + 1\cdot 2^5 +
+1\cdot 2^1 = (1234)_{10}$. $(\textsf{1ABF})_{16} = 1\cdot 16^3 + 10\cdot 16^2 +
+11 \cdot 16 + 15 = 6848_{10}$. $(\textsf{4D2})_{16} = 4\cdot 16^2 + 13\cdot 16
++ 2 = 1234_{10}$. 
+
+\noindent $(\textsf{1234})_3$ ? La sequenza non rispetta le condizioni
+del Teorema, non ha quindi molto senso valutarla poiché se $B = 3$ si ha
+$\mathcal{C} = \{ 0, 1, 2 \}$ ed i simboli \textsf{3,4} non hanno alcun
+significato in tale sistema. \end{ex}
+
+Nel seguito se la base $B$ è chiara dal contesto non useremo le parentesi e la
+base come pedice, pertanto $ (1001001)_2$ sarà scritto semplicemente come
+$1001001$ se è chiaro che stiamo trattando numeri in base $2$. Noi usiamo
+abitualmente la base $10$ per cui scriviamo abitualmente \textsf{1298} e non
+$\mbox{\textsf{(1298)}}_{10}$, ed il valore ad esso associato è l'intero 1298.
+Quest'ultima osservazione che può sembrare banale è invece opportuna in quanto
+è chiaro che data una sequenza di cifre, il valore ad essa associato dipende
+dal sistema di numerazione in cui ci troviamo, cioè dalla base usata, la stessa
+sequenza infatti avrà valori diversi per basi diverse. 
+
+La condizione $0 \leq c_i \leq
+B-1$\nota{Condizione per l'esistenza e unicità della rappresentazione} è
+importante per garantire l'esistenza e l'unicità della rappresentazione.
+Nell'Esempio precedente abbiamo scritto che non ha senso valutare $(1234)_3$,
+proviamo ad essere più precisi: consideriamo $B = 2$ e supponiamo vi siano $4$
+cifre: $\mathcal{C} = \{ 0, 1, 2, 3 \}$ vediamo subito che l'unicità della
+rappresentazione non vale più poiché $13 = 3\cdot 2^2 + 1 \cdot 2^0$ ma anche
+$2\cdot 2^2 + 2\cdot 2^1 + 1\cdot 2^0$. Quindi se usiamo \emph{troppe} cifre,
+perdiamo l'unicità, allo stesso modo se usiamo \emph{poche} cifre perdiamo
+l'esistenza di una rappresentazione, ad esempio se in base $10$ usassimo solo
+le cifre $0,\ldots,8$ avremmo infiniti numeri naturali non rappresentabili ($9$, $19$,..).
+Dimostriamo adesso il Teorema:
+
+\begin{proof}[Dimostrazione: (Teorema 1)]
+Fissiamo la base $B$ e dimostriamo esistenza e unicità di \eqref{eq:pos} per induzione su $n$.
+
+Chiaramente $1$ è sempre rappresentabile in uno ed un solo modo\footnote{perche?}. Adesso supponiamo induttivamente che ogni intero
+$1,\ldots,n-1$ sia rappresentabile in modo univoco. 
+
+\noindent Consideriamo l'intero $n$, chiamiamo $d = n \mod B$, allora $d < B$ è una delle cifre disponibili. Per induzione $n' = (n-d)/B$ è unicamente rappresentabile, diciamo ad esempio così:
+\[ \frac{n-d}{B} = d_0 + d_1 B + d_2 B^2 + \ldots \]
+Allora chiaramente,
+\begin{align*}
+n = d + \frac{n-d}{B}B = d + d_0 B + d_1 B^2 + d_2 B^3 + \ldots
+\end{align*}
+è una rappresentazione di $n$ che usa solo le cifre disponibili, e l'esistenza è dimostrata.
+Adesso supponiamo che $n$ abbia due rappresentazioni diverse avremmo:
+\begin{align*}
+n &= a_0 + a_1B + a_2B^2 + \cdots\\
+  &= c_0 + c_1B + c_2B^2 + \cdots
+\end{align*}
+Ma poichè da sopra, $c_0$ e $a_0$ sono uguali a $d = n \mod B$, allora sono eguali, quindi la differenza deve essere nelle altre cifre. Ma allora il numero $n'$ ha due rappresentazioni diverse, ma questo 
+contraddice l'ipotesi induttiva.
+\end{proof}
+
+
+Svolgendo le operazioni in \eqref{eq:pos} in base $10$ abbiamo un modo
+semplice per convertire un naturale dalla base $B \neq 10$ alla base $B = 10$.
+Nell'esempio precedente mostriamo come convertire numeri binari, ottali o
+esadecimali in decimale. La stessa formula ci mostra come i numeri siano
+strettamente collegati al concetto di polinomio: la somma in \eqref{eq:pos} può essere
+vista come un polinomio di grado $k-1$, i cui coefficienti sono le cifre
+dell'intero, valutato nel punto $x = B$.
 
 Il valore $k$ in \eqref{eq:pos} è il numero di cifre, le singole cifre prese da
 $\mathcal{C}$ hanno significato diverso in base alla loro posizione, ecco
-perchè il sistema è detto posizionale. Il peso è proporzionale ad una potenza
+perché il sistema è detto posizionale. Il peso è proporzionale ad una potenza
 della base via via crescente da destra a sinistra. La prima cifra $c_{k-1} \neq
-0$ viene detta \emph{più significativa} poichè associata alla potenza della
+0$ viene detta \emph{più significativa} poiché associata alla potenza della
 base più alta, corrispondentemente la cifra $c_0$ o cifra delle \emph{unità}
-viene chiamata anche \emph{meno significativa}. Nella didattica delle
-elementari è usuale dare dei numeri come $1214$ e chiedere di scomporli nelle
+viene chiamata anche \emph{meno significativa}. Vale la pena ricordare che nella didattica della Matematica nelle classi primarie (elementari) 
+è usuale dare dei numeri come $1214$ e chiedere di scomporli nelle
 loro cifre e nei pesi della base attraverso la dizione seguente:
 
 {\it 1214 $ = $ un migliaio, due centinaia, una decina, e quattro unità.}
@@ -239,7 +286,7 @@ identificate con opportune espressioni: migliaia, centinaia, etc).
 
 In seguito tratteremo in modo approfondito l'uso della base due\nota{Sistema
 Binario}. Se consideriamo $B = 2$ e $\mathcal{C} = \{ 0, 1 \}$ il sistema è
-chiamato \emph{binario} proprio perche le cifre a disposizione sono solo due.
+chiamato \emph{binario} proprio perché le cifre a disposizione sono solo due.
 Le singole cifre vengono anche chiamate $\emph{bit}$ dalla contrazione di
 \emph{Binary digIT}\nota{Bit} (che non è altro che l'inglese di ''Cifra
 Binaria'').
@@ -249,8 +296,8 @@ sono rappresentate in binario, ovviamente come \emph{lunghe} sequenze di bit.
 Questo rende tale sistema importante per la comprensione di come viene
 codificata l'informazione dentro un calcolatore. L'uso della base due è
 motivato dal fatto che è molto semplice misurare una piccola variazione di
-potenziale in un circuito, e definire così due \emph{stati} distinti: possiamo
-ad esempio associare a $0V$ (Volts) il valore $0$ ed $1$ al livello $+3V$. Se
+potenziale in un circuito\nota{Sistema Binario, Circuiti Bistabili, Hardware del Calcolatore}, e definire così due \emph{stati} distinti: possiamo
+ad esempio associare a $0V$ (Volt) il valore $0$ ed $1$ al livello $+3V$. Se
 un circuito può assumere in modo stabile due livelli (non necessariamente
 quelli indicati sopra), è detto \emph{bistabile} e consente di rappresentare
 una cifra binaria. La procedura con cui convertiamo l'informazione in sequenze
@@ -293,30 +340,31 @@ a contare da $0$ il valore massimo rappresentabile sarà $B^k-1$.
 
 \begin{ex} In base 10 con al più 4 cifre possiamo rappresentare i valori tra
 $0$ e $9999$, questi corrispondono alle quadruple dell'insieme $\mathcal{C}^4 =
-\left\{ (c_3,c_2,c_1,c_0) \;|\; 0 \leq c_i \in \mathbb{N} \leq 9 \right\} = \{
-(0,0,0,0), \ldots, (9,9,9,9) \}$. Vi sono quindi $|\mathcal{C}^4| = 10000$
-numeri possibili, da $0$ a $9999 = 10000-1$.
+\left\{ (c_3,c_2,c_1,c_0) \;|\; 0 \leq c_i \in \mathbb{N} \leq 9 \right\}$ $= \{
+(0,0,0,0),$ $\ldots, (9,9,9,9) \}$. Vi sono quindi $|\mathcal{C}^4| = 10000$
+numeri possibili, da $0$ a $9999 = 10000-1$.\medskip
 
 Se usiamo la base $B = 2$ i valori possibili vanno da $0$ a $1111 =
 2^3+2^2+2^1+2^0 = 2^4-1 = 15$, con $8$ bit abbiamo $2^8 = 256$ valori, tra $0$
-e $(11111111)_2 = 255$. In esadecimale con $4$ cifre abbiamo $16^4 = 65536$ valori possibili,
-da $0$ a $\text{FFFF} = 65535$. \end{ex}
+e $(11111111)_2 = 255$. In esadecimale con $4$ cifre abbiamo $16^4 = 65536$ valori possibili, da $0$ a $\text{FFFF} = 65535$. 
+\end{ex}
 
 L'esempio\nota{Il numero di cifre per $n$ è $k = \lceil\, \log_B{n} \,\rceil$}
 mostra quindi che se fissiamo il numero di cifre, l'intervallo di rappresentazione aumenta all'aumentare della base. Quante cifre servono a rappresentare un generico intero? Se $n \in \mathbb{N}$, il numero di cifre necessario a rappresentare $n$ sarà ovviamente il minimo $k$ tale che $B^k-1 \geq n$, quindi $k = \lceil\, \log_B{n} \,\rceil$.
 
-\begin{ex} 
+\begin{ex}[Numero di cifre di un intero in base $B$] 
 L'ultima relazione ci dice che la lunghezza in cifre di un numero intero $n$ in
 decimale è $\lceil\log_{10} n \rceil$, il che è un ovvia conseguenza della
 \eqref{eq:pos}. Prendiamo $n = 123456789$, esso ha $\lceil \log_{10} n \rceil =
-\lceil\, 8,0915 \,\rceil = 9$ cifre, poichè $\log_2{n} = 8,0915 / \log_{10}{2}
+\lceil\, 8,0915 \,\rceil = 9$ cifre, poiché $\log_2{n} = 8,0915 / \log_{10}{2}
 = 26,87$, in binario serviranno $27$ bit. Infatti come vedremo successivamente:
-$123456789 = (111010110111100110100010101)_2$. 
+$123456789 = (111010110111100110100010101)_2$. Notiamo quindi che è possibile definire ad un intero il concetto di \emph{lunghezza}, definita come:
+$\operatorname{len}(n) = \lceil \log_B n \rceil$
 \end{ex}
 
----------------------
-
-{ \footnotesize
+\begin{quote}
+{\hfill \rule{0.9\textwidth}{0.5pt} \hfill}
+\small
 
 Perche usiamo la notazione posizionale, ed in particolare il sistema decimale?
 E come sono stati rappresentati i numeri interi prima della diffusione del
@@ -329,12 +377,12 @@ molto naturale il suo apprendimento. Resta da capire perché preferire un
 sistema posizionale rispetto ad esempio a quello romano?
 
 Cominciamo a rispondere alla domanda precedente, rivedendo come sono stati
-scritti o meglio 'segnati' i numeri fin dagli arbori del tempo. Il modo
+scritti o meglio 'segnati' i numeri fin dagli albori del tempo. Il modo
 primitivo per rappresentare delle quantità intere è stato l'uso di pietre
 (\emph{calculi}) che rappresentavano le unità, dallo stesso termine deriva
 l'etimologia di \emph{calcolare}.
 
-Dal punto di vista atratto possiamo vedere questo modo di rappresentare i
+Dal punto di vista astratto possiamo vedere questo modo di rappresentare i
 numeri come quello di un uomo che chiuso in una cella segna i giorni con delle
 tacche su un muro. Questo sistema usa un solo simbolo '\textsc{I}' per
 rappresentare le unità, può rappresentare un qualunque numero intero
@@ -360,7 +408,7 @@ circostanze.
 
 I Romani\nota{Numerazione Romana} hanno sviluppato un sistema a
 \emph{sostituzione} in cui ogni volta che la rappresentazione di un valore
-diventa troppo lunga, si associa tale valore ad un diverso simbolo: poichè $5 =
+diventa troppo lunga, si associa tale valore ad un diverso simbolo: poiché $5 =
 \mathrm{IIIII}$ è già troppo lungo, introduciamo $\mathrm{V} = 5$, ed essendo
 quattro, uno prima di cinque, abbiamo $4 = \mathrm{IV}$, naturalmente $6$ è uno
 dopo $5$ quindi $\mathrm{VI}$ e con lo stesso identico sistema possiamo
@@ -377,21 +425,22 @@ dell'aritmetica: Come possiamo descrivere le operazioni di somma o sottrazione?
 In effetti tali operazioni non sono per nulla facili da descrivere, e
 sicuramente sono decisamente più complesse rispetto all'aritmetica decimale. I
 romani in pratica usavano fare le somme usando un \emph{abaco} solo per numeri
-molto piccoli.\par }
+molto piccoli.\par
+{\hfill \rule{0.9\textwidth}{0.5pt} \hfill}
 
----------------------
+\end{quote}
 
 \subsection{Conversione tra basi}
 
 Di seguito si vedrà come convertire da una rappresentazione in base $b$ ad una
-in base $B$. Poichè noi siamo abituati a svolgere operazioni in base $10$, per
+in base $B$. Poiché noi siamo abituati a svolgere operazioni in base $10$, per
 facilitare il cambio di base, trasformeremo prima un valore dalla base $b$ di
 partenza alla base $10$, e poi convertiremo il valore decimale ottenuto in base
 $B$. Come visto anche nell'esempio $1$, la formula in \eqref{eq:pos} ci
 consente di convertire un numero da una base qualunque alla base $10$. Pertanto
 resta da capire come convertire da base $10$ ad un altra base generica $B$.
-Osserviamo che dato un intero $n$, possiamo seguendo la \eqref{eq:pos}
-riscriverlo come\footnote{Questo è un altro esempio del parallelismo tra numeri e polinomi, infatti questo modo di scrivere i polinomi è detto formula di Horner ed è molto usata per velocizzare la valutazione del polinomio in un punto.}:
+Osserviamo che dato un intero $n$, l'essenza della dimostrazione del Teorema $1$ è la riscrittura dell'equazione \eqref{eq:pos}
+come\footnote{Questo è un altro esempio del parallelismo tra numeri e polinomi, infatti questo modo di scrivere i polinomi è detto formula di Horner ed è molto usata per velocizzare la valutazione del polinomio in un punto.}:
 
 \begin{align*} 
 n = \sum_{i=0}^{k-1} c_iB^i = (((c_{k-1}B+c_{k-2})B\ldots+ c_2)B + c_1)B + c_0\\ 
@@ -403,10 +452,10 @@ dividendo (usiamo la divisione intera) $n$ per $B$ e prendendo il resto.
 \nota{Conversione in base B, tramite divisioni ripetute per~B ed estrazione dei
 resti.} Quindi abbiamo $c_0 = n \Mod{B}$ ed il valore della divisione $n' = n /
 B$ è un intero formato dalle rimanenti cifre di $n$. Possiamo ripetere il
-procedimento su $n'$ fin quando il valore della divisione è diverso da zero estraendo cosi tutte le cifre.
+procedimento su $n'$ fin quando il valore della divisione è diverso da zero estraendo così tutte le cifre.
 
 \begin{ex}
-Consideriamo $n = 12345$, abbiamo $n' = n/10 = 1234$ e $n \Mod{10} = 5$. Ripetendo l'operazione di modulo su $n'$ otteniamo la cifra $4$, e cosi via. Se
+Consideriamo $n = 12345$, abbiamo $n' = n/10 = 1234$ e $n \Mod{10} = 5$. Ripetendo l'operazione di modulo su $n'$ otteniamo la cifra $4$, e così via. Se
 invece di $10$ usiamo il valore della base $B$, otterremo valori tra $0$ e $B-1$, che non sono altro che le cifre di $n$ espresso in base $B$.
 
 Convertiamo ad esempio $n = 12345$ in binario, scrivendo per ogni divisione il risultato della stessa $+$ il resto.
@@ -419,16 +468,17 @@ Convertiamo ad esempio $n = 12345$ in binario, scrivendo per ogni divisione il r
  385   / 2 &= 192 + 1    &3 / 2  = 1 + 1\\
  192   / 2 &= 96 + 0     &1 / 2  = 0 + \mathbf{1}& \quad \uparrow
 \end{align*}
-e poichè che l'ultima cifra è la più significativa si ha che $12345$ in binario è $11000000111001$. Proviamo a convertire $58$ in esadecimale, osserviamo che $58/16 = 3$ e $58 \Mod{16} = 10$ quindi $(58)_{10} = (3A)_{16}$. Convertiamo $12345$ in ottale: 
+e poiché l'ultima cifra è la più significativa si ha che $12345$ in binario è $11000000111001$. Proviamo a convertire $58$ in esadecimale, osserviamo che $58/16 = 3$ e $58 \Mod{16} = 10$ quindi $(58)_{10} = (3A)_{16}$. Convertiamo $12345$ in ottale: 
 \begin{align*}
- 12345 / 8 &= 1543 + 1 \\ 
- 1543  / 8 &= 192 + 7   \\
- 192  / 8  &= 24 + 0 \\
- 24  / 8   &= 3 + 0   
+ 12345 / 8 = 1543 + &1 \\ 
+ 1543  / 8 = 192 + &7   \\
+ 192  / 8  = 24 + &0 \\
+ 24  / 8   = 3 + &0   
 \end{align*}
+\noindent Quindi $12345 = (30071)_8$. 
 \end{ex}
 
-Quindi $12345 = (30071)_8$. Il lettore è invitato adesso a confrontare la sequenza dei valori nei calcoli sopra con i valori ottenuti nella conversione in binario. Si nota facilmente che poichè $8 = 2^3$, ogni passo nella conversione in ottale, costituisce tre passi nella conversione decimale, è facile verificare che questo dipende direttamente dalle proprietà della rappresentazione in base. In ottale in effetti, ogni cifra è un valore tra $0$ e $7$, se vogliamo rappresentare questi valori in binario serviranno $\log 8$ bit, cioè $3$ bit per ogni cifra ottale. 
+Il lettore è invitato adesso a confrontare la sequenza dei valori nei calcoli sopra con i valori ottenuti nella conversione in binario. Si nota facilmente che poiché $8 = 2^3$, ogni passo nella conversione in ottale, costituisce tre passi nella conversione decimale, è facile verificare che questo dipende direttamente dalle proprietà della rappresentazione in base. In ottale in effetti, ogni cifra è un valore tra $0$ e $7$, se vogliamo rappresentare questi valori in binario serviranno $\log 8$ bit, cioè $3$ bit per ogni cifra ottale. 
 
 Questo\nota{Conversione da binario ad ottale ad esadecimale} ci suggerisce un modo veloce per passare da una base $b$ ad una base $B=b^i$. Se si passa da $b$ a $B$ si tratta di \emph{raccogliere} ogni $i$ cifre e rappresentarle come un unica cifra in base $B$. Se viceversa si passa dalla base $B$ alla base $b$ allora ogni cifra si deve \emph{espandere} in $i$
 cifre della base $b$. 
@@ -438,8 +488,8 @@ Nell'esempio precedente $n=12345$ e in binario vale $11000000111001$, per passar
 \[
 \underbrace{\mathbf{0}11}_{3}\underbrace{000}_{0}\underbrace{000}_{0}\underbrace{111}_{7}\underbrace{001}_{1}
 \]
-\noindent Notiamo che si inizia a raggruppare dalle cifre \emph{meno} significative, cioè da destra a sinistra, nel caso in cui come nell'esempio si hanno meno cifre di quelle da raggruppare, si aggiungino degli zeri (in figura in grassetto) che posti davanti al numero non ne cambiamo il valore. Otteniamo
-quindi esattamente il valore calcolato precedentemente. Lo stesso vale per la coversione in esadecimale, invece di usare le divisioni, poichè $16 = 2^4$ possiamo fare cosi:
+\noindent Notiamo che si inizia a raggruppare dalle cifre \emph{meno} significative, cioè da destra a sinistra, nel caso in cui come nell'esempio si hanno meno cifre di quelle da raggruppare, si devono aggiungere degli zeri, che posti a destra delle altre cifre (in figura in grassetto) non ne cambiamo il valore. Otteniamo
+quindi esattamente il valore calcolato precedentemente. Lo stesso vale per la coversione in esadecimale, invece di usare le divisioni, poiché $16 = 2^4$ possiamo fare così:
 \[
 \underbrace{0011}_{3}\underbrace{0000}_{0}\underbrace{0011}_{3}\underbrace{1001}_{9}
 \]
@@ -453,7 +503,8 @@ abbiamo che per estrarre la cifra $c_{k-1}$ dobbiamo dividere il valore dell'int
 se vogliamo estrarre $3$ da $3240$ dobbiamo dividerlo per $1000 = 10^3$, quindi dobbiamo sapere quante sono le cifre di $n$, ma questo si ottiene calcolando 
 $k = \lceil \log_{10} n \rceil$, notiamo che le restanti cifre sono contenute in $3240 \Mod{10^3} = 240$.
 
-L'algoritmo pertanto è il seguente: Se si vuole convertire il numero decimale $n$ in base $B$ si calcola $k = \log_B n$, si calcola $c_{k-1} = n / B^{k-1}$ e $n' = n \Mod{B^{k-1}}$, si diminuisce $k$ e si riapplica il metodo a $n'$. 
+L'algoritmo pertanto è il seguente: Se si vuole convertire il numero decimale $n$ in base $B$ si calcola $k = \log_B n$, si calcola $c_{k-1} = n / B^{k-1}$ e $n' = n \Mod{B^{k-1}}$, si diminuisce $k$ e si applica lo stesso metodo a $n'$. 
+
 \begin{ex}
 Convertiamo $3240$ in ottale usando il metodo sopra:
 \begin{align*}
@@ -465,11 +516,11 @@ Convertiamo $3240$ in ottale usando il metodo sopra:
 Quindi $3240$ in esadecimale è $\mathrm{CA}8$.
 \end{ex}
 
-\subsection{Aritmetica in base $B$}
+\subsection{Aritmetica in base \protect$B$}
 
 L'aritmetica in base $B\neq 10$ segue esattamente le stesse regole di quella con i numeri decimali. 
 
-Cominciamo con l'operazione più semplice, il calcolo del successore di un intero $n$, valutare cioè $n+1$, questo ci consentirà di imparare a contare in una generica base $B$. Il lettore svolge questa operazione in modo \emph{meccanico} poichè l'ha imparata in tal modo fin dalle elementari. 
+Cominciamo con l'operazione più semplice, il calcolo del successore di un intero $n$, valutare cioè $n+1$, questo ci consentirà di imparare a contare in una generica base $B$. Il lettore svolge questa operazione in modo \emph{meccanico} poiché l'ha imparata in tal modo fin dalle elementari. 
 
 Ma come possiamo formalizzare esattamente tale operazione?\nota{Contare in Base
 $B$} E' facile verificare che il seguente Algoritmo è la risposta giusta:
@@ -483,9 +534,8 @@ Lo studente provi a le seguenti operazioni in base $10$, seguendo l'algoritmo
 espresso sopra: $139+1 = 140$, $99+1 = 100$. Notate inoltre che l'algoritmo presentato non è altro che l'algoritmo della somma imparato alle elementari ma presentato in modo leggermente diverso, senza usare i riporti per far scivolare
 il valore del $+1$ verso sinistra. Lo stesso algoritmo si può quindi usare per contare in una base.
 
-\begin{ex}
-Contiamo
- in binario: $\mathsf{0, 1, (1+{\mathrm 1}) = 10, (10+{\mathrm 1}) = 11, (11+{\mathrm 1}) = 100}$,\\ 
+\begin{ex}[Conteggio in base $B$]
+Contiamo in binario: $\mathsf{0, 1, (1+{\mathrm 1}) = 10}$, $\mathsf{(10+{\mathrm 1}) = 11}$, $\mathsf{(11+{\mathrm 1}) = 100}$\\ 
 $\mathsf{100+{\mathrm 1} = 101, 101+{\mathrm 1} = 110}$, etc.\\
 Contiamo in base $3: 0,1,2,(2+1)=10,11,12,20,21,22,100$, etc.\\
 Contiamo in base $4: 0,1,2,3, (3+1) = 10, 11,12,13,20,21,22,23,30$, etc.\\
@@ -495,7 +545,8 @@ Contiamo in base $8: 0,\ldots,7, (7+1)=10,11,12,13,14,15,16,17,20,\ldots$, etc.
 Le operazioni aritmetiche quindi si svolgono in modo identico a quello imparato
 alle elementari.\nota{Somme in binario}
 
-\begin{ex}\label{ex:somma} Sommiamo $31+12$ in binario. Si ha: $31/2 = 15 + 1, 15/2 = 7 + 1, 7/2 = 3 + 1, 3 /2 = 1 + 1$, quindi $31 = (1111)_2$ con $12 = (8+4) = 1100_2$
+\begin{ex}[Somma Binaria]\label{ex:somma} 
+Sommiamo $31+12$ in binario. Si ha: $31/2 = 15 + 1, 15/2 = 7 + 1, 7/2 = 3 + 1, 3 /2 = 1 + 1$, quindi $31 = (1111)_2$ con $12 = (8+4) = 1100_2$
 \begin{align*}
     &1\qquad \qquad \leftarrow\text{resti}\\
 	&1111+\\
@@ -503,10 +554,14 @@ alle elementari.\nota{Somme in binario}
 ----&----\\
    1&1011   
 \end{align*}
+\end{ex}
+
 che deriva dal fatto che: $1+0 = 1$, e $1+1 = 10$ quindi si riporta un resto
 a destra, sopra ad esempio abbiamo segnato il resto riportato nella somma tra le cifre in seconda colonna. Nella prima colonna si ha quindi $1+1+1 = 11$ e quindi il risultato presenta una cifra in più. 
 
 La sottrazione tra due numeri $a,b$ con $a>b$ avviene come in decimale, nel caso in cui la cifra da sottrarre è maggiore della cifra da cui sottraiamo, avviene un prestito, tenendo conto del peso delle cifre: se prendiamo in prestito da sinistra un unità, diventano due unità di resto sulla sinistra.
+
+\begin{ex}[Sottrazione Binaria]
 Calcoliamo $25-14$, abbiamo $25 = 11001$ e $14 = 1110$ quindi
 \[
 \begin{matrix}
@@ -519,18 +574,19 @@ Calcoliamo $25-14$, abbiamo $25 = 11001$ e $14 = 1110$ quindi
  \mathsf 0 & \mathsf 1 & \mathsf 0 & \mathsf 1 & \mathsf 1 &
 \end{matrix}
 \]
-
 In effetti $(1011)_2 = 2^3+2+1 = 11 = 25-14$.
+\end{ex}
+
 Vediamo in dettaglio: nella colonna $0$ a destra abbiamo $1-0 = 1$,
 nella colonna $1$ abbiamo $0-1$ e non possiamo farlo senza prestiti. 
 Quindi chiediamo in prestito dalla colonna $2$ che però è a zero, quindi proseguiamo e chiediamo un prestito dalla colonna $3$, dove abbiamo un $1$ (abbiamo evidenziato con una sottolineatura i valori da cui prendiamo in prestito per ricordarlo dopo).
 Il prestito della colonna $3$ diventa un due nella colonna $2$ (guardate la riga con i resti), da questo prediamo in prestito un unità, che diventa un $2$ nella colonna $1$.
 A questo punto possiamo completare l'operazione in colonna 1, con $2-0-1 = 1$,
-nella colonna $2$, abbiamo $0 - 1$ ma dobbiamo considerare un unità di resto rimasta e quindi otteniamo $1 - 1 = 0$. Nella colonna tre, abbiamo $0-1$ perche abbiamo preso in prestito, quindi nuovamente prendiamo in prestito dalla colonna $4$ ottenendo $2-1 = 1$, a questo punto la colonna quattro è $0-0=0$.
+nella colonna $2$, abbiamo $0 - 1$ ma dobbiamo considerare un unità di resto rimasta e quindi otteniamo $1 - 1 = 0$. Nella colonna tre, abbiamo $0-1$ perché abbiamo preso in prestito, quindi nuovamente prendiamo in prestito dalla colonna $4$ ottenendo $2-1 = 1$, a questo punto la colonna quattro è $0-0=0$.
 
 Per quanto possa sembrare complicato a prima vista, si tratta esattamente
 dello stesso procedimento con cui calcolavamo le sottrazioni in decimale da piccoli.
-\end{ex}
+
 
 \subsection{Numeri Interi Negativi}
 
@@ -544,7 +600,7 @@ numero di cifre che lo compongono nelle diverse basi.
 
 In questa Sezione ci preoccuperemo di capire come rappresentare i numeri interi negativi, e quindi passare da $\mathbb{N}$ a $\mathbb{Z}$. Nell'uso comune i numeri negativi sono rappresentati aggiungendo un simbolo '-' davanti alla loro rappresentazione come numeri naturali positivi. Quindi abbiamo $1234$, e $-1234$, e questa è sicuramente la rappresentazione più semplice. Dal punto di vista astratto tale rappresentazione è perfettamente compatibile con la Definizione in \eqref{eq:pos}, infatti la applichiamo al sistema decimale senza problemi.
 
-L'obiettivo di questa sezione è quindi leggermente più complesso: Non ci serve semplicemente una notazione per i numeri negativi, in base arbitraria, ma una notazione che li rappresenta senza usare simboli aggiuntivi rispetto all'insieme $\mathcal{C}$ definito in \eqref{eq:pos}. In altri termini: Poichè i computer memorizzano tutto in forma binaria, il sistema di rappresentazione che useremo per i numeri negativi deve essere compatibile con questa scelta, deve cioè consentire di \emph{codificare} interi positivi o negativi in modo che alla fine la rappresentazione del numero sia sempre e solo costituita da una stringa di bit. Ecco perche in questo sezione, ci concentreremo prettamente sulla rappresentazione in base due.
+L'obiettivo di questa sezione è quindi leggermente più complesso: Non ci serve semplicemente una notazione per i numeri negativi, in base arbitraria, ma una notazione che li rappresenta senza usare simboli aggiuntivi rispetto all'insieme $\mathcal{C}$ definito in \eqref{eq:pos}. In altri termini: Poiché i computer memorizzano tutto in forma binaria, il sistema di rappresentazione che useremo per i numeri negativi deve essere compatibile con questa scelta, deve cioè consentire di \emph{codificare} interi positivi o negativi in modo che alla fine la rappresentazione del numero sia sempre e solo costituita da una stringa di bit. Ecco perché in questo sezione, ci concentreremo prettamente sulla rappresentazione in base due.
 
 \subsubsection{Modulo e Segno}
 
@@ -555,14 +611,16 @@ Il primo modo, molto semplice per codificare i numeri negativi è notare che i s
 Notiamo quindi che il segno è rappresentato nella cifra più significativa che però non viene interpretata come le altre cifre, notiamo che questo implica che come si vede dagli indici della sommatoria, l'intervallo di rappresentazione dei numeri con $k$ cifre diventa più piccolo. Il valore massimo infatti sarà pari ad esattamente alla metà rispetto alla notazione in \eqref{eq:pos} cioè $(2^{k-1}-1)$. Il range di rappresentazione\nota{Numeri Interi in Modulo e Segno, con $k$ bit: Range = $[-2^{k-1}-1,2^{k-1}-1]$}, è dato quindi dagli interi in $[-2^{k-1}-1,2^{k-1}-1]$.
 
 \begin{ex} In binario, modulo e segno, il valore $-12$ sarà ottenuto prima
-	ottendo il valore di $12 = (1100)_2$ e poi aggiungendo un bit di segno messo ad $1$, quindi $(-12 = 11100)$. Notiamo che abbiamo usato $5$ cifre,
-	infatti con sole $4$ cifre, dovendo usarne una per il segno, avremmo a disposizione solo $3$ bit per il valore assoluto, e quindi il massimo valore
-	rappresentabile sarebbe $111 = 7$. Con $5$ cifre possiamo quindi rappresentare i valori interi in $[-2^4-1,2^4-1] = [-15,15]$.
-\end{ex}
+calcolando il valore di $12 = (1100)_2$ e poi aggiungendo un bit di segno messo
+ad $1$, quindi $(-12 = 11100)$. Notiamo che abbiamo usato $5$ cifre, infatti
+con sole $4$ cifre, dovendo usarne una per il segno, avremmo a disposizione
+solo $3$ bit per il valore assoluto, e quindi il massimo valore rappresentabile
+sarebbe $111 = 7$. Con $5$ cifre possiamo quindi rappresentare i valori interi
+in $[-2^4-1,2^4-1] = [-15,15]$. \end{ex}
 
-La rappresentazione in modulo e segno è semplice, ma presenta vari problemi che hanno portato alla sua scomparsa nell'uso pratico. Notiamo intanto che esiste nella rappesentazione sia il valore $0$ che il valore $-0$, e questo comporta uno spreco poichè due diverse sequenze di bit, sono di fatto associate allo stesso valore. Inoltre la presenza di un bit di segno separato, rende più complicate le operazioni aritmetiche. Anche il calcolo delle somme, e sottrazioni come vedremo è complesso:
+La rappresentazione in modulo e segno è semplice, ma presenta vari problemi che hanno portato alla sua scomparsa nell'uso pratico. Notiamo intanto che esiste nella rappresentazione sia il valore $0$ che il valore $-0$, e questo comporta uno spreco poiché due diverse sequenze di bit, sono di fatto associate allo stesso valore. Inoltre la presenza di un bit di segno separato, rende più complicate le operazioni aritmetiche. Anche il calcolo delle somme, e sottrazioni come vedremo è complesso:
 
-\begin{ex} Proviamo a calcolare $25 - 14$ intanto dobbiamo preliminarmente decidere come rappresentare i due valori, poichè siamo nel sistema con modulo e segno, per rappresentare $25$ serviranno almeno $6$ bit per la rappresentazione. Infatti $2^{6-1}-1 = 31 > 25$, mentre $2^{5-1}-1 = 15$ ed il valore $25$ non sarebbe rappresentabile con $5$ bit. 
+\begin{ex} Proviamo a calcolare $25 - 14$ intanto dobbiamo preliminarmente decidere come rappresentare i due valori, poiché siamo nel sistema con modulo e segno, per rappresentare $25$ serviranno almeno $6$ bit per la rappresentazione. Infatti $2^{6-1}-1 = 31 > 25$, mentre $2^{5-1}-1 = 15$ ed il valore $25$ non sarebbe rappresentabile con $5$ bit. 
 
 Abbiamo quindi $25 = 011001$ e  $-14 = 101110$. Adesso nasce un problema. 
 Per sommare due numeri positivi, dobbiamo sommare i moduli, e lasciare il bit
@@ -586,7 +644,7 @@ al risultato corretto: infatti il valore $11$ su $6$ bit, con segno e modulo è 
 
 L'osservazione sopra va intesa alla luce, di quello che vedremo nel Capitolo successivo sull'ALU, cioè sul circuito che internamente al Processore svolge le
 operazioni aritmetiche. Se adottassimo la notazione con modulo e segno, dovremmo avere una parte circuitale che confronta i segni, per controllare se
-sono discordi/corcordi, e due circuiti diversi, per la somma e per la sottrazione da usare nei due casi. Come vedremo esistono
+sono discordi/concordi, e due circuiti diversi, per la somma e per la sottrazione da usare nei due casi. Come vedremo esistono
 rappresentazioni che possiedono la proprietà algebrica $a-b = (a)+(-b)$,
 quindi necessitano in hardware solo di un circuito per la somma. Ecco
 uno dei motivi principali per cui la notazione con modulo e segno, usata
@@ -607,17 +665,17 @@ Sia $M > 0$ intero, se \emph{scostiamo} di un valore $-M$ (che chiameremo scosta
 \noindent allora il range di rappresentazione sarà: $[-M,B^k-M-1]$. Di solito
 si considera $M = B^k/2-1$ se vogliamo circa metà di valori positivi e metà negativi. Il range dei valori rappresentati andrà dal minimo $-B^k/2+1$ fino al massimo $B^k-1-(B^k/2-1) = B^k/2$ per $B=2$ si ha l'intervallo: $[-2^{k-1}-1,2^{k-1}]$. Ad esempio, con $k = 8$ bit, abbiamo i valori tra $[-2^7+1,2^7] = [-127,128]$.
 
-\begin{ex} Nell notazione decimale con $2$ cifre abbiamo i numeri naturali da $0$ a $99$. In decimale con scostamento a $M = -10^2/2 + 1 = -49$ otteniamo gli interi nell'intervallo $[-49,50]$. Il simbolo $\mathsf 0$ deve quindi essere interpretato come $0-49 = -49$, e allo stesso modo si ha: $\mathsf{1} = -48$, $\mathsf{49} = 49 - 49 = 0$ e $\mathsf{99} = 99 - 49 = 50$.
+\begin{ex} I numeri decimali con al massimo $2$ cifre vanno da $0$ a $99$. In decimale con scostamento a $M = -10^2/2 + 1 = -49$ otteniamo gli interi nell'intervallo $[-49,50]$. Il simbolo $\mathsf 0$ deve quindi essere interpretato come $0-49 = -49$, e allo stesso modo si ha: $\mathsf{1} = -48$, $\mathsf{49} = 49 - 49 = 0$ e $\mathsf{99} = 99 - 49 = 50$.
 
 In Binario con otto bit e scostamento $M = 127$ abbiamo i valori interi nell'intervallo: $[-127,128]$. Se prendiamo quindi un numero $11011011$, il suo valore si ottiene convertendolo in decimale:
-$11011011 = 219$ e sottraendo $127$ quindi si ha $(11011011) = 92$. Viceversa se avessimo dovuto \emph{codificare} il valore di $92$, avremmo prima calcolato $92+127$ e successivamento convertito tale valore in binario.
+$11011011 = 219$ e sottraendo $127$ quindi si ha $(11011011) = 92$. Viceversa se avessimo dovuto \emph{codificare} il valore di $92$, avremmo prima calcolato $92+127$ e successivamente convertito tale valore in binario.
 \end{ex}	
 
 Questo tipo di rappresentazione è usata non tanto per rappresentare i valori interi (negativi o positivi), ma per un uso più specifico: rappresentare l'esponente nella notazione in standard \textrm{IEEE-754} per i numeri in virgola mobile.
 
 \subsubsection{Rappresentazione in Complemento alla Base}
 
-Questa è davvero la rappresentanzione usata all'interno del calcolatore per
+Questa è davvero la rappresentazione usata all'interno del calcolatore per
 rappresentare gli interi (positivi e negativi). Come vedremo la proprietà
 fondamentale di questa rappresentazione, che in base due si chiama \emph{complemento a due}, è sopratutto quella di rispettare la proprietà algebrica $a - b = a +\, -b$. Riducendo quindi il problema della sottrazione
 al calcolo della somma tra numeri di segno diverso.
@@ -628,7 +686,7 @@ $B^k$ \emph{non è rappresentabile}. In particolare cosa accade se provassimo a 
 
 \begin{ex} In decimale con tre cifre abbiamo:
 	\[ \boxed{9}\boxed{9}\boxed{9} + 1 = 1\boxed{0}\boxed{0}\boxed{0} \]
-E poichè l'uno a sinistra non può essere scritto, abbiamo $10^3 = 1000 \equiv 0$. Lo studente di matematica attento ha già capito che in pratica la somma lavora \emph{modulo $1000$}. Ad esempio: con tre cifre decimali, il valore di $-45$ è $55$, perche se calcoliamo $45 + 55$ si ha $100 \equiv 0$.
+E poiché l'uno a sinistra non può essere scritto, abbiamo $10^3 = 1000 \equiv 0$. Lo studente di matematica attento ha già capito che in pratica la somma lavora \emph{modulo $1000$}. Ad esempio: con tre cifre decimali, il valore di $-45$ è $55$, perché se calcoliamo $45 + 55$ si ha $100 \equiv 0$.
 \end{ex}
 
 Dato un intero positivo $N$, e fissato il numero di cifre della rappresentazione, definiamo \emph{complemento alla base} l'intero $N'$

@@ -10,14 +10,15 @@
 \define@key{boxedtheorem}{thcounter}{\def\thcounter{#1}}
 \define@key{boxedtheorem}{size}{\def\size{#1}}
 \presetkeys{boxedtheorem}{titlecolor = black, titlebackground = white, background = white,%
-                         titleboxcolor = black, boxcolor = black, thcounter=, size = .9\textwidth}{}
+     titleboxcolor = black, boxcolor = black, thcounter=, size = .9\textwidth}{}
 
 \newcommand{\couleurs}[1][]{%
     \setkeys{boxedtheorem}{#1}
-    \tikzstyle{fancytitle} =[draw=\titleboxcolor, rounded corners, fill=\titlebackground,
+    \tikzstyle{fancytitle} =[draw=\titleboxcolor, rounded corners, 
+							fill=\titlebackground,
                             text= \titlecolor]
-    \tikzstyle{mybox} = [draw=\boxcolor, fill=\background, very thick,
-                        rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+    \tikzstyle{mybox} = [draw=\boxcolor, fill=\background, thick,
+                        rectangle, rounded corners, inner sep=10pt, inner ysep=15pt]
 }
 
 
