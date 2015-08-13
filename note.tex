@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc} 
 \usepackage[italian]{babel}
-\usepackage{booktabs,enumitem,graphicx,hyphenat,titlesec,xcolor,url}
+\usepackage{enumitem,graphicx,hyphenat,titlesec,xcolor,url}
 \usepackage{amsmath} 
 \usepackage{amsthm} 
 \usepackage{amssymb}
@@ -11,6 +11,9 @@
 \usepackage[babel=true,final]{microtype} 
 \usepackage{boiboites} 
 \usepackage[showframe=false,paper=a4paper,margin=1in]{geometry}
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{tabularx}
 
 \makeatletter 
 \renewcommand\maketitle{
@@ -33,23 +36,20 @@
 \definecolor{shadethmcolor}{HTML}{EDF8FF}
 \definecolor{shaderulecolor}{HTML}{45CFFF}
 
-
 \titleformat{\chapter}[display]
             {\raggedright\normalfont\Large\color{titlecolor}}
 			{\chaptertitlename\ \thechapter}{0pt}{\Huge}[\vspace{5pt}\titlerule]
-
 \titleformat{\section}
 			{\raggedright\normalfont\Large\bfseries\color{titlecolor}}
 			{\thesection}{1ex}{}
-
 \titleformat{\subsection}
 			{\raggedright\normalfont\large\bfseries\color{titlecolor}}
 			{\thesubsection}{1ex}{}
-
 \titleformat{\paragraph}[runin]
 			{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 
 \usepackage{etoolbox}
+\usepackage{needspace}
 
 \hypersetup{
 	pdftitle={Note per il Corso di Programmazione},
@@ -73,14 +73,14 @@
 	background= shadethmcolor, %blue!5, 
 	titlebackground= blue!20,
 	titleboxcolor=black]{thm}{Teorema}{thmCounter} 
-
-
+%\break if fewer than 5\baselineskip is available on page	
+\AtBeginEnvironment{thm}{\Needspace{5\baselineskip}} 
+	
 \newboxedtheorem[
 	boxcolor = orange, 
 	background=blue!5, 
 	titlebackground=blue!20,
 	titleboxcolor=black]{defn}{Definizione}{defCounter} 
-
 \newboxedtheorem[
 	boxcolor = black, 
 	background=blue!5, 
@@ -97,14 +97,18 @@
 \theoremstyle{definition}
 \newtheorem{ex}{Esempio}
 
-%\usepackage{setspace} 
-%\setstretch{1.03} 
-%\setlength{\parskip}{0.2em}
+\usepackage{setspace} 
+\setstretch{1.03} 
+\setlength{\parskip}{0.2em}
 
 % ---- Front matter ---- 
 
 \title{Note per il Corso di Programmazione}
-\author{Antonio Caruso} 
+\author{Antonio Caruso\\[2ex] 
+ {\normalsize Dipartimento di Matematica e Fisica '\emph{Ennio De Giorgi}'\\   
+              Palazzo Fiorini\\[2ex] 
+ \url{mailto://antonio.caruso@unisalento.it}\\
+ \url{http://bilbo.unisalento.it/antonio}}} 
 \date{\today} 
 \pagestyle{plain} 
 
@@ -124,6 +128,7 @@
 \hypersetup{pageanchor=true} 
 \tableofcontents
 \pagenumbering{roman} 
+\pagestyle{headings} 
 \mainmatter
 
 \newgeometry{vmargin=30mm, right=1.9in, marginparsep=3.5mm, footskip=15mm}

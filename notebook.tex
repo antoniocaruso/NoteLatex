@@ -1,0 +1,160 @@
+\documentclass[a4paper]{amsbook} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc} 
+\usepackage[italian]{babel}
+
+\usepackage{epigraph} 
+\setlength{\epigraphwidth}{0.8\textwidth}
+\renewcommand{\epigraphsize}{\small}
+
+\usepackage{amsmath}
+\usepackage{amsthm} 
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[babel=true,final]{microtype} 
+
+%-----------------------
+\usepackage{booktabs,enumitem,graphicx,hypernat,xcolor,url}
+%\usepackage{booktabs,enumitem,graphicx,hyphenat,titlesec,xcolor,url}
+%\usepackage[showframe=false,paper=a4paper,margin=1in]{geometry}
+%
+\usepackage{hyperref}
+%
+%\definecolor{titlecolor}{rgb}{0,0,0.5}
+%
+%\titleformat{\chapter}[display]
+%            {\raggedright\normalfont\Large\color{titlecolor}}
+%			{\chaptertitlename\ \thechapter}{0pt}{\Huge}[\vspace{5pt}\titlerule]
+%\titleformat{\section}
+%			{\raggedright\normalfont\Large\bfseries\color{titlecolor}}
+%			{\thesection}{1ex}{}
+%\titleformat{\subsection}
+%			{\raggedright\normalfont\large\bfseries\color{titlecolor}}
+%			{\thesubsection}{1ex}{}
+%\titleformat{\paragraph}[runin]
+%			{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%
+%\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+%
+\usepackage{etoolbox}
+%\makeatletter
+%\patchcmd{\@dottedtocline}
+%  {\rightskip\@tocrmarg}
+%  {\rightskip\@tocrmarg plus 4em \hyphenpenalty\@M}
+%  {}{}
+%\renewcommand{\@pnumwidth}{1.7em}
+%\renewcommand{\@tocrmarg}{2.7em}
+%\makeatother
+%
+%
+\hypersetup{
+	pdftitle={Note per il Corso di Programmazione},
+	pdfauthor={Antonio Caruso}}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=black,
+	urlcolor=black
+}
+
+%\usepackage{boiboites} 
+
+%\newboxedtheorem[
+%	boxcolor = red!50!black, 
+%	background=blue!5, 
+%	titlebackground=blue!20,
+%	titleboxcolor=black]{thm}{Teorema}{thmCounter} 
+%
+%
+%\newboxedtheorem[
+%	boxcolor = orange, 
+%	background=blue!5, 
+%	titlebackground=blue!20,
+%	titleboxcolor=black]{defn}{Definizione}{defCounter} 
+%
+%\newboxedtheorem[
+%	boxcolor = black, 
+%	background=blue!5, 
+%	titlebackground=blue!5,
+%	titleboxcolor=black]{observe}{Osservazione}{obsCounter} 
+%
+%%\newboxedtheorem[
+%%	boxcolor = black, 
+%%	background=blue!2, 
+%%	titlebackground=blue!20,
+%%	titleboxcolor=black,
+%%	size=0.94\textwidth]{ex}{Esempio}{exCounter} 
+%
+
+\newtheorem{thm}{Teorema}
+\newtheorem{observe}{Osservazione}
+\theoremstyle{definition}
+\newtheorem{ex}{Esempio}
+
+%\usepackage{setspace} 
+%\setstretch{1.02} 
+\setlength{\parskip}{0.1em}
+
+%% ------------------- Front matter ------------------------ 
+%
+\makeatletter
+\renewcommand\maketitle{
+\begin{titlepage} \vspace*{\stretch{1}}
+\begin{center} {\Huge \@title \par}%
+	 \vspace{5em}%
+	 {\LARGE Antonio Caruso \par}%
+	 \vspace{1.5em} {
+	 \large \emph{\@date} \par}%
+	 \vspace{3em} \end{center}%
+\vspace*{\stretch{1}}
+\end{titlepage}}
+\makeatother
+
+\clubpenalty=10000 
+\widowpenalty=10000 
+\overfullrule=1mm
+
+\newcommand{\nota}[1]{\marginpar[{\raggedleft\small\sffamily #1\\}]{%
+ 								 {\raggedright\small\sffamily #1\\}}}
+\newcommand{\Mod}[1]{\ \text{mod}\ #1}
+
+
+\hyphenation{rap-pre-sen-ta-zio-ne}
+
+\includeonly{chapters}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+%% ------------------- Document ------------------------
+\begin{document}
+
+\frontmatter 
+\title{Note per il Corso di Programmazione}
+\author{Antonio Caruso} 
+\address{\centering
+ Dipartimento di Matematica e Fisica 'Ennio De Giorgi'\newline
+ \centering Complesso Ecotekne, Palazzo Fiorini
+}
+\email{antonio.caruso@unisalento.it}
+\date{a.a. 2015/16}
+\begin{abstract}
+	Queste Note sono parte del materiale didattico per il corso di Programmazione, della Laurea Triennale in Matematica.
+\end{abstract}
+\maketitle
+\addtocontents{toc}{~\hfill\textbf{Page}\par}
+\tableofcontents
+\mainmatter
+
+\pagenumbering{arabic}
+\pagestyle{headings}
+
+%\newgeometry{vmargin=30mm, right=1.9in, marginparsep=3.5mm, footskip=15mm}
+%\hypersetup{pageanchor=true} 
+
+\include{chapters}
+
+\end{document}
+

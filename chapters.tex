@@ -26,8 +26,7 @@ stato molto diverso da come noi siamo abituati a fare sin da piccoli.} da parte
 di Leonardo Pisano (detto il Fibonacci). Gli Interi e le operazioni elementari
 tra essi, come somma, sottrazione, moltiplicazione e divisione sono studiati in
 quella parte della matematica chiamata \emph{Aritmetica}; Nonostante il lettore
-possa trovare strano dover rivedere concetti che ritiene assodati, queste note
-mostreranno come alcuni concetti dell'Aritmetica meritino un ulteriore approfondimento.
+possa trovare strano dover rivedere concetti che ritiene assodati, vedremo come l'Aritmetica meriti senz'altro un ulteriore approfondimento.
 
 Queste note introdurranno una diversa prospettiva sul perché scriviamo i numeri in decimale. Vedremo come la scelta di una rappresentazione numerica è strettamente legata al modo con cui svolgiamo abitualmente le operazioni aritmetiche, cioè
 gli \emph{algoritmi} usati per il calcolo di somma, sottrazione, etc. 
@@ -111,6 +110,23 @@ $2\cdot 2^2 + 2\cdot 2^1 + 1\cdot 2^0$. Quindi se usiamo \emph{troppe} cifre,
 perdiamo l'unicità, allo stesso modo se usiamo \emph{poche} cifre perdiamo
 l'esistenza di una rappresentazione, ad esempio se in base $10$ usassimo solo
 le cifre $0,\ldots,8$ avremmo infiniti numeri naturali non rappresentabili ($9$, $19$,..).
+
+Il valore $k$ in \eqref{eq:pos} è il numero di cifre, le singole cifre prese da
+$\mathcal{C}$ hanno significato diverso in base alla loro posizione, ecco
+perché il sistema è detto posizionale. Il peso è proporzionale ad una potenza
+della base via via crescente da destra a sinistra. La prima cifra $c_{k-1} \neq
+0$ viene detta \emph{più significativa} poiché associata alla potenza della
+base più alta, corrispondentemente la cifra $c_0$ o cifra delle \emph{unità}
+viene chiamata anche \emph{meno significativa}. Vale la pena ricordare che nella didattica della Matematica nelle classi primarie (elementari) 
+è usuale dare dei numeri come $1214$ e chiedere di scomporli nelle
+loro cifre e nei pesi della base attraverso la dizione seguente:
+
+{\it 1214 $ = $ un migliaio, due centinaia, una decina, e quattro unità.}
+
+\noindent in questo modo i bambini apprendono rapidamente che le cifre
+rappresentano valori differenti a secondo della loro posizione, e che tale
+valore è proporzionale ad un opportuna potenza della base (a questo livello
+identificate con opportune espressioni: migliaia, centinaia, etc).
 Dimostriamo adesso il Teorema:
 
 \begin{proof}[Dimostrazione: (Teorema 1)]
@@ -144,22 +160,6 @@ strettamente collegati al concetto di polinomio: la somma in \eqref{eq:pos} può
 vista come un polinomio di grado $k-1$, i cui coefficienti sono le cifre
 dell'intero, valutato nel punto $x = B$.
 
-Il valore $k$ in \eqref{eq:pos} è il numero di cifre, le singole cifre prese da
-$\mathcal{C}$ hanno significato diverso in base alla loro posizione, ecco
-perché il sistema è detto posizionale. Il peso è proporzionale ad una potenza
-della base via via crescente da destra a sinistra. La prima cifra $c_{k-1} \neq
-0$ viene detta \emph{più significativa} poiché associata alla potenza della
-base più alta, corrispondentemente la cifra $c_0$ o cifra delle \emph{unità}
-viene chiamata anche \emph{meno significativa}. Vale la pena ricordare che nella didattica della Matematica nelle classi primarie (elementari) 
-è usuale dare dei numeri come $1214$ e chiedere di scomporli nelle
-loro cifre e nei pesi della base attraverso la dizione seguente:
-
-{\it 1214 $ = $ un migliaio, due centinaia, una decina, e quattro unità.}
-
-\noindent in questo modo i bambini apprendono rapidamente che le cifre
-rappresentano valori differenti a secondo della loro posizione, e che tale
-valore è proporzionale ad un opportuna potenza della base (a questo livello
-identificate con opportune espressioni: migliaia, centinaia, etc).
 
 In seguito tratteremo in modo approfondito l'uso della base due\nota{Sistema
 Binario}. Se consideriamo $B = 2$ e $\mathcal{C} = \{ 0, 1 \}$ il sistema è
@@ -209,7 +209,7 @@ c_0)$\footnote{La presenza delle virgole non è una differenza da poco: in
 \emph{giustapposte} senza separatori, in una tupla le componenti sono
 chiaramente separate dalle virgole. Le due rappresentazioni sono
 matematicamente diverse anche se ovviamente isomorfe.} allora ogni numero con
-$k$ cifre può essere visto come un prodotto cartesiano di $\mathcal{C}^k$, ma
+$k$ cifre può essere visto come un elemento di $\mathcal{C}^k$ (il prodotto cartesiano di $\mathcal{C}$ per se stesso, $k$ volte), ma
 la cardinalità di quest'ultimo insieme è banalmente $|\mathcal{C}^k| =
 |\mathcal{C}|^k = B^k$, quindi vi sono $B^k$ configurazioni
 diverse ed ognuna rappresenterà un intero diverso; Poichè iniziamo
@@ -227,7 +227,7 @@ e $(11111111)_2 = 255$. In esadecimale con $4$ cifre abbiamo $16^4 = 65536$ valo
 \end{ex}
 
 L'esempio\nota{Il numero di cifre per $n$ è $k = \lceil\, \log_B{n} \,\rceil$}
-mostra quindi che se fissiamo il numero di cifre, l'intervallo di rappresentazione aumenta all'aumentare della base. Quante cifre servono a rappresentare un generico intero? Se $n \in \mathbb{N}$, il numero di cifre necessario a rappresentare $n$ sarà ovviamente il minimo $k$ tale che $B^k-1 \geq n$, quindi $k = \lceil\, \log_B{n} \,\rceil$.
+mostra quindi che se fissiamo il numero di cifre, l'intervallo di rappresentazione aumenta all'aumentare della base. Quante cifre servono a rappresentare un generico intero? Se $n \in \mathbb{N}$, il numero di cifre necessario a rappresentare $n$ sarà ovviamente il minimo $k$ tale che $B^k-1 \geq n$, quindi $k = \log_B{n+1} \;\approx\; \lceil\, \log_B{n} \,\rceil$.
 
 \begin{ex}[Numero di cifre di un intero in base $B$] 
 L'ultima relazione ci dice che la lunghezza in cifre di un numero intero $n$ in
@@ -235,8 +235,7 @@ decimale è $\lceil\log_{10} n \rceil$, il che è un ovvia conseguenza della
 \eqref{eq:pos}. Prendiamo $n = 123456789$, esso ha $\lceil \log_{10} n \rceil =
 \lceil\, 8,0915 \,\rceil = 9$ cifre, poiché $\log_2{n} = 8,0915 / \log_{10}{2}
 = 26,87$, in binario serviranno $27$ bit. Infatti come vedremo successivamente:
-$123456789 = (111010110111100110100010101)_2$. Notiamo quindi che è possibile definire ad un intero il concetto di \emph{lunghezza}, definita come:
-$\operatorname{len}(n) = \lceil \log_B n \rceil$
+$123456789 = (111010110111100110100010101)_2$.
 \end{ex}
 
 %\begin{quote}
@@ -306,7 +305,7 @@ molto piccoli.\par
 {\hfill \rule{0.9\textwidth}{0.5pt} \hfill}
 %\end{quote}
 
-\subsection{Conversione tra basi}
+\subsection{Conversione tra basi}\label{sec:conversione}
 
 Di seguito si vedrà come convertire da una rappresentazione in base $b$ ad una
 in base $B$. Poiché noi siamo abituati a svolgere operazioni in base $10$, per
@@ -478,15 +477,41 @@ numero di cifre che lo compongono nelle diverse basi.
 
 In questa Sezione ci preoccuperemo di capire come rappresentare i numeri interi negativi, e quindi passare da $\mathbb{N}$ a $\mathbb{Z}$. Nell'uso comune i numeri negativi sono rappresentati aggiungendo un simbolo '-' davanti alla loro rappresentazione come numeri naturali positivi. Quindi abbiamo $1234$, e $-1234$, e questa è sicuramente la rappresentazione più semplice. Dal punto di vista astratto tale rappresentazione è perfettamente compatibile con la Definizione in \eqref{eq:pos}, infatti la applichiamo al sistema decimale senza problemi.
 
-L'obiettivo di questa sezione è quindi leggermente più complesso: Non ci serve semplicemente una notazione per i numeri negativi, in base arbitraria, ma una notazione che li rappresenta senza usare simboli aggiuntivi rispetto all'insieme $\mathcal{C}$ definito in \eqref{eq:pos}. In altri termini: Poiché i computer memorizzano tutto in forma binaria, il sistema di rappresentazione che useremo per i numeri negativi deve essere compatibile con questa scelta, deve cioè consentire di \emph{codificare} interi positivi o negativi in modo che alla fine la rappresentazione del numero sia sempre e solo costituita da una stringa di bit. Ecco perché in questo sezione, ci concentreremo prettamente sulla rappresentazione in base due.
+L'obiettivo di questa sezione è quindi leggermente più complesso: Non ci serve semplicemente una notazione per i numeri negativi, in base arbitraria, ma una notazione che li rappresenta senza usare simboli aggiuntivi rispetto all'insieme $\mathcal{C}$ definito in \eqref{eq:pos}. In altri termini: Poiché i computer memorizzano tutto in forma binaria, il sistema di rappresentazione che useremo per i numeri negativi deve essere compatibile con questa scelta, deve cioè consentire di \emph{codificare} interi positivi o negativi in modo che alla fine la rappresentazione del numero sia sempre e solo costituita da una stringa di bit. I sistemi di rappresentazione che vedremo, per quanto
+definiti per basi arbitrarie, hanno una reale applicazione solo in binario.
 
 \subsubsection{Modulo e Segno}
 
-Il primo modo, molto semplice per codificare i numeri negativi è notare che i simboli '+' e '-' per il segno, sono solo due, quindi possono essere rappresentato da un solo bit, associamo ad esempio $0 = '+'$ e $1 = '-'$, e mettiamo questo bit davanti alla rappresentazione del valore assoluto del numero. Pertanto la rappresentazione detta \emph{con modulo e segno} di un intero $n$ in binario con $k$ cifre è la seguente:
+Il primo modo, molto semplice per codificare i numeri negativi è notare che i simboli '$+$' e '$-$' per il segno, sono solo due, quindi possono essere rappresentato da un solo bit, associamo ad esempio $0 = $'$+$' e $1 = $'$-$', e mettiamo questo bit davanti alla rappresentazione del valore assoluto del numero. Pertanto la rappresentazione detta \emph{con modulo e segno} di un intero $n$ in binario con $k$ cifre è la seguente:
 
 \[ n = (c_{k-1}c_{k-2}{\ldots}c_1c_0)_2 = (-c_{k-1}) \cdot \sum_{i=0}^{k-2}c_iB^i \]
 
-Notiamo quindi che il segno è rappresentato nella cifra più significativa che però non viene interpretata come le altre cifre, notiamo che questo implica che come si vede dagli indici della sommatoria, l'intervallo di rappresentazione dei numeri con $k$ cifre diventa più piccolo. Il valore massimo infatti sarà pari ad esattamente alla metà rispetto alla notazione in \eqref{eq:pos} cioè $(2^{k-1}-1)$. Il range di rappresentazione\nota{Numeri Interi in Modulo e Segno, con $k$ bit: Range = $[-2^{k-1}-1,2^{k-1}-1]$}, è dato quindi dagli interi in $[-2^{k-1}-1,2^{k-1}-1]$.
+Notiamo quindi che il segno è rappresentato nella cifra più significativa che  non viene a far parte del \emph{valore} dell'intero come le altre cifre. Come si vede dagli indici della sommatoria il range di rappresentazione\nota{Numeri Interi in Modulo e Segno, con $k$ bit: Range = $[-2^{k-1}-1,2^{k-1}-1]$}, è dato dagli interi nell'intervallo $[-2^{k-1}-1,2^{k-1}-1]$.
+
+\begin{wraptable}[18]{r}{4.8cm}\footnotesize \sffamily 
+%\renewcommand{\arraystretch}{1.2}	
+\begin{tabular}{c|c|p{1.2cm}}
+	Binario & Posizionale & Modulo e Segno\\ \noalign{\smallskip}
+	\hline \noalign{\smallskip}
+	$0000$ & $0$ & $+0$\\
+	$0001$ & $1$ & \hspace{2ex}$1$\\ 
+	$0010$ & $2$ & \hspace{2ex}$2$\\ 
+	$0011$ & $3$ & \hspace{2ex}$3$\\ 
+	$0100$ & $4$ & \hspace{2ex}$4$\\ 
+	$0101$ & $5$ & \hspace{2ex}$5$\\
+	$0110$ & $6$ & \hspace{2ex}$6$\\
+	$0111$ & $7$ & \hspace{2ex}$7$\\
+	$1000$ & $8$ & $-0$\\
+	$1001$ & $9$ & $-1$\\
+	$1010$ & $10$ & $-2$\\
+	$1011$ & $11$ & $-3$\\
+	$1100$ & $12$ & $-4$\\
+	$1101$ & $13$ & $-5$\\
+	$1110$ & $14$ & $-6$\\
+	$1111$ & $15$ & $-7$\\ \noalign{\smallskip}
+	\hline
+\end{tabular}
+\end{wraptable}
 
 \begin{ex} In binario, modulo e segno, il valore $-12$ sarà ottenuto prima
 calcolando il valore di $12 = (1100)_2$ e poi aggiungendo un bit di segno messo
@@ -494,9 +519,13 @@ ad $1$, quindi $(-12 = 11100)$. Notiamo che abbiamo usato $5$ cifre, infatti
 con sole $4$ cifre, dovendo usarne una per il segno, avremmo a disposizione
 solo $3$ bit per il valore assoluto, e quindi il massimo valore rappresentabile
 sarebbe $111 = 7$. Con $5$ cifre possiamo quindi rappresentare i valori interi
-in $[-2^4-1,2^4-1] = [-15,15]$. \end{ex}
+in $[-2^4-1,2^4-1] = [-15,15]$. In generale si deve sempre prestare attenzione a fissare il numero di bit, in modo che l'intervallo di rappresentazione sia sufficientemente grande da poter rappresentare gli interi di nostro interesse. \end{ex}
 
-La rappresentazione in modulo e segno è semplice, ma presenta vari problemi che hanno portato alla sua scomparsa nell'uso pratico. Notiamo intanto che esiste nella rappresentazione sia il valore $0$ che il valore $-0$, e questo comporta uno spreco poiché due diverse sequenze di bit, sono di fatto associate allo stesso valore. Inoltre la presenza di un bit di segno separato, rende più complicate le operazioni aritmetiche. Anche il calcolo delle somme, e sottrazioni come vedremo è complesso:
+Nella Tabella accanto, vediamo un confronto tra l'interpretazione di numeri binari con $4$ bit nei due sistemi visti finora. Notiamo che nella prima colonna
+abbiamo aggiunto degli zeri davanti ad ogni numero in modo da evidenziare sempre
+il numero di cifre che abbiamo fissato ($0000 = 0$). Come si vede chiaramente non basta dare la sequenza di bit per decidere il suo valore. Ma bisogna capire se essa è un numero naturale, e quindi il suo valore è dato dall'equazione \eqref{eq:pos}, in seconda colonna, oppure un numero in modulo e segno, ed il suo valore è riportato nella terza colonna. E' responsabilità di chi ha scritto la sequenza di bit, sapere come interpretarla.
+
+La rappresentazione in modulo e segno è semplice, ma presenta vari problemi che hanno portato alla sua scomparsa nell'uso pratico. Notiamo dalla Tabella che esiste sia il valore $+0$ che il valore $-0$, e questo comporta uno spreco poiché due diverse sequenze di bit, sono di fatto associate allo stesso valore. Inoltre la presenza di un bit di segno separato, rende più complicate le operazioni aritmetiche di somma e sottrazione (ma facilita le moltiplicazioni/divisioni). Vediamo un esempio di sottrazione:
 
 \begin{ex} Proviamo a calcolare $25 - 14$ intanto dobbiamo preliminarmente decidere come rappresentare i due valori, poiché siamo nel sistema con modulo e segno, per rappresentare $25$ serviranno almeno $6$ bit per la rappresentazione. Infatti $2^{6-1}-1 = 31 > 25$, mentre $2^{5-1}-1 = 15$ ed il valore $25$ non sarebbe rappresentabile con $5$ bit. 
 
@@ -508,7 +537,6 @@ i moduli, e mettiamo il bit di segno ad $1$). Ma nel caso in cui i segni siano
 discorsi, non possiamo svolgere una somma, ma dobbiamo svolgere una sottrazione,
 come nell'Esempio \ref{ex:somma}. Quello che stiamo dicendo in pratica è che
 il sistema di rappresentazione con modulo e segno non gode della proprietà: $a-b = (a)+(-b)$, che ci consentirebbe di trattare le sottrazioni come somme. Vediamolo con un esempio:
-
 Se sommiamo la rappresentazione di $25$ e di $-14$, abbiamo
 \begin{align*}
 	    1&1 \quad \leftarrow\text{resti}\\ 
@@ -525,8 +553,7 @@ operazioni aritmetiche. Se adottassimo la notazione con modulo e segno, dovremmo
 sono discordi/concordi, e due circuiti diversi, per la somma e per la sottrazione da usare nei due casi. Come vedremo esistono
 rappresentazioni che possiedono la proprietà algebrica $a-b = (a)+(-b)$,
 quindi necessitano in hardware solo di un circuito per la somma. Ecco
-uno dei motivi principali per cui la notazione con modulo e segno, usata
-in decimale per la scrittura dei numeri negativi, non è usata all'interno del calcolatore.
+uno dei motivi principali per cui la notazione con modulo e segno non è usata all'interno del calcolatore.
 
 \subsubsection{Rappresentazione in Scostamento}
 
@@ -537,11 +564,41 @@ Il ragionamento per definire questa rappresentazione è molto semplice. I valori
 rappresentabili con $k$ cifre in base $B$ tramite \eqref{eq:pos} sono gli interi in $[0,B^k-1]$. 
 
 Sia $M > 0$ intero, se \emph{scostiamo} di un valore $-M$ (che chiameremo scostamento o bias) il valore finale della sommatoria, cioè formalmente:
-
 \[ (c_{k-1}\,\cdots\,c_{0})_B = \sum_{i=0}^{k-1} c_iB^i - M \] 
 
+
+\begin{wraptable}[18]{r}{5.1cm}\footnotesize \sffamily 
+%\renewcommand{\arraystretch}{1.2}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}	
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c|c|C{1.8cm}}
+	Binario & Posizionale & Scostamento (a $7$)\\ \noalign{\smallskip}
+	\hline \noalign{\smallskip}
+	$0000$ & $0$ & $-7$\\
+	$0001$ & $1$ & $-6$\\ 
+	$0010$ & $2$ & $-5$\\ 
+	$0011$ & $3$ & $-4$\\ 
+	$0100$ & $4$ & $-3$\\ 
+	$0101$ & $5$ & $-2$\\
+	$0110$ & $6$ & $-1$\\
+	$0111$ & $7$ & \hspace{2ex}$0$\\
+	$1000$ & $8$ & \hspace{2ex}$1$\\
+	$1001$ & $9$ & \hspace{2ex}$2$\\
+	$1010$ & $10$ & \hspace{2ex}$3$\\
+	$1011$ & $11$ & \hspace{2ex}$4$\\
+	$1100$ & $12$ & \hspace{2ex}$5$\\
+	$1101$ & $13$ & \hspace{2ex}$6$\\
+	$1110$ & $14$ & \hspace{2ex}$7$\\
+	$1111$ & $15$ & \hspace{2ex}$8$\\ \noalign{\smallskip}
+	\hline
+\end{tabular}
+\end{wraptable}
+
+
 \noindent allora il range di rappresentazione sarà: $[-M,B^k-M-1]$. Di solito
-si considera $M = B^k/2-1$ se vogliamo circa metà di valori positivi e metà negativi. Il range dei valori rappresentati andrà dal minimo $-B^k/2+1$ fino al massimo $B^k-1-(B^k/2-1) = B^k/2$ per $B=2$ si ha l'intervallo: $[-2^{k-1}-1,2^{k-1}]$. Ad esempio, con $k = 8$ bit, abbiamo i valori tra $[-2^7+1,2^7] = [-127,128]$.
+si considera $M = B^k/2-1$ se vogliamo circa metà di valori positivi e metà negativi. Il range dei valori rappresentati andrà dal minimo $-B^k/2+1$ fino al massimo $B^k-1-(B^k/2-1) = B^k/2$ per $B=2$ si ha l'intervallo: $[-2^{k-1}-1,2^{k-1}]$. Ad esempio, con $k = 8$ bit, abbiamo i valori tra $[-2^7+1,2^7] = [-127,128]$. Nella Tabella accanto vediamo un esempio con $4$ bit, e range $= [-7,8]$. Notiamo che il bit più significativo resta associato
+al segno ma con il significato opposto al caso precedente, se il numero è negativo il bit è a \emph{zero}, positivo se vale uno, e lo zero sotto questa interpretazione è un \emph{meno zero} poichè $0 = 0111$ ed il bit alto vale zero. Notiamo anche che i numeri positivi non conservano la loro rappresentazione rispetto alla notazione senza segno, e questo è una debolezza di questo sistema.
+
 
 \begin{ex} I numeri decimali con al massimo $2$ cifre vanno da $0$ a $99$. In decimale con scostamento a $M = -10^2/2 + 1 = -49$ otteniamo gli interi nell'intervallo $[-49,50]$. Il simbolo $\mathsf 0$ deve quindi essere interpretato come $0-49 = -49$, e allo stesso modo si ha: $\mathsf{1} = -48$, $\mathsf{49} = 49 - 49 = 0$ e $\mathsf{99} = 99 - 49 = 50$.
 
@@ -549,33 +606,140 @@ In Binario con otto bit e scostamento $M = 127$ abbiamo i valori interi nell'int
 $11011011 = 219$ e sottraendo $127$ quindi si ha $(11011011) = 92$. Viceversa se avessimo dovuto \emph{codificare} il valore di $92$, avremmo prima calcolato $92+127$ e successivamente convertito tale valore in binario.
 \end{ex}	
 
-Questo tipo di rappresentazione è usata non tanto per rappresentare i valori interi (negativi o positivi), ma per un uso più specifico: rappresentare l'esponente nella notazione in standard \textrm{IEEE-754} per i numeri in virgola mobile.
+Questo tipo di rappresentazione è usata non tanto per rappresentare i valori interi (negativi o positivi), ma per un uso più specifico: rappresentare l'esponente nella notazione in standard \textrm{IEEE-754} per i numeri in virgola mobile, come vedremo nella sezione a loro dedicata.
 
 \subsubsection{Rappresentazione in Complemento alla Base}
 
 Questa è davvero la rappresentazione usata all'interno del calcolatore per
-rappresentare gli interi (positivi e negativi). Come vedremo la proprietà
-fondamentale di questa rappresentazione, che in base due si chiama \emph{complemento a due}, è sopratutto quella di rispettare la proprietà algebrica $a - b = a +\, -b$. Riducendo quindi il problema della sottrazione
-al calcolo della somma tra numeri di segno diverso.
+rappresentare gli interi (positivi e negativi). Illustriamo subito le proprietà
+di cui essa gode, rispetto alle altre rappresentazioni viste finora:
+\begin{enumerate}
+	\item Rispetta la proprietà algebrica:  $a - b = a +\, -b$. Quindi le sottrazioni, possono essere svolte come semplici somme.
+	\item Come nel modulo e segno, il bit più alto individua il segno del numero, zero se positivo, uno se negativo.
+	\item I numeri positivi sono associati alla stessa sequenza di bit della notazione dell'equazione \eqref{eq:pos}. Quindi la parte positiva della
+	codifica corrisponde perfettamente a quanto visto per i naturali.
+\end{enumerate}
 
-La rappresentazione in complemento alla base, sfrutta una proprietà fondamentale
-di ogni sistema numerico \emph{con un numero finito di cifre}. Se infatti usiamo al massimo $k$ cifre, abbiamo ripetuto oramai numerose volte che il massimo valore rappresentabile sarebbe $B^k-1$. Notiamo quindi che il valore
+Per ottenere le tre proprietà sopra elencate, la 
+rappresentazione in complemento alla base, sfrutta una proprietà fondamentale
+di ogni sistema numerico \emph{con un numero finito di cifre}. Se infatti usiamo al massimo $k$ cifre, (abbiamo ripetuto oramai numerose volte che) il massimo valore rappresentabile è $B^k-1$. Notiamo quindi che il valore
 $B^k$ \emph{non è rappresentabile}. In particolare cosa accade se provassimo a calcolare $B^k-1\,+\,1$? e avessimo solo lo spazio fisico per scrivere $k$ cifre?
 
 \begin{ex} In decimale con tre cifre abbiamo:
-	\[ \boxed{9}\boxed{9}\boxed{9} + 1 = 1\boxed{0}\boxed{0}\boxed{0} \]
+	\[ \boxed{9}\boxed{9}\boxed{9} + 1 = 1\;\boxed{0}\boxed{0}\boxed{0} \]
 E poiché l'uno a sinistra non può essere scritto, abbiamo $10^3 = 1000 \equiv 0$. Lo studente di matematica attento ha già capito che in pratica la somma lavora \emph{modulo $1000$}. Ad esempio: con tre cifre decimali, il valore di $-45$ è $55$, perché se calcoliamo $45 + 55$ si ha $100 \equiv 0$.
 \end{ex}
 
+
+\begin{wraptable}[18]{r}{5.1cm}\footnotesize \sffamily 
+%\renewcommand{\arraystretch}{1.2}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}	
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c|c|C{1.8cm}}
+	Binario & Posizionale & Complemento a $2$\\ \noalign{\smallskip}
+	\hline \noalign{\smallskip}
+	$0000$ & $0$ & \hspace{2ex}$0$\\
+	$0001$ & $1$ & \hspace{2ex}$1$\\ 
+	$0010$ & $2$ & \hspace{2ex}$2$\\ 
+	$0011$ & $3$ & \hspace{2ex}$3$\\ 
+	$0100$ & $4$ & \hspace{2ex}$4$\\ 
+	$0101$ & $5$ & \hspace{2ex}$5$\\
+	$0110$ & $6$ & \hspace{2ex}$6$\\
+	$0111$ & $7$ & \hspace{2ex}$7$\\
+	$1000$ & $8$ & $-8$\\
+	$1001$ & $9$ & $-7$\\
+	$1010$ & $10$ & $-6$\\
+	$1011$ & $11$ & $-5$\\
+	$1100$ & $12$ & $-4$\\
+	$1101$ & $13$ & $-3$\\
+	$1110$ & $14$ & $-2$\\
+	$1111$ & $15$ & $-1$\\ \noalign{\smallskip}
+	\hline
+\end{tabular}
+\end{wraptable}
+
+Consideriamo quindi l'anello $Z_{B^k}$ e le sue classi di resto. Ad esempio
+la classe $[1] = 1 + (B^k)\mathbb{Z}$ indica tutti gli interi che sono congrui ad uno modulo $B^k$, e cosi via. Tipicamente si usano come rappresentati di $Z_{B^k}$
+i valori tra $0$ e $B^k-1$, ma questo è solo una scelta, che può essere cambiata. In particolare, se vogliamo lavorare con valori negativi possiamo
+scegliere come rappresentanti i valori tra $-B^{k-1}$ e $B^{k-1}-1$.
+
 Dato un intero positivo $N$, e fissato il numero di cifre della rappresentazione, definiamo \emph{complemento alla base} l'intero $N'$
 che soddisfa $N'= B^k-N$, ad esempio in decimale con due cifre,
-il complemento a $dieci$ di $45$ è $55 = 100-45$. Definiamo inoltre il complemento alla \emph{base-1}, come l'intero $N' = B^k-N-1$. Vedremo che
-quest'ultimo ha delle proprietà che consentiranno di calcolare facilmente il complemento alla base, senza dover esplicitamente effettuare la sottrazione da $B^k$.
+il complemento a $dieci$ di $45$ è $55 = 100-45$. 
+Nella Tabella a fianco, vediamo un esempio di rappresentazione con $4$ bit, in \emph{complemento a due}. Osserviamo facilmente che questo sistema soddisfa le proprietà elencate nei punti sopra: Il bit più significativo è rappresentativo del segno, zero se positivo, uno se negativo (punto 2); Il complemento a due di $5 = 0101$ ad esempio è  $16-5 = 11 = 1011 = -5$, come si vede in tabella. Vale quindi che $0101+1011 = 0$ (punto $1$). Inoltre anche il punto $3$ vale, si può vedere infatti che i valori positivi sono rappresentati dalle stesse stringhe di bit usate per rappresentare i naturali (i numeri positivi della terza colonna sono rappresentati come quelli della seconda).
 
-Adesso formalmente in base $B$ e con $k$ cifre, la sequenza di cifre $(c_{k-1}\,\cdots\,c_{0})_B$ rappresenta in complemento alla base, il valore:
-\[ (c_{k-1}\,\cdots\,c_{0})_B = -a_{k-1}B^{k-1}+\sum_{i=0}^{k-2} c_iB^i \] 
+Mostriamo inoltre come per calcolare il complemento alla base, in particolare
+nel caso del complemento a due non sia necessario effettuare la sottrazione da
+$2^k$. Notiamo il complemento a due di $N$ è $N' = 2^k - N$ quindi $N' = 2^k-1-N+1$. Definiamo \emph{complemento ad uno} il valore $M = 2^k-1-N$.
+In generale avremo un \emph{complemento alla base $-1$} definito come $M = B^k-1-N$ ed il complemento alla base è uguale a $M+1$. Adesso notiamo che
+il complemento alla base $-1$ è facilmente calcolabile poichè il valore
+di $B^k-1$ è sempre costituito in ogni base da una sequenza di $k-1$ cifre tutte uguali a $B-1$, esse sono quindi sempre maggiori di ogni cifra in $N$ e
+la sottrazione nel calcolo del complemento ad uno, può essere fatta senza
+considerare prestiti e analizzando solo una cifra alla volta, nel caso dei numeri binari, la cosa è ancora più semplice, poichè l'operazione di sottrazione con queste proprietà consiste nell'invertire i bit di $N$.
+Gli esempi chiariranno meglio il significato di quanto detto:
 
+\begin{ex} Calcoliamo il complemento a due di $45$ ($-45$). 
+	
+\noindent \textbf{Primo metodo:} 	
+Prima di tutto per rappresentare $45$ in questo sistema dobbiamo avere almeno $7$ bit, infatti con $6$ bit il massimo valore rappresentabile è $2^{6-1}-1 = 31 < 45$, con $7$ abbiamo $2^6-1 = 63>45$. A questo punto sappiamo che $-45 = 2^7-45 = 83$ e $83$ in binario è $1010011$ (usando uno dei metodi in \ref{sec:conversione}).\medskip
+
+\noindent \textbf{Secondo Metodo:}
+Questo metodo non userà sottrazioni, ed è quello usato davvero in hardware dai circuiti dell'ALU. Sappiamo che servono $7$ bit, abbiamo $45 = 32+8+4+1 = 101101$, quindi $0101101$. 
+Adesso notiamo che il complemento ad uno di
+$45$ è dato da $2^7-1-45$, e $2^7-1 = 127 = 1111111$. Calcoliamo $1111111-0101101$, notiamo che in ogni passo $1-1=0$ e $1-0=1$ quindi la sottrazione corrisponde all'operazione di \emph{complementazione binaria}, o
+\emph{negazione bit-a-bit}, in cui ogni $0$ diventa $1$ e ogni $1$ diventa $0$.
+Quindi il complemento ad $1$ di $45$ è $1010010$ (notiamo che è essenziale sapere su quanti bit si sta lavorando e aggiungere sempre gli zeri di fronte, prima di complementare). A questo punto il complemento a due, è $1010010+1 = 1010011 = 83$ come sopra.
+\end{ex}
+
+Riassumendo: Lo studente adesso conosce tre modi diversi per rappresentare valori negativi, rappresentazione in modulo e segno, in scostamento, oppure in complemento alla base. Deve essere in grado di convertire un valore in una di queste rappresentazioni, con attenzione particolare al complemento a due. 
+Deve anche conoscere gli intervalli di rappresentazione in funzione del numero di bit disponibili. Per calcolare il complemento a due di un intero $n$, fissato il numero di bit $k$ in cui lavoriamo, calcoliamo $2^k-n$. Oppure
+convertiamo $n$ in binario su $k$ bit, lo complementiamo e aggiungiamo $1$.
+Quest'ultima strada è quella usata dall'ALU, perché come vedremo i circuiti
+per le operazioni di complementazione bit-a-bit e incremento sono molto semplici da costruire.
 
 \section{Numeri Razionali e Reali}
+
+La sezione precedente ha trattato i numeri Naturali e gli Interi, adesso vediamo come rappresentare numeri non interi, quindi in $\mathbb{Q}$ o $\mathcal{R}$. Notiamo che i valori di $\mathbb{Q}$ potrebbero essere rappresentati
+come coppie di interi $p, q$ con $mcd(p,q) = 1$. Questa notazione presenta alcuni
+vantaggi: il valore della frazione è rappresentato senza perdere informazioni
+(senza errori di approssimazione), ma le operazioni aritmetiche sono complesse.
+Naturalmente questa notazione non sarebbe utilizzabile per $\mathbb{R}$.
+Preferiamo quindi trattare in modo uniforme gli elementi di $\mathbb{Q}$ e $\mathbb{R}$, parleremo quindi in generale della rappresentazione di un numero
+reale, sapendo che se è un intero esso ricade in quanto descritto nelle sezioni
+precedenti altrimenti la sua rappresentazione è basata su una semplice estensione del Teorema 1:
+
+\begin{thm}
+\label{thm:F}
+Sia $B>1$ la base del sistema di rappresentazione, $\mathcal{C}$ un insieme
+di $B$ cifre distinte, allora $\forall\, x \in \mathbb{R}$, l'espansione in base $B$ di $x$ è una sequenza (infinita) di cifre $c_{k-1}c_{k-2}{\ldots}c_0.c_{-1}c_{-2}\ldots$ con $c_i \in \{0,...B-1\}$ tali che:
+\begin{equation}\label{eq:reali} 
+	x = \sum_{i=0}^{k-1} c_iB^i + \sum_{i=1}^{\infty} c_{-i}B^{-i} 
+\end{equation}
+\end{thm}
+
+Nella \eqref{eq:reali} abbiamo una prima sommatoria che corrisponde alla parte intera di $x$, e la seconda che corrisponde alla parte frazionaria. Le cifre vengono scritte a destra di un punto che separa le potenze della base positive da quelle negative: es. $234.345 = (2\cdot10^2+3\cdot10+4)+(3\cdot10^{-1}+4\cdot10^{-2}+5\cdot10^{-2})$. Le cifre della parte frazionaria possono essere infinite poiché se $x$ è un razionale periodico o un irrazionale, la sua espansione decimale non è finita.
+Inoltre anche l'unicità non è garantita, come sappiamo $0.999999\ldots = 1$.
+
+All'interno del calcolatore useremo una rappresentazione con un numero finito di cifre (bit), quindi dovremo in generale fissare la lunghezza della parte frazionaria e eventualmente \emph{troncare} il vero valore di $x$. Questo introduce un \emph{errore di troncamento} o di \emph{rappresentazione}, inevitabile; lo studio di come tali errori influenzino gli algoritmi che lavorano con questo genere di numeri porta alla nascita del \emph{Calcolo Numerico}. 
+
+Riguardo alla conversione tra basi diverse, abbiamo trattato la gestione della parte intera nella sezione precedente, prima di entra nel dettaglio della rappresentazione interna al calcolatore mostriamo come convertire in particolare da decimale a binario la parte frazionaria.
+
+Notiamo che con lo stesso ragionamento fatto per la parte intera, dobbiamo \emph{estrarre} il valore delle cifre decimali, da $c_1$ in poi. Notiamo che
+\[ B(x - \left\lfloor x \right \rfloor) = c_1 + \sum_{i=2}^{\infty} c_{-i}B^{-i} \implies c_1 = \left\lceil B(x - \left\lfloor x \right\rfloor) \right\rceil \]
+e le altre cifre possono essere estratte allo stesso modo. Vediamo prima in decimale e poi convertiamo da decimale a binario.
+
+\begin{ex}
+	Usiamo $x = 3.78125$. La parte frazionaria è $0.78125$, adesso $0.78125\cdot 10 = 7.8125$ e $\lfloor 7.8125 \rfloor = 7$, la parte frazionaria è $0.8125$ e continuando a \emph{moltiplicare} per la base, estraiamo le cifre.
+	Se invece di moltiplicare per $10$, usiamo la base in cui vogliamo scrivere le cifre, ad esempio in binario otteniamo:
+ \begin{align*}
+		 0.78125 \cdot 2 &= 1.56250\\
+		 (1.56250-1) \cdot 2 &= 1.125\\
+		 0.125 \cdot 2 &= 0.25\\
+		 0.25  \cdot 2 &= 0.5\\
+		 0.5 \cdot 2 &= 1.0\\
+\end{align*}
+quindi prendendo le parti intere si ha: $(0.78125)_{10} = (.11001)_2$, vediamo: $1/2+1/4+1/32 = 0.5 + 0.25 + 0.03125 = 0.78125$.
+\end{ex}
+
 
 \section{Testi, Immagini, Musica}
