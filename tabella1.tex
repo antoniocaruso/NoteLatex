@@ -1,0 +1,14 @@
+\begin{table}\sffamily
+\renewcommand{\arraystretch}{1.2}
+\begin{pycode}
+print(r"\begin{tabular}{c|rccc}")
+print(r"Binario & Posizionale & Modulo e Segno & Scostamento (a $7$) & Complemento a $2$ \\ \noalign{\smallskip}")
+print(" \\hline\\noalign{\\smallskip}\n")
+for i in range(16):
+	print("%04s & $%2d$ & $%c%d$ & $%+2d$ & " % (format(i,'04b'), i , '+' if (i<8) else '-', i if (i<8) else (i-8), i-7),end=' ')
+	print("$%+d$ \\\\ \n" % (i if (i<=2**3-1) else (-2**4+i)))
+print("\hline\n \\end{tabular}")
+\end{pycode}
+\caption{Numeri binari di $4$ bit: valore rispetto alla notazione posizionale (naturali), e confronto dei valori nei vari sistemi per numeri negativi.}
+\label{tab:zeta}
+\end{table}
