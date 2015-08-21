@@ -2,3 +2,21 @@
 *.lb
 
 *.aux
+
+pythontex-files-note/note.pytxmcr
+
+*.pdf
+
+note.pytxcode
+
+note.log
+
+note.out
+
+note.toc
+
+pythontex-files-note/note.pytxpyg
+
+pythontex-files-note/py_default_default_0.stdout
+
+pythontex-files-note/pythontex_data.pkl
