@@ -82,11 +82,11 @@ Il sistema \emph{decimale} ha $B = 10$ e $\mathcal{C} = $\{\textsf{ 0, 1, 2, 3,
 elementari. \nota{sistema decimale, binario, ternario,.. esadecimale} Con $B =
 2$ come vedremo il sistema è detto binario e lo tratteremo approfonditamente,
 con B = 3 abbiamo numeri in ternario, con $B = 4$ in quaternario, con $B = 8$
-in ottale. Se $B > 10$ ad esempio con $B = 16$ abbiamo il sistema esadecimale,
-le cifre comunemente usate nel sistema decimale non bastano a rappresentare i
-simboli delle cifre esadecimali, e si usa normalmente $\mathcal{C} = \{
-\textsf{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F} \}$ con la convenzione che $\textsf{A}
-= 10, \textsf{B} = 11, \ldots, \textsf{F} = 15$.
+in ottale. Possiamo avere anche $B > 10$, ad esempio con $B = 16$ abbiamo il
+sistema esadecimale, le cifre comunemente usate nel sistema decimale non
+bastano a rappresentare i simboli delle cifre esadecimali, e si usa normalmente
+$\mathcal{C} = \{ \textsf{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F} \}$ con la
+convenzione che $\textsf{A} = 10, \textsf{B} = 11, \ldots, \textsf{F} = 15$.
 
 \begin{ex} $(\textsf{1234})_{10} = 1\cdot 10^3+2\cdot 10^2 + 3 \cdot 10 + 4 =
 1234$. $(\textsf{1234})_8 = 1\cdot 8^3+2\cdot 8^2+3\cdot 8^1+4\cdot 8^0 =
@@ -149,7 +149,7 @@ $1,\ldots,n-1$ sia rappresentabile in modo univoco.
 
 \noindent Consideriamo l'intero $n$, chiamiamo $d = n \mod B$, allora $d < B$ è una delle cifre disponibili. Per induzione $n' = (n-d)/B$ è unicamente rappresentabile, diciamo ad esempio così:
 \[ \frac{n-d}{B} = d_0 + d_1 B + d_2 B^2 + \ldots \]
-Allora chiaramente,
+Allora chiaramente
 \begin{align*}
 n = d + \frac{n-d}{B}B = d + d_0 B + d_1 B^2 + d_2 B^3 + \ldots
 \end{align*}
@@ -178,13 +178,13 @@ Le singole cifre vengono anche chiamate $\emph{bit}$ dalla contrazione di
 \emph{Binary digIT}\nota{Bit} (che non è altro che l'inglese di "Cifra
 Binaria").
 
-E' nozione comune che le informazioni all'interno di un calcolatore digitale
+E' nozione\nota{Sistema Binario, Circuiti Bistabili, Hardware
+del Calcolatore} comune che le informazioni all'interno di un calcolatore digitale
 sono rappresentate in binario, ovviamente come \emph{lunghe} sequenze di bit.
 Questo rende tale sistema importante per la comprensione di come viene
 codificata l'informazione dentro un calcolatore. L'uso della base due è
 motivato dal fatto che è molto semplice misurare una piccola variazione di
-potenziale in un circuito\nota{Sistema Binario, Circuiti Bistabili, Hardware
-del Calcolatore}, e definire così due \emph{stati} distinti: possiamo ad
+potenziale in un circuito, e definire così due \emph{stati} distinti: possiamo ad
 esempio associare a $0V$ (Volt) il valore $0$ ed $1$ al livello $+3V$. Se un
 circuito può assumere in modo stabile due livelli (non necessariamente quelli
 indicati sopra), è detto \emph{bistabile} e consente di rappresentare una cifra
@@ -258,9 +258,8 @@ binario serviranno $27$ bit. Infatti come vedremo successivamente: $123456789 =
 (111010110111100110100010101)_2$. \end{ex}
 
 
-\begin{quote}
-\sffamily \small
-
+\subsection*{Lo Zero, l'Unario, i Numeri Romani}
+{ \small
 Perche usiamo la notazione posizionale, ed in particolare il sistema decimale?
 E come sono stati rappresentati i numeri interi prima della diffusione del
 sistema decimale?
@@ -301,7 +300,7 @@ migliorare le cose è quello di aumentare il numero di simboli. Ma a questo
 punto dobbiamo stabilire che valore dare a diversi simboli, e in quali
 circostanze.
 
-I Romani\nota{Numerazione Romana} hanno sviluppato un sistema a
+I Romani\nota{Numerazione\\ Romana} hanno sviluppato un sistema a
 \emph{sostituzione} in cui ogni volta che la rappresentazione di un valore
 diventa troppo lunga, si associa tale valore ad un diverso simbolo: poiché $5 =
 \mathrm{IIIII}$ è già troppo lungo, introduciamo $\mathrm{V} = 5$, ed essendo
@@ -313,16 +312,39 @@ cifre (notare l'assenza dello zero). Il sistema consente di scrivere numeri
 senza l'esplosione esponenziale della loro lunghezza come nell'unario, ma è
 comunque affetto da numerosi problemi.
 
+\begin{wrapfigure}[10]{r}{4.5cm}
+\vspace{-2ex}
+\captionsetup{font=small}
+\centering \includegraphics[width=4cm]{abaco.pdf}
+\caption{Abaco}\label{fig:abaco}
+\end{wrapfigure}
 Il numero di simboli non può essere costante come nei sistemi posizionali, ma
 deve crescere, cosa accadrebbe se vogliamo rappresentare $10^9$ in romano?
 servono altri simboli dopo $\mathrm{M}$. Più importante ancora è la difficoltà
 dell'aritmetica: Come possiamo descrivere le operazioni di somma o sottrazione?
 In effetti tali operazioni non sono per nulla facili da descrivere, e
 sicuramente sono decisamente più complesse rispetto all'aritmetica decimale. I
-romani in pratica usavano fare le somme usando un \emph{abaco} solo per numeri
-molto piccoli. 
-\end{quote}
+romani in pratica usavano fare le somme usando un \emph{abaco} (vedi Figura \ref{fig:abaco} accanto) 
+solo per numeri molto piccoli.
 
+Gli storici della matematica credono che l'uso della notazione posizionale decimale e l'introduzione dello \emph{zero} siano da attribuire a \emph{Brahmagupta} un matematico indiano nel 620\textrm{AD}. Questo sistema raggiunge l'Europa passando prima attraverso la Spagna (allora Musulmana) e diffondendosi in Italia. L'italiano Leonardo di Pisa, chiamato anche il Fibonacci, scopre questo sistema di numerazione e l'aritmetica ad esso associata lavorando nella bottega del padre, nella città di Bugia (una città Africana nella regione corrispondente all'attuale Algeria).
+E' attraverso gli scritti di Muhammad ibn Musa al-Khwarizmi, Abu Kamil e altri\nota{Muhammad ibn Musa al-Khwarizmi} matematici arabi che Fibonacci apprende il nuovo sistema, e lo diffonde in Europa dove viene presto adottato insieme all'uso dello zero. 
+
+E' evidente\nota{Zero in\\ Matematica} l'importanza sia pratica (all'interno
+del sistema di numerazione) sia concettuale dello zero. Il fatto che dovesse
+esistere un \emph{numero} che indicasse un \emph{assenza} di quantità, è un
+concetto che richiese secoli prima di essere assimilato. Lo zero è fondamentale
+all'interno dei sistemi posizionali, lo studente oramai capisce la motivazione
+di fondo: in un intero come $5005$, gli zeri sono essenziali per \emph{spostare
+il peso di una cifra senza aggiungerne complessivamente al valore} (vedi i due
+$5$). Una volta introdotto è necessario capire come le operazioni aritmetiche
+si comportano su esso, e naturalmente si nota subito il problema legato alla
+divisione. Il fatto che l'operazione di divisione \emph{non fosse definita}
+(oggi diremmo che essa costituisce una funzione parziale sugli interi) è
+qualcosa che contrariava molti matematici. Non parliamo delle resistenze dei
+filosofi a dare un nome a una quantità per rappresentare....un assenza di
+quantità.
+}
 
 \subsection{Conversione tra basi}\label{sec:conversione}
 
@@ -375,7 +397,6 @@ e poiché l'ultima cifra è la più significativa si ha che $12345$ in binario �
 \end{align*}
 \noindent Quindi $12345 = (30071)_8$.
 \end{ex}
-
 
 Il lettore è invitato adesso a confrontare la sequenza dei valori nei calcoli sopra con i valori ottenuti nella conversione in binario. Si nota facilmente che poiché $8 = 2^3$, ogni passo nella conversione in ottale, costituisce tre passi nella conversione decimale, è facile verificare che questo dipende direttamente dalle proprietà della rappresentazione in base. In ottale in effetti, ogni cifra è un valore tra $0$ e $7$, se vogliamo rappresentare questi valori in binario serviranno $\log 8$ bit, cioè $3$ bit per ogni cifra ottale.
 
@@ -562,7 +583,7 @@ Se sommiamo la rappresentazione di $25$ e di $-14$, abbiamo
 al risultato corretto: infatti il valore $11$ su $6$ bit, con segno e modulo è rappresentato come $001011$. Questo dimostra che appunto $a-b \neq a \,+\, -b$.
 \end{ex}
 
-L'osservazione sopra va intesa alla luce, di quello che vedremo nel Capitolo successivo sull'ALU, cioè sul circuito che internamente al Processore svolge le
+L'osservazione\nota{Modulo e Segno\\ problemi con l'ALU} sopra va intesa alla luce, di quello che vedremo nel Capitolo successivo sull'ALU, cioè sul circuito che internamente al Processore svolge le
 operazioni aritmetiche. Se adottassimo la notazione con modulo e segno, dovremmo avere una parte circuitale che confronta i segni, per controllare se
 sono discordi/concordi, e due circuiti diversi, per la somma e per la sottrazione da usare nei due casi. Come vedremo esistono
 rappresentazioni che possiedono la proprietà algebrica $a-b = (a)+(-b)$,
@@ -578,40 +599,10 @@ Il ragionamento per definire questa rappresentazione è molto semplice. I valori
 rappresentabili con $k$ cifre in base $B$ tramite \eqref{eq:pos} sono gli interi in $[0,B^k-1]$. Sia $M > 0$ intero, se \emph{scostiamo} di un valore $-M$ (che chiameremo scostamento o bias) il valore finale della sommatoria, cioè formalmente:
 \[ (c_{k-1}\,\cdots\,c_{0})_B = \sum_{i=0}^{k-1} c_iB^i - M \]
 
-%
-% % \begin{wraptable}[15]{l}{5.2cm} \sffamily
-% % %\renewcommand{\arraystretch}{1.2}
-% % \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-% % \setlength{\tabcolsep}{4pt}
-% % \vspace{-0.8cm}
-% % \begin{tabular}{c|c|C{1.8cm}}
-% % 	Binario & Posizionale & Scostamento (a $7$)\\ \noalign{\smallskip}
-% % 	\hline \noalign{\smallskip}
-% % 	$0000$ & $0$ & $-7$\\
-% % 	$0001$ & $1$ & $-6$\\
-% % 	$0010$ & $2$ & $-5$\\
-% % 	$0011$ & $3$ & $-4$\\
-% % 	$0100$ & $4$ & $-3$\\
-% % 	$0101$ & $5$ & $-2$\\
-% % 	$0110$ & $6$ & $-1$\\
-% % 	$0111$ & $7$ & \hspace{2ex}$0$\\
-% % 	$1000$ & $8$ & \hspace{2ex}$1$\\
-% % 	$1001$ & $9$ & \hspace{2ex}$2$\\
-% % 	$1010$ & $10$ & \hspace{2ex}$3$\\
-% % 	$1011$ & $11$ & \hspace{2ex}$4$\\
-% % 	$1100$ & $12$ & \hspace{2ex}$5$\\
-% % 	$1101$ & $13$ & \hspace{2ex}$6$\\
-% % 	$1110$ & $14$ & \hspace{2ex}$7$\\
-% % 	$1111$ & $15$ & \hspace{2ex}$8$\\ \noalign{\smallskip}
-% % 	\hline
-% % \end{tabular}
-% % \end{wraptable}
-%
-
 \noindent allora il range di rappresentazione sarà: $[-M,B^k-M-1]$. Di solito
 si considera $M = B^k/2-1$ se vogliamo circa metà di valori positivi e metà
 negativi. Il range dei valori rappresentati andrà dal minimo $-B^k/2+1$ fino al
-massimo $B^k-1-(B^k/2-1) = B^k/2$ per $B=2$ si ha l'intervallo:
+massimo $B^k-1-(B^k/2-1) = B^k/2$ per $B=2$ si ha l'intervallo:\nota{Rappresentazione in Scostamento\\ Intervallo di Rappresentazione\\in Binario:\\ $[-2^{k-1}-1,2^{k-1}]$}
 $[-2^{k-1}-1,2^{k-1}]$. Ad esempio, con $k = 8$ bit, abbiamo i valori tra
 $[-2^7+1,2^7] = [-127,128]$. Nella Tabella \ref{tab:zeta} vediamo un esempio con $4$
 bit, e range $= [-7,8]$. Notiamo che il bit più significativo resta associato
@@ -629,7 +620,7 @@ In Binario con otto bit e scostamento $M = 127$ abbiamo i valori interi nell'int
 $11011011 = 219$ e sottraendo $127$ quindi si ha $(11011011) = 92$. Viceversa se avessimo dovuto \emph{codificare} il valore di $92$, avremmo prima calcolato $92+127$ e successivamente convertito tale valore in binario.
 \end{ex}
 
-Questo tipo di rappresentazione è usata non tanto per rappresentare i valori interi (negativi o positivi), ma per un uso più specifico: rappresentare l'esponente nella notazione in standard \textrm{IEEE-754} per i numeri in virgola mobile, come vedremo nella sezione a loro dedicata.
+Questo tipo di rappresentazione è usata non tanto per rappresentare i valori interi (negativi o positivi), ma per un uso più specifico: rappresentare l'esponente\nota{Esponente in IEEE-754} nella notazione in standard \textrm{IEEE-754} per i numeri in virgola mobile, come vedremo nella sezione a loro dedicata.
 
 \subsubsection{Rappresentazione in Complemento alla Base}
 
@@ -657,16 +648,15 @@ E poiché l'uno a sinistra non può essere scritto, abbiamo $10^3 = 1000 \equiv 
 
 Consideriamo quindi l'anello $Z_{B^k}$ e le sue classi di resto. Ad esempio la
 classe $[1] = 1 + (B^k)\mathbb{Z}$ indica tutti gli interi che sono congrui ad
-uno modulo $B^k$, e cosi via. Tipicamente si usano come rappresentati di
-$Z_{B^k}$ i valori tra $0$ e $B^k-1$, ma questo è solo una scelta, che può
+uno modulo $B^k$, e cosi via. Tipicamente si usano come rappresentanti le classi $[0] \ldots [B^k-1]$, ma questo è solo una scelta, che può
 essere cambiata. In particolare, se vogliamo lavorare con valori negativi
-possiamo scegliere come rappresentanti i valori tra $-B^{k-1}$ e $B^{k-1}-1$.
+possiamo scegliere come rappresentanti i valori delle classi di resto da $[-B^{k-1}]$ a $[B^{k-1}-1]$.
 
-Dato un intero positivo $N$, e fissato il numero di cifre della
+Dato\nota{Complemento alla Base} un intero positivo $N$, e fissato il numero di cifre della
 rappresentazione, definiamo \emph{complemento alla base} l'intero $N'$ che
 soddisfa $N'= B^k-N$, ad esempio in decimale con due cifre, il complemento a
 $dieci$ di $45$ è $55 = 100-45$. Nella Tabella \ref{tab:zeta} vediamo un
-esempio di rappresentazione con $4$ bit, in \emph{complemento a due}.
+esempio di rappresentazione con $4$ bit, in \emph{complemento a due}.\nota{Complemento a Due}
 Osserviamo facilmente che questo sistema soddisfa le proprietà elencate nei
 punti sopra: Il bit più significativo è rappresentativo del segno, zero se
 positivo, uno se negativo (punto 2); Il complemento a due di $5 = 0101$ ad
@@ -679,7 +669,7 @@ rappresentati come quelli della seconda).
 Mostriamo inoltre come per calcolare il complemento alla base, in particolare
 nel caso del complemento a due non sia necessario effettuare la sottrazione da
 $2^k$. Notiamo il complemento a due di $N$ è $N' = 2^k - N$ quindi $N' =
-2^k-1-N+1$. Definiamo \emph{complemento ad uno} il valore $M = 2^k-1-N$. In
+2^k-1-N+1$. Definiamo \emph{complemento ad uno}\nota{Complemento ad Uno} il valore $M = 2^k-1-N$. In
 generale avremo un \emph{complemento alla base $-1$} definito come $M =
 B^k-1-N$ ed il complemento alla base è uguale a $M+1$. Adesso notiamo che il
 complemento alla base $-1$ è facilmente calcolabile poichè il valore di $B^k-1$
@@ -734,7 +724,7 @@ presenta alcuni vantaggi: il valore della frazione è rappresentato senza
 perdere informazioni (senza errori di approssimazione), ma le operazioni
 aritmetiche sono complesse. Naturalmente questa notazione non sarebbe
 utilizzabile per $\mathbb{R}$. Preferiamo quindi trattare in modo uniforme gli
-elementi di $\mathbb{Q}$ e $\mathbb{R}$, parleremo quindi in generale della
+elementi di $\mathbb{Q}$ e $\mathbb{R}$, parleremo in generale della
 rappresentazione di un numero reale, sapendo che se è un intero esso ricade in
 quanto descritto nelle sezioni precedenti altrimenti la sua rappresentazione è
 basata su una semplice estensione del Teorema 1:
@@ -742,7 +732,7 @@ basata su una semplice estensione del Teorema 1:
 \begin{thm}
 \label{thm:F}
 Sia $B>1$ la base del sistema di rappresentazione, $\mathcal{C}$ un insieme
-di $B$ cifre distinte, allora $\forall\, x \in \mathbb{R}$, l'espansione in base $B$ di $x$ è una sequenza (infinita) di cifre $c_{k-1}c_{k-2}{\ldots}c_0.c_{-1}c_{-2}\ldots$ con $c_i \in \{0,...B-1\}$ tali che:
+di $B$ cifre distinte, allora $\forall\, x \in \mathbb{R}$, l'espansione in base $B$ di $x$ è una sequenza (infinita) di cifre $c_{k-1}c_{k-2}{\cdots}c_0\mathbf{.}c_{-1}c_{-2}\cdots$ con $c_i \in \{0,...,B-1\}$ tali che:
 \begin{equation}\label{eq:reali}
 	x = \sum_{i=0}^{k-1} c_iB^i + \sum_{i=1}^{\infty} c_{-i}B^{-i}
 \end{equation}
@@ -755,11 +745,11 @@ da quelle negative: es. $234.345 =
 (2\cdot10^2+3\cdot10+4)+(3\cdot10^{-1}+4\cdot10^{-2}+5\cdot10^{-2})$. Le cifre
 della parte frazionaria possono essere infinite poiché se $x$ è un razionale
 periodico o un irrazionale, la sua espansione decimale non è finita. Inoltre
-anche l'unicità non è garantita, come sappiamo $0.999999\ldots = 1$.
+l'unicità è garantita solo se imponiamo delle equivalenze come $0.999999\ldots = 1$.
 
 All'interno del calcolatore useremo una rappresentazione con un numero finito
-di cifre (bit), quindi dovremo in generale fissare la lunghezza della parte
-frazionaria e eventualmente \emph{troncare} il vero valore di $x$. Questo
+di cifre (bit)\nota{Errore di Troncamento}, quindi dovremo in generale fissare la lunghezza della parte
+frazionaria e se necessario \emph{troncare} il vero valore di $x$. Questo
 introduce un \emph{errore di troncamento} o di \emph{rappresentazione},
 inevitabile; lo studio di come tali errori influenzino gli algoritmi che
 lavorano con questo genere di numeri porta alla nascita del \emph{Calcolo
@@ -771,9 +761,10 @@ rappresentazione interna al calcolatore mostriamo come convertire in
 particolare da decimale a binario la parte frazionaria.
 
 Notiamo che con lo stesso ragionamento fatto per la parte intera, dobbiamo
-\emph{estrarre} il valore delle cifre decimali, da $c_1$ in poi. Notiamo che \[
-B(x - \left\lfloor x \right \rfloor) = c_1 + \sum_{i=2}^{\infty} c_{-i}B^{-i}
-\implies c_1 = \left\lceil B(x - \left\lfloor x \right\rfloor) \right\rceil \]
+\emph{estrarre} il valore delle cifre frazionarie, da $c_{-1}$ in poi. 
+Notiamo che \[
+B(x - \left\lfloor x \right \rfloor) = c_{-1} + \sum_{i=2}^{\infty} c_{-i}B^{-i+1}
+\implies c_1 = \left\lfloor B(x - \left\lfloor x \right\rfloor) \right\rfloor \]
 e le altre cifre possono essere estratte allo stesso modo. Vediamo prima in
 decimale e poi convertiamo da decimale a binario.
 
@@ -789,7 +780,7 @@ cifre, ad esempio in binario otteniamo:
 		 0.25  \cdot 2 &= 0.5\\
 		 0.5 \cdot 2 &= 1.0\\
 \end{align*}
-quindi prendendo le parti intere si ha: $(0.78125)_{10} = (.11001)_2$, vediamo: $1/2+1/4+1/32 = 0.5 + 0.25 + 0.03125 = 0.78125$.
+quindi prendendo le parti intere si ha: $(.78125)_{10} = (.11001)_2$, verifichiamolo: $1/2+1/4+1/32 = 0.5 + 0.25 + 0.03125 = 0.78125$. Notiamo che se fissiamo a $5$ il numero di bit della parte frazionaria, il numero immediatamente più grande di $.11001$ è $.11010 = 1/2 + 1/4 + 1/16 = 0.8125$, quindi ogni numero reale $x$ con $0.78125  < x < 0.8125$ non può essere rappresentato esattamente, ma dovrà essere approssimato.
 \end{ex}
 
 \section{Testi, Immagini, Musica}

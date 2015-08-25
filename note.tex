@@ -18,7 +18,7 @@
 \usepackage{enumitem,graphicx,hyphenat,titlesec,titletoc,xcolor,url}
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage[babel=true,final]{microtype} 
-\usepackage[showframe=false,paper=a4paper,margin=1in]{geometry}
+\usepackage[heightrounded,showframe=false,paper=a4paper,margin=1in]{geometry}
 \usepackage{wrapfig}
 \usepackage{array}
 \usepackage{tabularx}
@@ -26,6 +26,8 @@
 \usepackage{pythontex}
 \usepackage{etoolbox}
 \usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage{caption}
 
 %-----------------------
 
@@ -50,6 +52,16 @@
 \definecolor{grey60}{rgb}{0.7,0.7,0.7}
 \definecolor{shadethmcolor}{HTML}{EDF8FF}
 \definecolor{shaderulecolor}{HTML}{45CFFF}
+
+
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.01pt}
+\lhead{}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername \ \thechapter.\ #1}{}}
+
+
 
 \titleformat{\chapter}[display]
             {\raggedright\normalfont\Large\color{titlecolor}}
@@ -201,10 +213,10 @@
 
 \begin{document}
 
-\hypersetup{pageanchor=false}
-\pagestyle{empty}
+\frontmatter
 
-\frontmatter 
+\hypersetup{pageanchor=false}
+\pagestyle{empty} 
 \maketitle
 \tableofcontents
 
@@ -222,7 +234,7 @@ Non è richiesta conoscenza preliminare sugli argomenti trattati nel corso. E' n
 
 Si ringraziano in anticipo coloro che, qualora trovassero delle inesattezze o errori nelle note, vogliano cortesemente segnalarmele via email, o direttamente a lezione.
 \vspace*{\stretch{1}}
-\usection{License}
+\section*{License}
 \begin{samepage}
 This work is licensed under the \emph{Creative Commons Attribution--ShareAlike 3.0 Unported License}. To view a copy of this license, visit
 \begin{center}
@@ -230,10 +242,9 @@ This work is licensed under the \emph{Creative Commons Attribution--ShareAlike 3
 \end{center}
 \end{samepage}
 
+\pagestyle{fancy} 
 \mainmatter
-\hypersetup{pageanchor=true} 
-\pagestyle{headings} 
-\pagenumbering{roman} 
+%\hypersetup{pageanchor=true} 
 
 \newgeometry{vmargin=30mm, right=1.9in, marginparsep=3.5mm, footskip=15mm}
 
