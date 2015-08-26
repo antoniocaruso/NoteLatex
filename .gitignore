@@ -26,3 +26,5 @@ luatest.tex
 luatest.log
 
 luatest.toc
+
+*.gz
