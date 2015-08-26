@@ -17,6 +17,7 @@
 
 \usepackage{enumitem,graphicx,hyphenat,titlesec,titletoc,xcolor,url}
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
+\allowdisplaybreaks
 \usepackage[babel=true,final]{microtype} 
 \usepackage[heightrounded,showframe=false,paper=a4paper,margin=1in]{geometry}
 \usepackage{wrapfig}
@@ -27,6 +28,14 @@
 \usepackage{etoolbox}
 \usepackage{needspace}
 \usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE]{\footnotesize \textsf{\leftmark}}
+\fancyhead[LO]{\footnotesize \textsf{\rightmark}}
+\fancyhead[LE,RO]{\footnotesize \textsf{\thepage}}
+%\fancyhead[RE,LO]{\textsf{\thepage - \rightmark}}
+
 \usepackage{caption}
 
 %-----------------------
@@ -53,15 +62,11 @@
 \definecolor{shadethmcolor}{HTML}{EDF8FF}
 \definecolor{shaderulecolor}{HTML}{45CFFF}
 
-
-
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0.01pt}
-\lhead{}
-\renewcommand{\chaptermark}[1]{%
- \markboth{\chaptername \ \thechapter.\ #1}{}}
-
-
+%\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0.01pt}
+%\lhead{}
+%\renewcommand{\chaptermark}[1]{%
+%\markboth{\chaptername \ \thechapter.\ #1}{}}
 
 \titleformat{\chapter}[display]
             {\raggedright\normalfont\Large\color{titlecolor}}
@@ -242,8 +247,9 @@ This work is licensed under the \emph{Creative Commons Attribution--ShareAlike 3
 \end{center}
 \end{samepage}
 
-\pagestyle{fancy} 
 \mainmatter
+\pagestyle{fancy} 
+
 %\hypersetup{pageanchor=true} 
 
 \newgeometry{vmargin=30mm, right=1.9in, marginparsep=3.5mm, footskip=15mm}
