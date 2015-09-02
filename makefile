@@ -8,7 +8,9 @@ pynote: tabella1.tex
 	pythontex note.tex
 	pdflatex note
 
-note: chapters.tex note.tex
+note: algoritmi.tex numeri.tex hardware.tex note.tex
 	pdflatex note
 	 
-   
+
+clean:
+	rm -f *.log *.aux note.pdf *.toc *.out

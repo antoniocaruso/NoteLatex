@@ -1,0 +1,891 @@
+%!TEX root = note.tex
+
+\chapter{Introduzione}
+
+\section{Algoritmo: Etimologia e Significato}
+
+La nozione di \textbf{Algoritmo} è la nozione centrale dell'Informatica, la sua piena comprensione è fondamentale per l'attività di scrittura di programmi al calcolatore.
+
+Secondo Knuth \cite{knuth} La parola Algoritmo deriva da \emph{Muhammad ibn Musa \'l-Khwarizmi}, un matematico persiano che scrisse nell'anno 825 un famoso libro sulle regole per il calcolo delle operazioni aritmetiche, come somma, sottrazione, moltiplicazione e divisione tra numeri in notazione araba (la notazione decimale usata adesso comunemente).
+
+Il termine algoritmo deriva dall'errata associazione tra i procedimenti descritti nel libro ed il nome dell'autore. I matematici moderni usano questo termine per denotare dei procedimenti di calcolo che terminano in tempo finito con un risultato e descritti in modo rigoroso, passo per passo. Intorno al 1950 la parola algoritmo è frequentemente associata all'algoritmo di Euclide. 
+
+\section{Un Idea Intuitiva di Algoritmo}
+
+Esistono moltissimi formalismi atti ad esprimere algoritmi, tra cui:
+\begin{itemize}
+ \item La \emph{Macchina di Turing} è sotto molti aspetti, il più importante modello di calcolo. Esso fornisce la 
+  definizione moderna del concetto di Algoritmo (Turing, 1936).
+ \item Funzioni $\mu$-ricorsive, un formalismo basato sulle funzioni e sulla loro composizione definito da Church and Kleene (1936).
+ \item Il $\lambda$-calcolo, un formalismo algebrico basato sul concetto di funzioni $\mu$-ricorsive, usato
+ attualmente come notazione per la descrizione della semantica dei linguaggi funzionali, presentato
+ sempre da Church nel 1936. Turing dimostra l'equivalenza tra $\lambda$-calcolo e le sue macchine
+ nel 1937.
+ \item Grammatiche a struttura di frase. Un sistema di riscrittura di termini, usate adesso per descrivere la sintassi dei linguaggi di programmazione. E' stato dimostrato anch'esso Turing equivalente.
+ \item Tanti altri, tra cui: RAM (Random Access Machine), Algoritmi di Markov, Modelli di Post, e ovviamente ogni moderno linguaggio di programmazione.
+\end{itemize}
+
+Ognuno di questi formalismi, cerca di catturare in modo diverso la nozione di Algoritmo.
+Indipendentemente dal formalismo usato un algoritmo deve soddisfare i seguenti requisiti, descritti informalmente:
+
+\begin{itemize}
+\item Un algoritmo è costituito da un insieme finito di istruzioni;
+\item Ogni istruzione appartiene ad un insieme finito di istruzioni possibili, questo insieme è chiamato generalmente \emph{set d'istruzioni}. Ogni istruzione ha un effetto limitato su dati discreti, scegliere un opportuno set d'istruzioni corrisponde a   descrivere un \emph{modello di calcolo} (o Macchina Virtuale);
+\item La computazione è eseguita per passi discreti (singoli), senza ricorrere a sistemi analogici o metodi continui;
+\item Nel caso in cui ogni passo dipenda solo dai precedenti e da una porzione finita dei dati, in modo deterministico (cioè: senza essere soggetti ad alcuna distribuzione probabilistica non banale), l'algoritmo si dirà \emph{Deterministico}; Se invece, l'ordine dei passi dipende da un generatore di numeri pseudo-casuale\footnote{Un generatore pseudo-casuale è un algoritmo \emph{deterministico} che genera una sequenza di valori, che \emph{appare} casuale. Nel senso che essa risulta difficilmente distinguibile da una sequenza estratta ad esempio da una variabile aleatoria continua uniforme su $[0,1]$}  allora l'algoritmo si dirà \emph{Probabilistico}.
+\item Non c’è limite al numero di passi necessari all’esecuzione di un algoritmo, nè alla memoria richiesta per contenere i dati (finiti) iniziali, intermedi ed eventualmente finali.
+\end{itemize}
+
+Sotto queste ipotesi, tutte le formulazioni fin ad ora sviluppate sono equivalenti e si postula che lo saranno anche tutte le future (\emph{Tesi di Church-Turing}).
+
+
+%\chapter{Linguaggi di Programmazione}
+\section{Linguaggi di Programmazione}
+
+Si è sempre sostenuto che la nostra capacità di ragionare è ciò che ci distingue dalle altre specie: sembrerebbe paradossale a prima vista tentare di meccanizzare ciò che è più specificatamente umano. Eppure queste note iniziano con una breve storia dei tentativi di \emph{meccanizzazione} del ragionamento umano, un processo che ha avuto un enorme sviluppo a partire dagli inizi del secolo scorso.
+
+Perfino gli antichi greci sapevano che il ragionamento è un processo strutturato e che, almeno parzialmente, è governato da leggi esplicitabili. Aristotele codificò i sillogismi, Euclide la geometria; intorno alla metà del secolo scorso, i logici inglesi George Boole, e Augustus De Morgan andarono molto più avanti di Aristotele nel codificare le forme di ragionamento strettamente deduttivo. Tutti questi sforzi erano diretti a chiarire cosa si dovesse intendere esattamente con il termine di \emph{dimostrazione}.
+
+In ogni caso, per poter ragionare e comunicare i loro risultati in modo preciso necessitavano di un particolare linguaggio, un \emph{sistema formale}. Esempi di sistemi formali sono il \emph{calcolo dei predicati} o gli enunciati della \emph{logica del primo ordine}, ed i \emph{linguaggi di programmazione}. Questi ultimi sono dei linguaggi artificiali, usati per descrivere \emph{algoritmi}, ovvero procedimenti risolutivi di problemi, atti ad
+essere eseguiti da un calcolatore.
+
+Un programma non è altro che la traduzione (si dice anche implementazione) di un algoritmo in uno specifico linguaggio
+di programmazione. I linguaggi di programmazione, così come altri linguaggi coinvolgono due aspetti che è importante distinguere: la \emph{sintassi} e la \emph{semantica}. La sintassi ha a che fare con la \emph{struttura} (o la forma) dei programmi esprimibili in un dato linguaggio. La semantica, invece, ha a che fare con il \emph{significato} dei programmi esprimibili in un dato linguaggio.
+
+Se consideriamo i linguaggi naturali, per esempio l'italiano, due frasi come ''\emph{la mela mangia il bambino}'' e ''\emph{il bambino mangia la mela}'' obbediscono entrambe alla sintassi dell'italiano (sono corrette sia ortograficamente che grammaticalmente), d'altra parte solo la seconda ha un significato, o semantica, ragionevole. Queste note iniziano con una definizione formale di questi concetti: Cominceremo con il termine \emph{linguaggio} come sinonimo di \emph{insieme di frasi (sintatticamente) ammissibili}. In altri termini: una volta fissato un\emph{alfabeto} $\Sigma$ di elementi base detti sinboli \emph{terminali}, un linguaggio non sarà altro che un sottoinsieme di tutte le frasi ottenibili come sequenze di simboli terminali. Tali sequenze saranno anche riferite con il termine di \emph{stringhe} (o parole) su $\Sigma$.
+
+Si pensi ad esempio al linguaggio delle espressioni dell'aritmetica, ottenibili a partire dai numeri interi e dalle quattro operazioni $+, -, /, \times$. Fra tutte le possibili stringhe di numeri ed operazioni, ve ne sono di ammissibili\footnote{Nei linguaggi formali una stringa ammissibile è detta anche \emph{formula ben formata (fbf)}} come $3 \times 4+2$ e di non ammissibili come $3+\times+4$.
+
+Quindi, il linguaggio delle espressioni aritmetiche può essere identificato come il sottoinsieme delle stringhe ammissibili. In modo del tutto analogo, un linguaggio di programmazione può essere identificato con l'insieme delle proprie stringhe ammissibili, che chiameremo comunemente \emph{programmi}. Descrivere la sintassi di un linguaggio significa quindi descrivere l'insieme delle stringhe del linguaggio, ovvero avere un metodo per:
+
+\begin{itemize}
+\item decidere quali stringhe fanno parte di tale insieme, e quali no, oppure
+\item costruire tale insieme, enumerando le stringhe che lo compongono.
+\end{itemize}
+
+Il problema è quindi: come identifichiamo le stringhe ammissibili, che caratterizzano un linguaggio?
+Esistono due approcci principali: Il primo si basa su uno strumento detto \emph{automa} che è in grado di
+\emph{riconoscere} (o accettare) tutte e sole le stringhe che fanno parte del linguaggio.  Il secondo, si basa su un altro formalismo detto \emph{grammatiche}, che sono invece in grado di \emph{generare} (o costruire) tutte e sole le stringhe che fanno parte di un linguaggio. La teoria che studia questi aspetti è conosciuta come ''teoria degli automi'' o ''teoria dei linguaggi formali'', queste note introducono rapidamente questi due strumenti, senza scendere nei dettagli della teoria, al fine di comprendere i metodi con cui si descrive la sintassi dei linguaggi di programmazione.
+
+
+%\chapter{Introduzione}
+
+\section{Concetti}
+
+\subsection{Esempio: l'Algoritmo di Euclide}
+
+Problema: Dati due interi $m,n$ trovare il massimo comune divisore
+(mcd).
+
+\begin{enumerate}
+\item (dividi) Calcola $m$ diviso $n$, sia $r$ il resto della divisione ($0 \leq r < n$).
+\item (test zero). Se $r = 0$ allora termina con $mcd = n$.
+\item (scambio). $m \leftarrow n$, $n \leftarrow r$ e ritorna al passo 1.
+\end{enumerate}
+
+
+\begin{ex}
+Eseguite i passi del procedimento descritto per $n=2166$,
+$m=6099$.\end{ex}
+
+\begin{ex} Scrivere un algoritmo per la soluzione di equazioni di
+secondo grado, descrivendo i passi con una notazione simile a quella
+usata per l'algoritmo di Euclide.\end{ex}
+
+
+Notiamo alcune caratteristiche importanti della descrizione di questo procedimento:
+\begin{itemize}
+\item I passi del procedimento sono ordinati in modo da non generare
+  alcuna ambiguità sull'ordine delle operazioni. I passi sono eseguiti
+  a partire dal primo in sequenza a meno di indicazioni esplicite
+  contenute nelle istruzioni stesse (passo 3).
+\item L'operazione $\leftarrow$ è detta \textbf{operatore di
+    assegnamento}, la sintassi $m \leftarrow n$ significa che il
+  valore della variabile $n$ sostituisce il valore associato alla
+  variabile $m$.
+\item L'operazione $m = n$ è il classico test equazionale di
+  eguaglianza matematica ($m$ è uguale ad $n$?). La differenza
+  rispetto all'operatore $\leftarrow$ è enorme. L'eguaglianza valuta
+  espressioni e confronta valori, ma non cambia il contenuto delle
+  variabili (cambiamenti di stato). L'operatore di assegnamento invece
+  descrive un azione da compiere, un cambiamento dello stato,
+  attraverso la variazione del contenuto di una variabile.
+\item Ad esempio se $n \in \mathbb{N}$, $n = n + 1$ è matematicamente
+  sempre falso, mentre l'operazione $n \leftarrow n + 1$ indica
+  semplicemente l'incremento del valore associato alla variabile $n$.
+\end{itemize}
+
+\section{Algoritmi e Linguaggi}
+
+La notazione usata nell'Algoritmo di Euclide include:
+\begin{itemize}
+ \item variabili e costanti.
+ \item l'operatore di assegnamento ($\leftarrow$)
+ \item operatori di uguaglianza ($=$), possiamo aggiungere,
+   facilmente, anche ($\neq, <, >, \leq, \geq$).
+ \item Istruzioni condizionali: (se \verb|<condizione>| allora
+   \verb|<comando>|)
+ \item Istruzioni di salto: (\verb|vai a <numero>|,
+   \verb|ritorna a <numero>|).
+ \item Possiamo aggiungere per comodità un altra notazione per
+   indicare un insieme di variabili indicizzate con un
+   intero,comunemente usate in matematica per denotare valori con un
+   pedice: $x_1,\ldots,x_n$. Tale notazione viene modificata
+   generalmente in $x[1],\ldots,x[n]$.
+\end{itemize}
+
+Questo tipo di notazione è detta anche \emph{pseudo-linguaggio}, e viene usata per scrivere algoritmi. La notazione può essere arricchita ulteriormente ma permette già così di esprimere ogni possibile algoritmo (cosa significa questo con precisione verrà chiarito successivamente).
+
+A partire dal modello matematico possiamo definire con precisione dei problemi.  Dato un problema, lo studente dovrà trovare l'algoritmo di risoluzione, cioè la sequenza di passi (scritti con la notazione dello pseudo-codice) che a partire dai dati iniziali costruiscono una soluzione del problema. Una volta trovato un Algoritmo corretto per la risoluzione di un problema, un Programma è una rappresentazione in un linguaggio di programmazione dell'Algoritmo.
+
+Notiamo quindi che la differenza sostanziale tra il concetto di Algoritmo e quello di Programma, riguarda solamente il linguaggio con cui essi sono espressi.  Nel primo caso, lo pseudo-linguaggio consente un astrazione maggiore ed ha come scopo, lo studio delle proprietà formali (terminazione, correttezza) dell'algoritmo. Nel secondo, invece, i linguaggi di programmazione sono costruiti per facilitare al calcolatore la fase di esecuzione.
+
+Il significato moderno del termine algoritmo assomiglia a quello di una ricetta, metodo, tecnica, procedura, routine per svolgere un compito (calcolare dei valori). Ma la nozione di algoritmo è molto di più. Non tutte le sequenza finite di operazioni specificano un algoritmo.
+
+\subsection{Algoritmi: Caratteristiche}
+
+\begin{description}
+\item[Finitezza] Un algoritmo è descritto da un numero finito di passi (finitezza sintattica).  L'algoritmo di Euclide inoltre è \emph{corretto} poichè se la sequenza di passi termina, allora stampa sempre il valore corretto del mcd. Inoltre è possibile dimostrare che esso termina sempre.
+\item[Non Ambiguità (Definiteness)] Ogni passo dell'algoritmo è completamente definito, per evitare ambiguità si usa una notazione matematica con sintassi e semantica non ambigue come lo pseudo-codice, non si usa il linguaggio naturale (come l'italiano). Nell'algoritmo di Euclide questo significa che esiste un agente di calcolo (lo studente, o il calcolatore) che interpreta esattamente le operazioni di divisione intera, calcolo del resto, test di eguaglianza con $0$, etc.
+\item[Input] Ogni algoritmo riceve zero o più valori di input dall'esterno, i valori di input dell'algoritmo di Euclide sono ad esempio valori interi. Nota: per essere ancora più precisi, nell'algoritmo di Euclide dovrebbe essere incluso un passo $0$ con un istruzione del tipo: $m \leftarrow \mbox{ input }, n \leftarrow \mbox{ input }$. Dove input è una variabile speciale che contiene tutti i valori passati in input al problema in sequenza.
+\item[Output] Un algoritmo restituisce un output, un risultato del problema. L'algoritmo di Euclide restituisce il massimo comune divisore tra m,n. Infatti dopo il passo 1, si ha $m = qn+r$ con $q \geq 0$. Se $r = 0$, allora $m$ è un multiplo di $n$ e $mcd = n$. Altrimenti se un numero divide $m,n$ deve dividere anche $m-qn = r$, inoltre ogni numero che divide $n,r$ divide $qn+r=m$. Quindi l'insieme dei divisori comuni di $m, n$ coincide con l'insieme dei divisori di $n, r$ (e quindi anche il massimo dei divisori è lo stesso). Da qui la validità del passo 3.
+\end{description}
+
+\subsection{Algoritmi: Effettività}
+Questo è il punto più importante tra le caratteristiche della nozione di algoritmo.
+
+Ogni operazione svolta in un algoritmo deve essere effettiva. Questo significa che essa deve essere sufficientemente semplice da poter essere eseguita (in principio con carta e penna) in tempo finito. Le operazioni usate dall'algoritmo di Euclide coinvolgono sempre quantità finite (numeri interi), e operazioni aritmetiche tra esse (divisioni, calcolo del resto, confronti con zero), tutte queste operazioni soddisfano chiaramente questa nozione intuitiva di effettività.
+
+Notate che le stesse operazioni non sono effettive se invece di operare sugli interi lavorassimo su numeri reali arbitrari, dato che questi non ammettono in generale una rappresentazione finita. Vedremo poi, che in generale, ogni algoritmo può essere visto come una funzione $f: \mathbb{N} \mapsto \mathbb{N}$.
+
+I numeri reali saranno approssimati attraverso l'uso di un sottoinsieme di numeri razionali (limitati ad un numero fissato di cifre dopo la virgola). Tali numeri sono chiamati \emph{numeri di macchina}.
+
+\subsection{Algoritmi: Esempio}
+\subsubsection{Approssimazione di $\pi$}
+
+Vogliamo calcolare la funzione:
+\[ f(n) = n\mbox{-esima cifra dell'espansione decimale di } \pi \]
+
+Ci chiediamo se esiste un algoritmo che calcola la funzione $f(n)$, e
+se riusciamo a trovarlo, diremo la funzione $f$ è \emph{calcolabile}.
+
+Dall'analisi matematica sappiamo che esistono serie numeriche che
+convergono a $\pi$. Inoltre esistono metodi, (che lo studente vedrà
+nel corso di calcolo numerico), che permettono di misurare l'errore
+causato dal troncamento di una serie, e gli errori di arrotondamento
+causati dall'uso dei numeri di macchina.  Consideriamo la seguente
+procedura:
+
+1) Scegli la lunghezza $n$ della serie troncata e la precisione $p$
+(numero di cifre significative) durante le operazioni di calcolo
+(somma,sottrazione,etc.).  Calcola il valore approssimato della serie
+troncata, ed un valore (tipicamente una stima per eccesso)
+dell'errore.  Verifica se con tale errore la cifra $n$-esima trovata è
+esatta oppure no: se è esatta allora termina con tale valore come
+risultato, altrimenti torna al passo 1 incrementando i valori di $p$
+e/o $n$.  Nonostante la descrizione informale, la procedura descritta
+sopra, soddisfa tutti i requisiti associati alla definizione di
+algoritmo. Pertanto possiamo dire che $f$ è calcolabile.
+
+Consideriamo una situazione più complicata, la funzione:
+
+\[
+f(n) = \begin{cases}
+1 & \mbox{se esiste una sequenza di esattamente } n\\
+  &  \mbox{'5' consecutivi nell'espanzione decimale di } \pi.\\
+0 & \mbox{altrimenti}
+\end{cases} \]
+
+Notiamo che la funzione $f: \mathbb{N} \mapsto \{0,1\}$ è
+perfettamente accettabile e rigorosa dal punto di vista
+matematico. Essa individua univocamente un associazione tra un valore
+intero ed un unico valore $f(n) = 0$ o $1$.
+
+Ma come calcolarla? quanto vale ad esempio $f(10)$? Potremmo provare
+(usando l'algoritmo precedente) a calcolare le prime 10000 cifre di
+$\pi$. Possiamo anche facilmente verificare se all'interno di questa
+sequenza di cifre esiste la sequenza 5555555555 (10 '5' consecutivi),
+ed in tal caso possiamo dire che $f(10) = 1$.
+
+Ma cosa fare se questa sequenza non esiste?, possiamo provare a
+espandere ulteriormente il numero di cifre (ad esempio calcolandone
+$1.000.000$) ma se la sequenza non si trova ancora, possiamo
+restituire $0$?
+
+E' abbastanza intuitivo osservare che in nessun caso siamo
+giustificati a restituire 0 poichè comunque, in ogni momento stiamo
+osservando una sottosequenza finita (un prefisso) anche se
+arbitrariamente lunga delle cifre di $\pi$.
+
+Pertanto non possiamo escludere che la sequenza cercata non esista
+nelle restanti (infinite) cifre che non stiamo osservando. La funzione
+$f$ sembrerebbe allora non-calcolabile, o no? non possiamo affermarlo
+perchè potremmo dimostrare un teorema di teoria dei numeri che
+prova che ogni sequenza per quanto strana è inclusa all'interno dell'espansione
+decimale di $\pi$, (questa dimostrazione ci direbbe qualcosa di significativo
+sulle cifre di $\pi$, senza doverle calcolare esplicitamente), ed in tal caso la
+funzione $f$ sarebbe semplicemente la funzione costante ($f(n) = 1,
+\forall n$).
+
+Questo esempio mostra sopratutto che il potere espressivo della
+matematica, nel definire ad esempio funzioni, è molto più complesso di
+quanto possa apparire. In effetti è tanto espressivo che dimostreremo come
+l'insieme $\mathbb{F} = \{f: \mathbb{N} \mapsto \mathbb{N}\}$ è più grande (molto più
+grande) dell'insieme di tutti gli algoritmi (e questo risultato non
+dipende dalla scelta dello pseudo-linguaggio).
+
+Un corollario importante di questo risultato teorico è il seguente:
+Poichè i programmi sono l'implementazione (la riscrittura) di un
+algoritmo in uno specifico linguaggio di programmazione questo implica
+che esistono problemi irrisolvibili con l'ausilio di un computer, non
+importa quanto veloce esso sia.
+
+Finora abbiamo dato una definizione di Algoritmo non molto
+soddisfacente per uno studente di matematica. In effetti si sono
+elencate delle qualità che una procedura di calcolo deve rispettare, e
+si sono visti degli esempi. Possiamo tuttavia essere più formali:
+
+\subsection{Formalizzazione della nozione di Algoritmo}
+
+Un \emph{problema computazionale} è una classe, generalmente infinita
+(numerabile) di domande, ognuna delle quali possiede una risposta
+finita. Un modo per descrivere tale classe è esprimere il problema in
+forma parametrica, i parametri saranno chiamati \emph{input} del
+problema e la risposta è l'\emph{output}.  Alcuni esempi:
+
+\begin{itemize}
+\item Dati $m,n \in \mathbb{N}$, calcolare $mcd(m,n)$.
+\item Data una matrice $A$, ed un vettore $b$, di opportune
+  dimensioni, trovare il vettore $x$ tale che $Ax = b$.
+\item Sia $PRIME$ l'insieme dei numeri primi: $PRIME = \{ n | n \text{
+    è primo.} \}$.  Dato $n \in \mathbb{N}$, decidere se $n \in PRIME$.
+\item Dato un insieme di numeri interi $a_1,\ldots,a_n$, produrre in
+  output una permutazione di tali numeri ordinata in modo decrescente.
+\end{itemize}
+
+Trovare un algoritmo per uno dei problemi elencati sopra, significa
+focalizzare l'attenzione sui singoli passi di un \emph{procedimento}
+attraverso cui a partire dai valori in input, costruiamo la soluzione
+richiesta dal problema.
+
+Per descrivere questo procedimento, dobbiamo introdurre un qualche
+formalismo che descriva i singoli passi del calcolo, e che alla fine
+di una sequenza di passi, produce una soluzione del
+problema. Definiamo quindi:
+
+\begin{defn}
+  Un sistema di transizione è una quadrupla: $T = (Q, I, \Omega, f)$.
+  \begin{itemize}
+  \item $Q$ è un insieme di stati della computazione.
+  \item $ I, \Omega \subseteq Q $ sono rispettivamente il sottoinsieme
+    di stati iniziale, e finale del problema.
+  \item $ f : Q \rightarrow Q $ è una funzione da $Q$ a se stesso,
+    detta funzione di transizione.
+  \end{itemize}
+\end{defn}
+
+
+Uno stato $q \in Q$ è una struttura finita che descrive completamente le informazioni (iniziali, intermedie, e finali) che l'algoritmo usa durante la sua esecuzione. Con il termine \emph{stato} identifichiamo quindi in modo astratto
+queste informazioni. Esempi: nell'algoritmo di Euclide $q$ conterrà tutti i valori necessari per il calcolo dell'mcd ed il numero dell'istruzione da eseguire; se il problema è calcolare il valore di un polinomio $p(x)$ in un punto $x$, $q$ conterrà il grado del polinomio, un vettore dei coefficienti di $p$, il valore di $x$, i valori intermedi usati nel calcolo di $p(x)$, ed il passo a cui siamo giunti nel calcolo, ed infine il valore del risultato.
+
+L'insieme $I$ è l'insieme degli stati iniziali, il sottoinsieme di $Q$ che codifica opportunamente i dati iniziali
+del problema. Esempi: per l'algoritmo di Euclide $i \in I$ è semplicemente una coppia $(n,m)$ di numeri
+interi; se il problema è il calcolo di $C = A \cdot B$ con $A,B \in R^{n \times n}$, allora
+$i = (n,A,B)$. I singoli elementi di $I$ si chiamano anche \emph{istanze}.
+
+L'insieme $\Omega$ è un insieme di stati finali, che codificano la soluzione del problema. Se l'esecuzione
+(definita sotto) del sistema di transizione arriva a calcolare uno stato in $\Omega$, questo rappresenterà
+in modo formale il fatto che il calcolo è terminato, e le informazioni presenti negli stati finali sono
+una codifica della soluzione del problema.
+
+La funzione $f$ specifica il singolo passo di calcolo, attraverso cui costruiamo una soluzione del problema. Quello che viene fatto in un singolo passo, dipenderà esattamente dalla complessità della funzione $f$, in ogni caso, un singolo passo deve soddisfare il requisito di \emph{semplicità} e le operazioni svolte dalla $f$ devono essere eseguibili in tempo finito; Notiamo che la scelta di queste operazioni corrisponde a definire il \emph{modello di calcolo} usato per risolvere
+il problema.
+
+
+Notiamo subito che la funzione di transizione ristretta su $\Omega$ è l'identità cioè: $f(x) = x$ per ogni $x \in \Omega$. Questo significa che una volta giunti ad uno stato finale, lo stato non cambia ulteriormente (e quindi in un certo senso ci fermeremo appena incontriamo durante l'esecuzione il primo tra questi stati). Formalmente l'esecuzione di un sistema di transizione è definita così:
+
+\begin{defn} Un \textbf{esecuzione} di un sistema di transizione $T =
+  (Q,I,\Omega,f)$ su input $i \in I$ è definita come la successione
+  $x_0,\ldots,x_k,\ldots$ di stati, tali che:
+ \[ x_0 = i, \qquad x_{k} = f(x_{k-1})\quad \forall k \geq 1 \]
+\end{defn}
+
+Notiamo che un esecuzione è un sistema dinamico, cioè un sistema che costruisce dinamicamente una successione di valori, transitando da uno stato, ad un altro stato; un esecuzione può essere
+finita o infinita, a seconda dello stato iniziale.
+
+Nel caso in cui la successione assume un valore $x_n  \in \Omega$, per la proprietà degli stati finali ($\forall x \in \Omega, f(x) = x$), possiamo fermare l'esecuzione poichè siamo sicuri che dopo $n$ passi la funzione $f$ non potrà più produrre cambiamenti allo stato. Quindi:
+
+\begin{defn} Dato un sistema di transizione $T = (Q,I,\Omega,f)$, ed
+  un input $i \in I$, l'esecuzione si dice \textbf{terminante} in $n$
+  passi, con output $x_n$ se e solo se, nella sequenza di stati: $\{
+  x_0 = i, x_1 = f(i), x_2 = f(x_1), \ldots \}$ esiste $n>0$, $n = min
+  \{ k\; |\; x_k \in \Omega \}$.
+\end{defn}
+
+Se l'esecuzione termina, allora lo stato $x_n$ conterrà una codifica del risultato (output) del sistema di transizione sull'istanza iniziale. Se invece, per una certa istanza in input non si arriva mai ad uno stato finale, cioè se $\forall k, x_k \in Q/\Omega$ allora la successione diverge, ed il sistema di transizione con input $i$ non termina.
+
+\begin{defn}
+Un \textbf{Algoritmo} è un sistema di transizione che termina su tutte le sue
+istanze d'input.
+\end{defn}
+
+
+\subsubsection{Esempio: Applichiamo la notazione precedent0e all'algoritmo di Euclide.}
+
+I valori di input sono coppie di naturali, di cui dobbiamo calcolare il massimo comune divisore. Le informazioni necessarie in ogni passo della computazione possono essere rappresentati attraverso il seguente insieme di stati: $Q = \{ (a,b,r,k) \}$, con $a,b,r \geq 0$ interi e $k \in {1,2,3}$.  Ogni quadrupla contiene in ordine: i due interi, il valore del resto $r$ di $m/n$, ed il numero dell'istruzione eseguita.
+
+Gli stati iniziali sono gli elementi di $Q$ che codificano l'input, quindi $I = \{ (m,n,0,1) \} \subset Q$. Gli stati finali contengono il risultato: quindi $\Omega = \{ (a,b,0,2) \}$ con $b = mcd(m,n)$.  Sia $m \% n$ l'operazione di \emph{modulo}, cioè il resto della divisione intera tra $m$ e $n$.  La funzione $f: Q \mapsto Q$ è definita come seque:
+
+\[
+\begin{aligned}
+   f(a,b,0,1) &= (a,b, a \% b, 2) & (\text{calcolo del resto})\\
+   f(a,b,0,2) &= (a,b,0,2) & (\text{nota: stato finale})\\
+   f(a,b,r,2) &= (a,b,r,3) \text{ se } r \neq 0, & (\text{salto})\\
+   f(a,b,r,3) &= (b,r,0,1) & (\text{scambio e ciclo})\\
+\end{aligned}
+\]
+
+Esempio: l'esecuzione del sistema definito sopra con input $i = (6,4,0,1)$ genera la seguente
+successione di stati: $x_0 = i = (6,4,0,1)$, $\rightarrow (6,4,2,2)$ 
+$ \rightarrow (6,4,2,3) \rightarrow (4,2,2,1)$ 
+$ \rightarrow (4,2,0,2) \rightarrow (4,2,0,2) \rightarrow (4,2,0,2)
+\rightarrow (4,2,0,2) = x_7$. Quindi $mcd(6,4) = 2$ e il sistema calcola il valore
+corretto in $7$ passi.
+
+\subsection{Macchine di Turing}
+
+Evidenziamo, per la sua importanza, un particolare sistema di transizione: Si definisce \emph{Macchina di Turing} deterministica ad un nastro, una macchina della seguente forma:
+$T = \langle Q, q_0, F, \Sigma, \delta \rangle$ dove
+\begin{enumerate}
+ \item $Q = \{ q_0, \ldots, q_k \}$ è un insieme finito detto insieme degli stati della macchina.
+ \item $q_0$ è lo stato iniziale. Da cui partono tutte le computazioni.
+ \item $F$ è un insieme di stati finali, le computazioni terminano quando si arriva in uno di questi stati.
+ \item $\delta : \Sigma \times Q \mapsto Q \times \Sigma \times \{\leftarrow, \rightarrow\}$ è la funzione di transizione della macchina.
+\end{enumerate}
+
+La Macchina di Turing (MdT), è un automa a stati finiti, esteso con un nastro infinito di memoria\footnote{Il nastro può essere pensato limitato a sinistra, e infinito verso destra, e la testina è posizionata all'inizio sulla cella più a sinistra}. Il nastro è diviso in celle, ogni cella contiene un carattere dell'alfabelto $\Sigma$, la macchina possiede una testina, posizionata all'inizio (nello stato $q_0$) su una cella del nastro. 
+
+La funzione di transizione $\delta$, è definita come una tabella di quintuple, ogni quintupla $(q,\alpha,q',\beta,L)$ definisce il fatto che $\delta(q,\alpha) = (q',\beta,\rightarrow)$ cioè se la macchina si trova nello stato $q$ e legge il simbolo $\alpha$, allora si sposta nello stato $q'$, scrive sul nastro $\beta$ e sposta la testina a destra. L'insieme complessivo delle quintuple rappresenta il programma della MdT.
+
+Vista l'importanza delle macchine di Turing in Informatica Teorica, da questo momento le useremo come un modello di riferimento per illustrare il resto della teoria.
+
+\subsection{Funzioni Calcolabili}
+
+Data una macchina di Turing $T$, notiamo che l'insieme degli stati interni di $T$ è finito, inoltre i valori sul nastro diversi dallo spazio (la stringa d'input) sono inizialmente in numero finito, la descrizione complessiva della macchina è quindi finita, poichè la macchina agisce in modo discreto su una casella alla volta, la configurazione complessiva in ogni passo è finita. Essi possono quindi essere codificati in un numero naturale. 
+
+Esiste cioè una corrispondenza biunivoca $cod: Q \mapsto \mathbb{N}$.
+
+Consideriamo un esecuzione di $T$ con input $q_i \in I$, sia $cod(q_i) = n$ l'intero che codifica l'input. Definiamo una funzione parziale\footnote{Vedi definizione in appendice}, $f_T : \mathbb{N} \mapsto \mathbb{N}_\perp$, come $f_T(n) = m$, se esiste $q_k \in \Omega$ e $cod(q_k) = m$. Cioè la funzione $f_T(n)$ associa al valore $n$ (che codifica l'input) il valore $m$ (che codifica l'ouput). Nel caso in cui per un certo $n = cod(q_i), q_i \in I$, il sistema di transizione non termina, allora $f(n)\uparrow$ (f diverge).
+
+Nel caso in cui il sistema definisca un algoritmo abbiamo la seguente definizione:
+
+\begin{defn}[Funzione Calcolabile]
+Ad ogni algoritmo $A$, associamo la funzione $f_A(n) = m$, dove $n = cod(q_i), q_i \in I$ e $cod(q_k) = m, q_k \in \Omega$.
+\end{defn}
+
+
+Ogni sistema di transizione, specifica quindi un particolare algoritmo $A$
+per un certo problema. Se l'algoritmo è corretto e se per ogni input
+esso restituisce un risultato (termina) allora la funzione ad esso associata
+($f_A$) è totale ed è detta \emph{calcolabile}.
+
+\begin{ex}
+Scrivere un algoritmo (in pseudo-codice) per trovare gli zeri di
+  un equazione di secondo grado. (Potete arricchire il linguaggio con
+  la funzione $x \leftarrow \sqrt(n)$.
+\end{ex}
+\begin{ex}
+Scrivere un algoritmo che riceve in input tre interi (a,b,c) e
+  stampa il valore massimo.
+\end{ex}
+
+\begin{ex} Dalla definizione di Algoritmo data sopra, vediamo che
+  l'operatore di assegnamento $a \leftarrow expr$, dove $expr$ è un
+  espressione matematica che include gli operatori ammessi dal
+  formalismo, è l'operazione fondamentale per trasformare uno stato $q
+  \in Q$ in un altro stato $q'$. Con la notazione \[ [q]\; a
+  \leftarrow expr \; [q']\] si indica rispettivamente lo stato $q$
+  precedente all'esecuzione dell'operatore di assegnamento, e lo stato
+  immdiatamente successivo $q'$. Date una descrizione di $q'$ in
+  funzione di $q$ e dell'operazione di assegnamento.
+\end{ex}
+
+\begin{ex} Partendo da uno stato vuoto, e data la sequenza di assegnamenti
+  $a~\leftarrow~3$, $b \leftarrow~4$, sia $q$ lo stato finale
+  associato a tale sequenza.  A partire da $q$ eseguite le due diverse
+  sequenze: 1) $ a \leftarrow b; b \leftarrow a$ e 2) $ t \leftarrow
+  a; a \leftarrow b; b \leftarrow t$. Scrivere gli stati intermedi, e
+  lo stato finale di ognuna. Quale delle due sequenze di assegnamenti
+  scambia i valori delle variabili $a,b$?
+\end{ex}
+\begin{ex}
+\item Chiamiamo $L1$ il formalismo usato per descrivere l'algoritmo di
+  Euclide. $L1$ assume che l'esecutore sia in grado di calcolare la
+  divisione intera.  Supponiamo che questo esecutore non esista,
+  chiamiamo questo nuovo linguaggio $L2$, Quindi $L2$ è identico ad
+  $L1$ ma non ha la divisione. La sequenza di istruzioni studiata
+  resta comunque un algoritmo? Possiamo pensare che l'operazione $a
+  \div b$ in $L1$ sia simulata in $L2$ tramite una opportuna sequenza
+  di istruzioni? Quali? \end{ex}
+
+
+\section{Alcune note attorno al concetto di Algoritmo}
+
+\begin{quote} \emph{Non vi è un limite superiore alla dimensione
+    dell'input. Non vi è limite superiore alla memoria di lavoro.}
+\end{quote}
+
+Nonostante i requisiti di finitezza. Bisogna prestare attenzione a non
+porre limitazioni superiori alle dimensioni degli stati. Infatti,
+banalmente noi vogliamo poter calcolare $mcd(m,n)$ per ogni valore di
+$m,n$ naturale. Quindi non vi possono essere limiti superiori per tali
+valori. Lo stesso per il numero dei passi di calcolo, e quindi per la
+memoria temporanea (variabili) usate durante i calcoli. Notare che
+questo non contraddice l'ipotesi di finitezza, perchè per quanto non
+limitabili superiormente le quantità citate sono comunque sempre
+finite.
+
+\begin{quote} \emph{La sequenza delle istruizioni è definita in modo
+    da poter individuare senza ambiguità qual'è l'istruzione
+    successiva a quella appena eseguita.}
+\end{quote}
+
+Un algoritmo specifica in modo non ambiguo la sequenza delle
+operazioni. I passi dello pseudo-codice sono ordinati, e di solito
+l'ordine di esecuzione è sequenziale (si eseguono le istruzioni
+seguendo l'ordine specificato nel testo dello pseudo-codice). Le
+istruzioni di controllo del flusso (salta a..) possono modificare
+quest'ordine in questo caso è importante distinguere due casi:
+
+\begin{description}
+\item[Algoritmi Deterministici:] le istruzioni di controllo del flusso
+  d'esecuzione, possono cambiare l'ordine d'esecuzione delle
+  istruzioni, solo in funzione del valore delle variabili usate
+  dall'algoritmo (compreso le variabili d'input). Il calcolo è
+  completamente deterministico, fissato l'input, l'algoritmo produce
+  \emph{sempre} la stessa computazione, in particolare la stessa
+  sequenza di stati intermedi, e lo stesso stato finale.
+\item[Algoritmi Randomizzati]: le istruzioni di controllo del flusso
+  d'esecuzione possono cambiare l'ordine d'esecuzione in funzione di
+  variabili aleatoree (numeri casuali). Si assume che l'esecutore, può
+  generare una sequenza di valori casuali con distribuzione uniforme
+  (equiprobabili). A partire da questa sequenza è possibile generare
+  distribuzioni di probabilità diverse. Quindi due esecuzioni diverse
+  dello stesso algoritmo con lo stesso input, in generale, possono
+  dare risultati diversi, proprio perchè il flusso di esecuzione può
+  dipendere dai valori casuali generati in quella specifica
+  esecuzione, anche in presenza dello stesso input.
+\end{description}
+
+L'ipotesi che l'esecutore disponga di un generatore di numeri casuali
+è piuttosto forte. Come può infatti un sistema deterministico generare
+valori a caso? Come vedremo nel corso è possibile per algoritmi
+deterministici generare delle sequenze dette pseudo-casuali. Queste
+sequenze simulano in modo statisticamente accettabile il comportamento
+di un generatore casuale. Pertanto, nonostante un algoritmo che usi
+numeri pseudo-casuali resti comunque deterministico, esso può essere
+considerato un'approssimazione di un algoritmo randomizzato e viene
+generalmente indicato con questo termine.
+
+
+\begin{quote}\emph{Dato un problema P, esiste solo un algoritmo A che
+    calcola una soluzione di P a partire dai dati iniziali? Se ne
+    esiste più di uno, allora in cosa si differenziano?}
+\end{quote}
+
+Abbiamo visto dalla definizione formale che possiamo associare ad ogni
+algoritmo $A$ una funzione totale $f_A$.  In generale, dato un
+problema, abbiamo molti (infiniti) algoritmi $A,A',A''$ che calcolano
+la stessa funzione: $f_A = f_{A'} = f_{A''}$ . Se ad esempio $A$ è
+l'algoritmo di Euclide, possiamo creare infiniti algoritmi $A^i$ che
+calcolano il massimo comune divisore semplicemente aggiungendo un
+ulteriore passo n. $4$, con l'istruzione $x \leftarrow i.$ con $i$ un
+numero naturale arbitrario. Notate che il passo $3$ dell'algoritmo
+salta in ogni caso al passo $1$, e il passo $2$ termina l'esecuzione o
+passa al passo $3$, quindi il passo $4$ non verrà mai eseguito ma
+nondimeno contribuisce al testo dell'algoritmo e quindi a definire la
+funzione di transizione associata (che quindi definisce delle
+trasformazioni di stato che non saranno mai calcolate), la funzione
+$f_{A^i}$ invece è sempre la stessa (il calcolo del massimo comune
+divisore).
+
+E' facile estendere questo ragionamento anche al testo di un
+programma: se un problema è calcolabile, esiste un algoritmo, anzi
+infiniti algoritmi, e quindi infiniti programmi.
+
+Notiamo inoltre che nell'esempio sopra, è immediatamente evidente che
+gli algoritmi calcolano la stessa funzione, ma in generale come
+vedremo successivamente decidere se due algoritmi (o programmi)
+diversi calcolano la stessa funzione è uno di quei problemi che
+purtroppo non ammettono nessuna soluzione algoritmica, sono cioè
+non-calcolabili.
+
+\begin{quote}\emph{Se esiste più di un algoritmo che risolve un
+    problema quale usiamo? è possibile definire un ordinamento in
+    termini di peggiore/migliore tra algoritmi, rispetto a quali
+    parametri?}
+\end{quote}
+
+Supponiamo di disporre di due algoritmi per lo stesso problema. Un
+modo per distinguerli è definire un concetto di efficienza per ognuno
+di essi: prendiamo in considerazione le risorse necessarie
+all'algoritmo durante la sua esecuzione. Tali risorse sono normalmente
+il tempo d'esecuzione (numero di passi di calcolo) e lo spazio di
+memoria (dimensione dello stato). La quantità di queste risorse usate
+da un algoritmo $A$, si chiama \emph{complessità computazionale} di
+$A$ (rispettivamente di tempo e di spazio).
+
+Possiamo definire una funzione che associa ad ogni algoritmo, e per
+ogni istanza di input, il numero di passi necessari per ottenere la
+soluzione. Infatti, l'algoritmo è un sistema di transizione sempre
+terminante $A = (Q,I,\Omega,f)$, quindi per ogni $q_i \in I$ sappiamo
+che esiste $n \in \mathbb{N}$ tale che $q_n \in \Omega$. Il valore di $n$ è
+esattamente il numero di passi impiegati dall'algoritmo per arrivare
+alla soluzione, quindi definiamo la misura di complessità come
+$t_A(q_i) = n$.
+
+Che caratteristiche ha questa funzione? Il numero di passi impiegati
+da $A$ può cambiare molto tra un istanza e l'altra, anche in modo
+drammatico. In generale però, possiamo aspettarci che le istanze del
+problema siano naturalmente associate ad un concetto di dimensione, e
+che la funzione $t_A$ sia \textbf{non-decrescente} rispetto alla
+dimensione dell'input. Ad esempio, nel caso di Euclide\footnote{Non è
+  necessario indicare ''Euclide'' come pedice della $t$ se è chiaro
+  dal contesto di quale algoritmo si parli}, è chiaro che:
+
+\[ t(<n=5,m=15>) \; \lll \; t(<n=23423523523,m=435432422352>) \]
+
+cioè banalmente il tempo cresce con la dimensione dei numeri coinvolti
+nel calcolo. Un altro esempio: se devo moltiplicare due matrici $n
+\times n$, il tempo $t(.)$ dipende più che dai numeri dentro le
+matrici, dalla dimensione $n$, quindi ci aspettiamo che moltiplicare
+matrici $100 \times 100$ possa essere fatto più velocemente che per
+matrici $10000 \times 10000$. Possiamo quindi definire in modo più
+utile la complessità computazione di un algoritmo non come funzione
+delle singole istanze, ma come funzione della \emph{dimensione}
+dell'istanza.
+
+Assumiamo quindi di poter definire una misura di dimensione per ogni
+istanza di input, e indichiamo con la funzione $|.| : Q \mapsto
+\mathbb{N}$, tale misura. Adesso, partizioniamo $I$ in sottoinsiemi
+$I_n = \{ q \in I \;|\; |q|=n \}$ con $n\in \mathbb{N}$, $I_n$ è
+quindi il sotto-insieme dell'input formato da istanze di lunghezza
+pari ad $n$. Definiamo allora \textbf{complessità di tempo
+  dell'algoritmo A nel caso peggiore} come:
+\[ T_A(n) = \max_{q\; \in\; I_n} t_A(q) \]
+
+cioè: il peggior tempo d'esecuzione impiegato da A per risolvere un
+istanza del problema di dimensione $n$. Usiamo il tempo associato
+all'istanza peggiore perche esso fornisce una chiara limitazione
+superiore al tempo d'esecuzione su tutte le istanze di quella
+dimensione, e quindi una garanzia che la funzione di transizione
+applicata a input di dimensione $n$ terminerà al più in $T(n)$ passi.
+
+\begin{quote}\emph{Esistono problemi difficili da risolvere? (in che
+    senso?)}
+\end{quote}
+
+Visto che come spiegato sopra è possibile definire in modo preciso
+quante risorse usa un certo algoritmo durante la sua esecuzione, è
+naturale pensare alla difficoltà di un algoritmo proprio in termini
+della sua complessità in tempo. In particolare, nel comportamento
+asintotico della funzione $T_A(n)$.
+
+La cosa fondamentale come vedremo durante il corso è che esiste una
+classe molto ampia di problemi che sono risolvibili algoritmicamente,
+ma la funzione $T_A(n)$ ha forma esponenziale, ad esempio: $T_A(n) =
+2^n$. Questa classe di problemi è definita difficile proprio perché
+vista la velocità molto rapida di crescita del tempo d'esecuzione,
+nella pratica esisterà una costante (purtroppo abbastanza piccola)
+$n'$ tale che:
+
+\[\forall\; n \geq n', T_A(n) > \mbox{tempo di vita della persona
+  interessata alla soluzione.}\]
+
+Il che rende chiaramente solvibile il problema, ma piuttosto inutile
+dal punto di vista della persona che prova a usare l'algoritmo A, il
+fatto che esso esista.
+
+\begin{quote}\emph{Tutti i problemi computazionali sono risolvibili?
+    Esiste cioè un algoritmo per ogni problema?}\end{quote}
+
+Un problema computazionale è modellato, come già spiegato, come una
+funzione parziale dai naturali ai naturali. Dimostriamo che esistono
+problemi che non ammettono nessun algoritmo.  Sappiamo già che
+$|\mathbb{R}| = \aleph_1 > |\mathbb{Q}| = |\mathbb{Z}| = |\mathbb{N}|
+= \aleph_0$ (vedi post Contare L'infinito). I matematici chiamano
+numerabili gli insiemi infiniti con cardinalità $\aleph_0$, mentre
+$\aleph_1$ è chiamata anche cardinalità del continuo.
+
+E' facile verificare che l'insieme di tutte le funzioni dai naturali
+ai naturali $F = \{ f: \mathbb{N} \mapsto \mathbb{N} \}$ ha la
+cardinalità del continuo. Per far questo usiamo:
+
+\begin{thm}[Teorema di Cantor] Per ogni insieme $I$, $|I| <
+  |2^{I}|$, dove $2^I$ è l'insieme delle parti di $I$, cioè l'insieme
+  dei suoi sottoinsiemi.
+\end{thm}
+
+Consideriamo il sottoinsieme $F_{\{0,1\}} = \{ f: \mathbb{N} \mapsto
+\{0,1\} \} \subset F$, ogni elemento di questo insieme può essere
+messo in corrispondenza biunivoca con un sottoinsieme di
+$\mathbb{N}$. Infatti, data $f \in F_{\{0,1\}}$ possiamo associarla
+all'insieme $I = \{ n |\; f(n) = 1 \}$, e viceversa, dato un
+sottoinsieme di $\mathbb{N}$ la sua funzione indicatrice (o
+caratteristica) è chiaramente un elemento di $F_{\{0,1\}}$; quindi per
+Cantor $|F_{\{0,1\}}| = \aleph_1$.  \bigskip
+
+Adesso consideriamo la cardinalità dell'insieme delle funzioni
+associate ad algoritmi scritti nello pseudo-codice; cioè l'insieme
+\[ F_S = \{ f_A: \mathbb{N} \mapsto \mathbb{N}, \forall\; A \mbox{ scritto in pseudo-codice }\}\]
+
+Dimostriamo che questo insieme è numerabile: Infatti gli algoritmi
+sono testi, e come tali, possono essere ordinati per ordine di
+lunghezza crescente. A parità di lunghezza, è possibile ordinarli in
+ordine alfabetico. Il dettaglio di questo modo di ordinare il "testo"
+dell'algoritmo dipenderà dal linguaggio (o meglio pseudo-linguaggio
+usato) ma è sempre possibile costruire questo "elenco". Notiamo che un
+elenco ordinato non è altro che una biiezione con $\mathbb{N}$.
+
+Quindi da una parte le funzioni dai naturali ai naturali sono in
+quantità più che numerabile, e dall'altra, l'insieme delle funzioni
+calcolabili è numerabile. Esistono quindi infinite funzioni per cui
+non esiste alcun algoritmo. Tali funzioni sono dette
+non-calcolabili. Inoltre esisteranno infiniti $X \subset \mathbb{N}$
+tali che la funzione caratteristica di $X$ è non-calcolabile, tali
+insiemi si dicono non-decidibili (poichè appunto, non è possibile
+calcolare se $x \in X$).
+
+Notate che l'insieme $F_S$ dipende dal formalismo usato per scrivere i
+nostri algoritmi, quindi potrebbe sembrare che tale dimostrazione (di
+non calcolabilità di certi problemi) sia da rifare per ogni eventuale
+linguaggio con cui esprimiamo i nostri algoritmi.
+
+Nell'ambito dell'informatica teorica sono stati sviluppati moltissimi
+linguaggi (o meglio formalismi) per definire algoritmi. La cosa
+interessante è che ogni formalismo sufficientemente potente da poter
+calcolare funzioni come il massimo comune divisore è stato dimostrato
+equivalente ad ogni altro formalismo sviluppato; anche di tipo molto
+diverso.
+
+Un modello di calcolo particolarmente importante è stato definito dal
+matematico Alan Turing, e chiamato per questo \emph{Macchina di
+  Turing}. Tutti i modelli di calcolo definiti successivamente sono
+Turing-equivalenti, cioè l'insieme di funzioni calcolabili da questi
+modelli coincide esattamente con l'insieme di funzioni calcolabili da
+una macchina di Turing.
+
+I computer attuali soddisfano questa definizione, sono cioè delle
+versioni ultra-accelerate, di una particolare macchina di Turing (per
+precisione: sono macchine di Turing Universali).
+
+Gli Informatici esprimono tramite una tesi (non un teorema), chiamata
+\textbf{tesi di Church-Turing}, l'idea che la nozione (intuitiva) di
+calcolabilità coincida con la nostra definizione di algoritmo e che
+tale risultato non dipenda dal particolare formalismo usato per
+descrivere i nostri algoritmi.
+
+La calcolabilità o meno di un problema pertanto non dipende dai limiti
+di questo o quel modello di calcolo (se comunque sono
+Turing-equivalenti) ma è intrinsica a certi problemi, le funzioni
+calcolabili sono dette anche Turing-calcolabili.
+
+
+\appendix
+\chapter{Richiami di Matematica}
+
+\section{Alfabeto, Stringhe e Linguaggi}
+
+Fissiamo un insieme finito di simboli detto \emph{alfabeto}  denotato con $\Sigma$ (sigma maiuscola). Ciascun elemento di $\Sigma$ è detto simbolo o elemento \emph{terminale}. Abbiamo poi bisogno di definire il concetto di \emph{stringa} sull'alfabeto $\Sigma$: una stringa è una sequenza finita di simboli di $\Sigma$, cioè se $\alpha = a_1a_2 \ldots a_n$, con $n \geq 0$, dove $\forall i \in [1,n],\; a_i \in \Sigma$; la lunghezza della stringa $\alpha$ è $n$; introduciamo inoltre $\epsilon$ per denotare la \emph{stringa vuota}, cioè l'unica stringa di lunghezza $0$. Ad esempio, se l'alfabeto $\Sigma$ è l'insieme \{0, 1\}, un esempio di stringa è $00110011101$.  Di solito le stringhe sono rappresentate tra virgolette doppie, i.e. ''$00110011101$'', la stringa vuota può essere indicata anche con $\epsilon = $''''.
+
+L'operazione principale tra stringhe è la \emph{concatenazione}: date due stringhe $s = a_1a_2\ldots a_n$ e $t = b_1b_2\ldots b_m$ con $n,m \geq 0$, la concatenazione di $s$ e $t$ è la stringa di lunghezza $n+m$ denotata con:
+
+\[ st = a_1a_2\ldots a_nb_1b_2\ldots b_m \]
+
+Ad esempio, se $s = 0101110$, $t = 1100101$, allora: $st = 01011101100101$.  Se $z = xy$ allora diciamo che $x$ è un
+\emph{prefisso} di $z$, e $y$ è un \emph{suffisso} di $z$. Se $z = xwy$ allora diciamo che $w$ è una \emph{sottostringa} di $z$.
+
+Dati due insieme $A$, $B$ di stringhe, estendiamo l'operazione di concatenazione agli insiemi, definendo $A$ concatenato $B$ come l'insieme $AB = \{ xy \;|\; x \in A, y \in B \}$. Possiamo quindi definire l'insieme delle stringhe di lunghezza $k$,
+per induzione su $k$, come $\Sigma^k = \Sigma \Sigma^{k-1}$ dove $\Sigma^0 = \{ \epsilon \}$. La stringa vuota è l'elemento neutro rispetto alla concatenazione, cioè: $\forall x, \epsilon x = x \epsilon = x$
+
+L'insieme di tutte le stringhe sull'alfabeto $\Sigma$ può essere quindi definito come l'unione (numerabile) delle stringhe di lunghezza $k$, per ogni $k \in \mathbb{N}$, formalmente:
+
+\[ \Sigma^* = \bigcup_{i=0}^{\infty} \Sigma^i \]
+
+Un linguaggio su $\Sigma$ è semplicemente un particolare sottoinsieme di stringhe di $\Sigma^*$, cioè $L \subset \Sigma^*$. Secondo questa definizione anche tutto $\Sigma^*$ o l'insieme $\emptyset$ sono linguaggi, ma piuttosto banali. 
+
+Se codifichiamo i caratteri al calcolatore attraverso lo standard \verb"ASCII" allora $\Sigma = $\verb"ASCII", ed i linguaggi di programmazione sono essenzialmente sottoinsiemi di \verb"ASCII"$^*$.  In altre parole, un programma non è altro (sintatticamente) che una stringa di caratteri alfanumerici \verb"ASCII". Ovviamente la stringa dovrà rispettare le regole del linguaggio, e diversi linguaggi di programmazione hanno in genere diverse regole sintattiche, e quindi diversi programmi sintatticamente ben formati.
+
+\section{Le Grammatiche}
+
+In questa sezione studieremo un formalismo per descrivere linguaggi, che fa uso di un tipo di definizione ricorsiva detta \emph{grammatica libera da contesto} (o brevemente, \emph{grammatica}). Le grammatiche sono lo strumento principale di \emph{specifica} dei linguaggi di programmazione (o di altri linguaggi formali).
+
+\subsection{Grammatiche libere da contesto}
+
+Consideriamo il linguaggio delle \emph{espressioni artimetiche} tra interi. Cos'è in questo
+linguaggio una espressione sintatticamente correttà? o più formalmente una \emph{formula
+ben formata}? Sicuramente espressioni come: $3+6$ sono corrette, ma lo sono anche espressioni come
+$4 * (3 - 2 ) + 1$ o semplicemente $3$ (una costante è pur sempre una \emph{espressione}).
+
+Quello che presentiamo è un formalismo che consente di dichiarare in modo non ambiguo quegli
+enunciati espressi sopra in modo intuitivo. In particolare le \emph{grammatiche a struttura
+di frase} costituiscono un formalismo atto a descrivere insiemi di stringhe in modo induttivo (o ricorsivo).
+
+Le definizioni sopra saranno tradotte più o meno in questo modo: la grammatica delle espressioni
+è costituita da una categoria sintattica \texttt{E} che indica tutte le espressioni valide,
+inoltre vi è una categoria sintattica \texttt{N} che rappresenta le costanti, 
+quindi \texttt{123} $\in$ \texttt{N}.
+
+A questo punto una regola della grammatica (o produzione) si scrive come $E := N$, e il suo significato è:
+\emph{un espressione è un numero}; un altra produzione sarà $E := E + E$ che ci dice che se ho due
+espressioni ed ad esse applico l'operatore '+' allora ottengo un altra espressione valida.
+Cioè, le produzioni sopra possono essere viste come una definizione dell'insieme $E$, come l'insieme
+delle stringhe più piccolo che gode delle seguenti proprietà:
+\begin{itemize}
+ \item Se $\alpha \in N$ allora $\alpha \in E$.
+ \item Se $e1 \in E$ ed $e2 \in E$ allora $e1 + e2 \in E$.
+\end{itemize}
+
+\begin{center}-----------    \textbf{Da Completare}    -------------- \end{center}
+
+\section{Funzioni}
+
+\begin{defn}
+  Una funzione da un insieme $A$ a un insieme $B$ è una corrispondenza
+  che associa ad ogni elemento $a \in A$ esattamente un elemento $b
+  \in B$. Più esattamente, una funzione da $A$ a $B$, è il
+  sottoinsieme $f \subseteq A\times B$ che soddisfa:
+  \begin{itemize}
+  \item Per tutti gli $a$ in $A$ c'è \emph{almeno} un $b$ in $B$ tale
+    che $(a,b) \in f$ (\emph{definitezza}).
+  \item Per tutti gli $a$ in $A$ c'è \emph{al più} un $b$ in $B$ tale
+    che $(a,b) \in f$ (\emph{unicità}).
+  \end{itemize}
+\end{defn}
+
+Se $f$ è una funzione da $A$ a $B$, $a$ è un elemento di $A$, e $b$ è
+l'unico valore tale che $(a,b) \in f$, allora diciamo che $f(a) = b$ e
+chiamiamo $a$ l'\emph{argomento} della funzione, e $b$ il suo
+\emph{risultato}. Per definizione di funzione, ad ogni argomento
+corrisponde uno ed un solo risultato. L'insieme di tutte le funzioni
+da $A$ a $B$ è indicato con $A \rightarrow B$, e il fatto che $f$ sia
+un elemento di tale insieme si scrive come: $f : A \rightarrow B$.
+Esempi:
+
+\begin{enumerate}
+\item La funzione $f: \mathbb{N} \rightarrow \mathbb{N}$ che associa
+  ad ogni $n \in \mathbb{N}$ il numero $n + n$, è l'insieme $\{ (0,0),
+  (1,2),$ $ (2,4), \ldots \}$, quindi $f(2) = 4$.
+\item La funzione \emph{predecessore}, $pred : \mathbb{N} \rightarrow
+  \mathbb{N}$ che associa ad ogni $n \neq 0$ il numero $n - 1$ e
+  associa $0$ a $0$. Cioè l'insieme $\{ (0,0),(1,0),(2,1)$
+  $,(3,2),\ldots \}$, quindi $pred(3) = 2$.
+\item La funzione $meno: \mathbb{N}\times\mathbb{N} \rightarrow
+  \mathbb{N}$ che associa ad ogni coppia $(m,n)$ con $m \geq n$ la
+  differenza $m-n$, e vale $0$ per tutte le altre coppie. Cioè
+  l'insieme
+  $meno = \{ ((0,0),0), ((0,1),0),\\
+  ((1,0),1),((2,0),2),((1,1),0),((0,2),0),\ldots \}$, quindi:
+  $meno(0,2)=0$, e $meno(4,1)=3$.
+\end{enumerate}
+
+Un modo più tradizionale di definire delle funzioni è attraverso delle
+\emph{espressioni} che coinvolgono la composizione di funzioni
+elementari. Cioè simbolicamente le stesse funzioni possono essere
+definite come:\medskip
+
+\noindent\mbox{
+$f(n) = n + n, \qquad$
+$ prev(n) = \begin{cases} n-1 & if n>0\\
+                                   0 & if n=0
+               \end{cases}\quad$
+$meno(m,n) = \begin{cases} m-n & if m>n\\
+                  0 & if m \leq n
+                 \end{cases}$
+}\medskip
+
+Possiamo usare tranquillamente queste definizioni, basta ricordarsi
+comunque che quello che stiamo definendo è effettivamente un
+particolare insieme.
+
+Una funzione definita come sopra, è qualche volta chiamata
+\emph{funzione totale} per rendere esplicita la differenza con le
+\emph{funzioni parziali} definite nella prossima sezione.  In generale
+con il termine \emph{funzione} si intende sempre una funzione totale.
+
+\subsection{Funzioni Parziali}\label{sec:fun}
+
+\begin{defn}
+  Una funzione parziale da un insieme $A$ a un insieme $B$ è una
+  corrispondenza che associa ad elementi di $a \in A$ al più un
+  elemento $b \in B$.  Più esattamente, una funzione da $A$ a $B$, è
+  il sottoinsieme $f \subseteq A\times B$ che soddisfa:
+\begin{itemize}
+\item Per tutti gli $a$ in $A$ c'è \emph{al più} un $b$ in $B$ tale
+  che $(a,b) \in f$ (\emph{unicità}).
+\end{itemize}
+\end{defn}
+
+In poche parole, una funzione parziale è come una funzione totale, ma
+manca del requisito di \emph{definitezza}: possono esistere valori in
+$A$, per cui la funzione non è definita. Se è definita, allora essa è
+una funzione, cioè il valore associato ad $a$ è unico. Se $f$ è una
+funzione parziale e $(a,b) \in f$ allora diremo che $f(a) = b$, e che
+la funzione è \emph{definita} o \emph{converge} in $a$, e scriveremo
+$f(a)\downarrow$.
+
+D'altra parte se per qualche $a \in A$ non esiste alcun $b \in B$ per
+cui $(a,b) \in f$, diciamo che $f$ è \emph{non definita} o
+\emph{diverge} su $a$ e scriviamo $f(a)\uparrow$ o alternativamente
+$f(a) = \perp$. In questi ultimi casi, il lettore non deve
+interpretare la notazione $f(a)$ o $\perp$ come eventuali oggetti
+esistenti in $B$, o sue possibili estenzioni, ma come una notazione
+che indica semplicemente che \emph{non esiste} $b \in B$ tale che
+$(a,b) \in f$. Nel caso in cui $f(a)\uparrow$ and $g(a)\uparrow$,
+possiamo anche scrivere che $f(a) = g(a)$, nel senso però che entrambe
+le funzioni sono divergenti (o non definite) su $a$.
+
+L'insieme di tutte le funzioni parziali da $A$ a $B$, viene denotato
+con $A \rightarrow B_\perp$, quindi se $f: A \rightarrow B_\perp$,
+allora $f$ è una funzione parziale da $A$ in $B$. Il \emph{dominio} di
+$f$ è l'insieme:
+
+\[ dom(f) = \{\; a \in A \;|\; f(a)\downarrow\; \} \]
+
+Nel caso in cui $f$ è totale, $dom(f) = A$.  Il \emph{codominio} di
+una funzione totale o parziale da $A$ a $B$ è l'insieme $B$.  Il
+\emph{range} di una funzione totale o parziale da $A$ a $B$ è
+l'insieme:
+\[ rng(f) = \{ b \in B \; | \; \text{c'è un } a \in A \text{ tale che } f(a) = b \;\} \]
+
+Ogni funzione totale è anche parziale, ovviamente se data una funzione
+parziale $f: A \rightarrow B_\perp$, si ha che essa è definita su ogni
+$a$, cioè se $dom(f) = A$ allora $f$ è totale.  Ci sono due modi
+\emph{standard} di ottenere una funzione totale $f'$ a partire da una
+funzione parziale $f: A \rightarrow B_perp$.
+\begin{enumerate}
+\item Rimuovere tutti gli elementi di $A$ su cui $f$ è non definita,
+  cioè definire $f': dom(f) \rightarrow B$ come $f'(a) = f(a)$ per
+  ogni $a \in dom(f)$.
+\item Aggiungere un altro elemento $*$ a $B$ e restituire tale valore
+  se $f$ è non definita: Definiamo $f' : A \rightarrow (B \cup \{ *
+  \})$ come $f'(a) = f(a)$ per ogni $a \in dom(f)$ e $f'(a) = *$ per
+  ogni $a \in A \setminus dom(f)$.
+\end{enumerate}
+
+\section{Funzioni di Ordine Superiore}
+
+Una \emph{funzione di ordine superiore} è una funzione che restituisce
+come valore un altra funzione.
+
+Un esempio è la funzione $doppia:(\mathbb{N} \rightarrow \mathbb{N}) \rightarrow
+(\mathbb{N} \rightarrow \mathbb{N})$, che data per ogni $f: \mathbb{N} \rightarrow \mathbb{N}$, è
+definita come $doppia(f) = g(n)$ con $\forall n \in \mathbb{N}, \; g(n) =
+f(f(n))$. Un altro esempio importante è la funzione $applica: (\mathbb{N}
+\rightarrow \mathbb{N}) \times \mathbb{N} \rightarrow \mathbb{N}$, dove per ogni $f: \mathbb{N}
+\rightarrow \mathbb{N}$, ed $n \in \mathbb{N}$, si ha $applica(f,n) = f(n)$.
+
+
+\begin{thebibliography}{9}
+\bibitem{knuth} Donald Knuth, \emph{The Art of Computer Programming}, Vol I, II, III, IV.
+\end{thebibliography}

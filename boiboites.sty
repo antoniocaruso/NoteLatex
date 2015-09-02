@@ -18,7 +18,7 @@
 							fill=\titlebackground,
                             text= \titlecolor]
     \tikzstyle{mybox} = [draw=\boxcolor, fill=\background, thick,
-                        rectangle, rounded corners, inner sep=10pt, inner ysep=15pt]
+                        rectangle, rounded corners, inner sep=10pt, inner ysep=12pt]
 }
 
 
@@ -31,6 +31,8 @@
     \couleurs[#1]
     \begin{lrbox}{\boiboite}%
      \begin{minipage}[!h]{\size}
+	  \setlength{\abovedisplayskip}{2pt}
+	  \setlength{\belowdisplayskip}{0pt}
     }%
     {%
      \end{minipage}
@@ -55,6 +57,7 @@
     (##1)}\textbf{.}}
     }%
     {%
+	\vspace{-1ex}
     \end{boite}
     }
 }

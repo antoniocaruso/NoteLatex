@@ -28,6 +28,7 @@
 \usepackage{etoolbox}
 \usepackage{needspace}
 \usepackage{fancyhdr}
+\usepackage{register}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -156,8 +157,9 @@
 %\theoremstyle{definition}
 %\newtheorem{ex}{Esempio}
 
-\usepackage[framemethod=default]{mdframed}
+%\usepackage[framemethod=default]{mdframed}
 \usepackage{tikz}
+\usepackage[framemethod=tikz]{mdframed}
 
 \global\mdfdefinestyle{lemma}{%
 	linecolor=blue!20,linewidth=1.5pt,
@@ -214,7 +216,7 @@
  								 {\raggedright\small\sffamily #1\\}}}
 \newcommand{\Mod}[1]{\ \text{mod}\ #1}
 
-\includeonly{chapters}
+\includeonly{numeri,hardware,algoritmi}
 
 \begin{document}
 
@@ -254,7 +256,9 @@ This work is licensed under the \emph{Creative Commons Attribution--ShareAlike 3
 
 \newgeometry{vmargin=30mm, right=1.9in, marginparsep=3.5mm, footskip=15mm}
 
-\include{chapters}
+\include{numeri}
+\include{hardware}
+\include{algoritmi}
 
 \end{document}
 
