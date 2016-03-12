@@ -9,7 +9,7 @@ pynote: tabella1.tex
 	pdflatex note
 
 note: algoritmi.tex numeri.tex hardware.tex note.tex
-	pdflatex note
+	latexmk -pdf note
 	 
 
 clean:

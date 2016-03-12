@@ -28,3 +28,7 @@ luatest.log
 luatest.toc
 
 *.gz
+
+*.fdb_latexmk
+
+*.fls
