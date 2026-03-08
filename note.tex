@@ -19,12 +19,24 @@
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \allowdisplaybreaks
 \usepackage[babel=true,final]{microtype} 
-\usepackage[heightrounded,showframe=false,paper=a4paper,margin=1in]{geometry}
+
+
+
+\usepackage[heightrounded,paper=a4paper,
+            showframe=false,
+            marginparwidth=3cm,
+            marginparsep=0.5cm,
+            margin=2.5cm, 
+            inner=3cm, outer=4cm,
+            includeheadfoot,
+            footskip=2cm]{geometry}
+
+
+
 \usepackage{wrapfig}
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{boiboites}
-\usepackage{pythontex}
 \usepackage{etoolbox}
 \usepackage{needspace}
 \usepackage{fancyhdr}
@@ -40,6 +52,7 @@
 %\fancyhead[RE,LO]{\textsf{\thepage - \rightmark}}
 
 \usepackage{caption}
+\usepackage{marginnote}
 
 %-----------------------
 
@@ -123,6 +136,7 @@
 %--------------------
 
 
+\usepackage[depythontex]{pythontex}
 
 \pagestyle{plain} 
 \pagenumbering{alpha} 
@@ -218,7 +232,7 @@
  								 {\raggedright\small\sffamily #1\\}}}
 \newcommand{\Mod}[1]{\ \text{mod}\ #1}
 
-\includeonly{numeri,hardware,algoritmi}
+\includeonly{numeri,tabella1,hardware,algoritmi}
 
 \begin{document}
 
