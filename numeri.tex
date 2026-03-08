@@ -318,12 +318,14 @@ cifre (notare l'assenza dello zero). Il sistema consente di scrivere numeri
 senza l'esplosione esponenziale della loro lunghezza come nell'unario, ma è
 comunque affetto da numerosi problemi.
 
-\begin{wrapfigure}[10]{r}{4.5cm}
+\begin{wrapfigure}[10]{r}{6.5cm}
 \vspace{-2ex}
 \captionsetup{font=small}
-\centering \includegraphics[width=4cm]{abaco.pdf}
+\centering \includegraphics[width=6cm,trim=1.3cm 2cm 1cm 1.2cm,clip]{graphics/abaco.jpg}
 \caption{Abaco}\label{fig:abaco}
 \end{wrapfigure}
+
+
 Il numero di simboli non può essere costante come nei sistemi posizionali, ma
 deve crescere, cosa accadrebbe se vogliamo rappresentare $10^9$ in romano?
 servono altri simboli dopo $\mathrm{M}$. Più importante ancora è la difficoltà
@@ -426,14 +428,14 @@ In Informatica l'uso della notazione ottale e sopratutto esadecimale consente
 di rappresentare lunghe sequenze di bit in modo decisamente più compatto, un
 numero binario di $32$ bit infatti richiederà solo $8 = 32/4$ cifre esadecimali.
 
-Il metodo esposto sopra produce le cifre nell'ordine opposto rispetto al modo in cui noi scriviamo,  \nota{Conversione tramite divisioni per potenze decrescenti della base}
+Il metodo esposto sopra produce le cifre nell'ordine opposto rispetto al modo in cui noi scriviamo,  
 cioè da destra a sinistra, dalla meno alla più significativa. E' possibile ottenere la sequenza a partire da $c_{k-1}$ fino
 a $c_0$, cioè nell'ordine in cui noi scriveremo il numero? Dalla \eqref{eq:pos},
 abbiamo che per estrarre la cifra $c_{k-1}$ dobbiamo dividere il valore dell'intero che stiamo considerando, chiamiamolo $n$, per $B^{k-1}$. Ad esempio
 se vogliamo estrarre $3$ da $3240$ dobbiamo dividerlo per $1000 = 10^3$, quindi dobbiamo sapere quante sono le cifre di $n$, ma questo si ottiene calcolando
 $k = \lceil \log_{10} n \rceil$, notiamo che le restanti cifre sono contenute in $3240 \Mod{10^3} = 240$.
 
-L'algoritmo pertanto è il seguente: Se si vuole convertire il numero decimale $n$ in base $B$ si calcola $k = \log_B n$, si calcola $c_{k-1} = n / B^{k-1}$ e $n' = n \Mod{B^{k-1}}$, si diminuisce $k$ e si applica lo stesso metodo a $n'$.
+L'algoritmo pertanto è il seguente: \nota{Conversione tramite divisioni per potenze decrescenti della base} Se si vuole convertire il numero decimale $n$ in base $B$ si calcola $k = \log_B n$, si calcola $c_{k-1} = n / B^{k-1}$ e $n' = n \Mod{B^{k-1}}$, si diminuisce $k$ e si applica lo stesso metodo a $n'$.
 
 \begin{ex}
 Convertiamo $3240$ in esadecimale usando il metodo sopra:
@@ -576,7 +578,9 @@ sufficientemente grande da poter rappresentare gli interi di nostro interesse.
 \end{ex}
 
 %% ----------------------- PYTHON TABLE ------------------
+{\footnotesize
 \input{tabella1}
+}
 %% ----------------------- PYTHON TABLE ------------------
 
 
@@ -1010,6 +1014,7 @@ Abbiamo concluso la parte legata alla rappresentazione in binario di numeri inte
 
 \section{Testi, Immagini, Musica}
 
+
 Come sappiamo, i calcolatori moderni possono manipolare oltre che numeri, anche informazioni più complesse: testi, in varie lingue, immagini fisse in bianco e nero e a colori, video e audio. In questa sezione vedremo come è possibile trasformare queste informazione in forma binaria.
 
 In tutti i casi, le rappresentazioni verranno costruite tramite \emph{codifiche}
@@ -1017,6 +1022,14 @@ che trasformano quelle informazioni di cui sopra in sequenze di numeri interi.
 Dal punto di vista matematica vedremo che queste codifiche degli \emph{isomorfismi}, molto semplici da applicare. 
 
 \subsubsection{Testi}
+
+
+\begin{figure}\centering
+\includegraphics[width=0.95\textwidth]{ascii-codes-table.png}
+\caption{Tabella ASCII per la rappresentazione numerica dei caratteri (stampabili e non).}
+\end{figure}
+
+
  Cominciamo con l'informazione non-numerica di tipo più seplice,\emph{un testo}. I testi, formalmente sono \emph{stringhe}, cioè sequenze finite di caratteri, dove i possibili caratteri sono presi da un insieme finito detto \emph{alfabeto}. Anche questo testo che leggete soddisfa questa definizione,
  in quanto, possiamo vederlo come una lunghissima sequenza di caratteri (dell'alfabeto Italiano, unito a tutti i caratteri di interpunzione e allo spazio). Poichè l'insieme di simboli dell'alfabeto è per ipotesi \emph{finito},
  possiamo associare ad ogni simbolo un numero intero positivo, ad esempio potremmo definire: \textsf{A}$=65$, \textsf{B}$=66 \ldots$ \textsf{Z}$=132$, etc; come mai non ho associato \textsf{A}$=1$, etc; dal punto di vista teorico
